@@ -22,30 +22,36 @@ public abstract class AbstractContinuedFraction<Type extends Number> extends
 
 	@Override
 	public float floatValue() {
-		return 0;
+		int lastIndex = size() - 1;
+		float z = getZ().floatValue();
+		float x = z / get(lastIndex).floatValue();
+		for (int i = lastIndex - 1; i > 0; i--) {
+			x = z / (get(i).floatValue() + x);
+		}
+		x = get(0).floatValue() / z + x;
+		return x;
 	}
 
 	@Override
 	public int intValue() {
-		return 0;
+		return (int) floatValue();
 	}
 
 	@Override
 	public long longValue() {
-		return 0;
+		return (long) doubleValue();
 	}
 
 	@Override
 	public double doubleValue() {
+		int lastIndex = size() - 1;
 		double z = getZ().doubleValue();
-		double v = 0.0;
-		int size = size();
-		for (int i = size - 1; i > 0; i--) {
-			double n = get(i).doubleValue();
-			v = z / n;
+		double x = z / get(lastIndex).doubleValue();
+		for (int i = lastIndex - 1; i > 0; i--) {
+			x = z / (get(i).doubleValue() + x);
 		}
-		v += z / get(0).doubleValue();
-		return v;
+		x = get(0).doubleValue() / z + x;
+		return x;
 	}
 
 	@Override

@@ -11,13 +11,16 @@ import org.junit.BeforeClass;
 
 class AbstractValuesResults {
 	
-	static factory
+	static injector
 	
 	@BeforeClass
 	static void beforeClass() {
-		def injector = Guice.createInjector(new Mod3ContinuedFractionModule())
-		factory = injector.getInstance(Mod3ContinuedFractionFactory)
+		injector = Guice.createInjector(new Mod3ContinuedFractionModule())
 	}
+	
+	def valuesFileName
+	
+	def resultsFileName
 	
 	def values = []
 	
@@ -26,19 +29,12 @@ class AbstractValuesResults {
 	@Before
 	void beforeTest() {
 		values = Resources.readLines(Resources.getResource(
-				AbstractValuesResults, "mod3continuedfractions_values.txt"), Charsets.UTF_8,
+				AbstractValuesResults, valuesFileName), Charsets.UTF_8,
 				[getResult:{ return values },
 					processLine: {  line ->
 						return processLine(line)
 					}]as LineProcessor)
 		results = Resources.readLines(Resources.getResource(
-				AbstractValuesResults, "mod3continuedfractions_results.txt"), Charsets.UTF_8)
-	}
-	
-	def processLine(def line) {
-		def vs = []
-		line.split(',').each {	vs << Double.parseDouble(it) }
-		values << vs
-		return true
+				AbstractValuesResults, resultsFileName), Charsets.UTF_8)
 	}
 }
