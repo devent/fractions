@@ -104,5 +104,8 @@
 
 		</plugins>
 	</build>
+	<modules>
+		<module>fractions-core</module>
+	</modules>
 
 </project>
