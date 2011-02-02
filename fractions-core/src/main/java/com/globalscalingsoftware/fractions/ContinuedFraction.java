@@ -6,5 +6,7 @@ public interface ContinuedFraction<Type extends Number> extends List<Type> {
 
 	Type getZ();
 
+	float floatValue();
+
 	double doubleValue();
 }
