@@ -17,20 +17,20 @@ class CalculateMod3ContinuedFractionTest extends AbstractValuesResults {
 		super.beforeTest()
 	}
 	
-	def processLine(def line) {
+	def processOneLineOfTestValues(def line) {
 		def vs = []
 		line.split(',').each {	vs << Double.parseDouble(it) }
-		values << vs
+		testValues << vs
 		return true
 	}
 	
 	@Test
 	void testValues() {
-		values.eachWithIndex { it, idx ->
+		testValues.eachWithIndex { it, idx ->
 			def value = it[0]
 			def z = (int)it[1]
 			def maxDenominators = (int)it[2]
-			assert factory.create(value, z, maxDenominators).toString() == results[idx]
+			assert factory.create(value, z, maxDenominators).toString() == expectedResults[idx]
 		}
 	}
 }

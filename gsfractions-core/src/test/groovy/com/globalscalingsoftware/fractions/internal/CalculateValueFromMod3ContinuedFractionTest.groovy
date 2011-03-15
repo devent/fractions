@@ -16,19 +16,19 @@ class CalculateValueFromMod3ContinuedFractionTest extends AbstractValuesResults 
 		super.beforeTest()
 	}
 	
-	def processLine(def line) {
+	def processOneLineOfTestValues(def line) {
 		def vs = []
 		line.split("[,;]").each { vs << Double.parseDouble(it) }
-		values << vs
+		testValues << vs
 		return true
 	}
 	
 	@Test
 	void testValues() {
-		values.eachWithIndex { it, idx ->
+		testValues.eachWithIndex { it, idx ->
 			def z = (int)it[0]
 			def denominators = it.subList(1, it.size())
-			def res = Double.parseDouble(results[idx])
+			def res = Double.parseDouble(expectedResults[idx])
 			assert Math.abs(factory.create(z, denominators).doubleValue() - res) < 1e-3
 		}
 	}

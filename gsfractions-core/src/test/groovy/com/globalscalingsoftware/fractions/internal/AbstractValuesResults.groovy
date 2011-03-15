@@ -9,7 +9,7 @@ import com.google.inject.Guice
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-class AbstractValuesResults {
+abstract class AbstractValuesResults {
 	
 	static injector
 	
@@ -22,19 +22,32 @@ class AbstractValuesResults {
 	
 	def resultsFileName
 	
-	def values = []
+	def testValues = []
 	
-	def results = []
+	def expectedResults = []
 	
 	@Before
 	void beforeTest() {
-		values = Resources.readLines(Resources.getResource(
-				AbstractValuesResults, valuesFileName), Charsets.UTF_8,
-				[getResult:{ return values },
-					processLine: {  line ->
-						return processLine(line)
-					}]as LineProcessor)
-		results = Resources.readLines(Resources.getResource(
-				AbstractValuesResults, resultsFileName), Charsets.UTF_8)
+		testValues = readTestValues()
+		expectedResults = readExpectedResults()
+	}
+	
+	def readTestValues() {
+		return Resources.readLines(Resources.getResource(
+		AbstractValuesResults, valuesFileName), Charsets.UTF_8,
+		[
+			getResult: { return testValues },
+			
+			processLine: {  line ->
+				return processOneLineOfTestValues(line)
+			}
+		]as LineProcessor)
+	}
+	
+	abstract processOneLineOfTestValues(def line)
+	
+	def readExpectedResults() {
+		return Resources.readLines(Resources.getResource(
+		AbstractValuesResults, resultsFileName), Charsets.UTF_8)
 	}
 }
