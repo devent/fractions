@@ -1,7 +1,6 @@
 package com.globalscalingsoftware.fractions.internal;
 
-
-public class Mod3Round {
+class Mod3Round {
 
 	public int round(double value) {
 		int n = (int) Math.abs(value);
