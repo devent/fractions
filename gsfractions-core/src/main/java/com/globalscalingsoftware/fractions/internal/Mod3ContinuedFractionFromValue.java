@@ -10,21 +10,21 @@ public class Mod3ContinuedFractionFromValue extends
 		AbstractContinuedFraction<Integer> {
 
 	public interface Mod3ContinuedFractionFromValueFactory {
-		Mod3ContinuedFractionFromValue create(@Assisted int z,
+		Mod3ContinuedFractionFromValue create(@Assisted float z,
 				@Assisted List<Integer> denominators);
 	}
 
-	private final int z;
+	private final float z;
 
 	@Inject
-	public Mod3ContinuedFractionFromValue(@Assisted int z,
+	public Mod3ContinuedFractionFromValue(@Assisted float z,
 			@Assisted List<Integer> denominators) {
 		super(denominators);
 		this.z = z;
 	}
 
 	@Override
-	public Integer getZ() {
+	public float getZ() {
 		return z;
 	}
 }

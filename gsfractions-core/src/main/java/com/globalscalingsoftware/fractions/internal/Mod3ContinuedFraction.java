@@ -11,17 +11,17 @@ public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 
 	public interface Mod3ContinuedFractionFactory {
 		Mod3ContinuedFraction create(@Assisted("value") double value,
-				@Assisted("z") int z,
+				@Assisted("z") float z,
 				@Assisted("maxDenominators") int maxDenominators);
 	}
 
 	private final Mod3Round round;
-	private final int z;
+	private final float z;
 	private final int maxDenominators;
 
 	@Inject
 	Mod3ContinuedFraction(Mod3Round round, @Assisted("value") double value,
-			@Assisted("z") int z,
+			@Assisted("z") float z,
 			@Assisted("maxDenominators") int maxDenominators) {
 		super(new ArrayList<Integer>());
 		this.round = round;
@@ -60,7 +60,7 @@ public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 	}
 
 	@Override
-	public Integer getZ() {
+	public float getZ() {
 		return z;
 	}
 

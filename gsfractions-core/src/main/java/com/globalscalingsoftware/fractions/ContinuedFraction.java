@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ContinuedFraction<Type extends Number> extends List<Type> {
 
-	Type getZ();
+	float getZ();
 
 	float floatValue();
 

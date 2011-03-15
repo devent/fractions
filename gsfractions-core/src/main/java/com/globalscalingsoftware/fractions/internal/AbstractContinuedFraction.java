@@ -23,7 +23,7 @@ public abstract class AbstractContinuedFraction<Type extends Number> extends
 	@Override
 	public float floatValue() {
 		int lastIndex = size() - 1;
-		float z = getZ().floatValue();
+		float z = getZ();
 		float x = z / get(lastIndex).floatValue();
 		for (int i = lastIndex - 1; i > 0; i--) {
 			x = z / (get(i).floatValue() + x);
@@ -45,7 +45,7 @@ public abstract class AbstractContinuedFraction<Type extends Number> extends
 	@Override
 	public double doubleValue() {
 		int lastIndex = size() - 1;
-		double z = getZ().doubleValue();
+		double z = getZ();
 		double x = z / get(lastIndex).doubleValue();
 		for (int i = lastIndex - 1; i > 0; i--) {
 			x = z / (get(i).doubleValue() + x);
