@@ -25,5 +25,10 @@
   		<version>r07</version>
   		<scope>test</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>com.globalscalingsoftware.fractions</groupId>
+  		<artifactId>gsfractions-public</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>

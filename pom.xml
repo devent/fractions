@@ -106,6 +106,8 @@
 	</build>
 	<modules>
 		<module>gsfractions-core</module>
+		<module>gsfractions-simple</module>
+		<module>gsfractions-public</module>
 	</modules>
 
 </project>
