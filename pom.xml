@@ -8,6 +8,11 @@
 	<packaging>pom</packaging>
 	<name>Global Scaling Continued Fractions Parent POM</name>
 
+    <modules>
+        <module>gsfractions-core</module>
+        <module>gsfractions-public</module>
+    </modules>
+    
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.groovy.version>1.7.5</project.build.groovy.version>
@@ -104,10 +109,5 @@
 
 		</plugins>
 	</build>
-	<modules>
-		<module>gsfractions-core</module>
-		<module>gsfractions-simple</module>
-		<module>gsfractions-public</module>
-	</modules>
 
 </project>
