@@ -11,12 +11,12 @@ import org.antlr.stringtemplate.StringTemplate;
 import com.globalscalingsoftware.fractions.ContinuedFraction;
 
 @SuppressWarnings("serial")
-public abstract class AbstractContinuedFraction<Type extends Number> extends
-		Number implements ContinuedFraction<Type> {
+abstract class AbstractContinuedFraction<Type extends Number> extends Number
+		implements ContinuedFraction<Type> {
 
 	protected final List<Type> denominators;
 
-	public AbstractContinuedFraction(List<Type> denominators) {
+	protected AbstractContinuedFraction(List<Type> denominators) {
 		this.denominators = denominators;
 	}
 
