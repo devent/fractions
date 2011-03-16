@@ -187,7 +187,7 @@ abstract class AbstractContinuedFraction<Type extends Number> extends Number
 
 	@Override
 	public String toString() {
-		String template = "$first(denos):{$it$}$;$rest(denos);separator=\",\"$";
+		String template = "[$first(denos):{$it$}$;$rest(denos);separator=\",\"$]";
 		StringTemplate str = new StringTemplate(template);
 		str.setAttribute("denos", this);
 		return str.toString();
