@@ -49,9 +49,9 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:ssh://gitprivate@globalscalingsoftware.com:gsfractions-parent.git</connection>
-		<developerConnection>scm:git:ssh://gitprivate@globalscalingsoftware.com:gsfractions-parent.git</developerConnection>
-		<url>scm:git:scm:git:ssh://gitprivate@globalscalingsoftware.com:gsfractions-parent.git</url>
+		<connection>scm:git:ssh://gitprivate@globalscalingsoftware.com/gsfractions-parent.git</connection>
+		<developerConnection>scm:git:ssh://gitprivate@globalscalingsoftware.com/gsfractions-parent.git</developerConnection>
+		<url>scm:git:scm:git:ssh://gitprivate@globalscalingsoftware.com/gsfractions-parent.git</url>
 	</scm>
 
 
