@@ -5,12 +5,12 @@
 	<parent>
 		<artifactId>gsfractions-parent</artifactId>
 		<groupId>com.globalscalingsoftware.fractions</groupId>
-		<version>1.0</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.globalscalingsoftware.fractions</groupId>
 	<artifactId>gsfractions-public</artifactId>
-	<version>1.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
 	</dependencies>
