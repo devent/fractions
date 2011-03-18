@@ -3,7 +3,7 @@
 
 	<groupId>com.globalscalingsoftware.fractions</groupId>
 	<artifactId>gsfractions-parent</artifactId>
-	<version>1.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Global Scaling Continued Fractions Parent POM</name>
 
