@@ -21,6 +21,11 @@ abstract class AbstractContinuedFraction<Type extends Number> extends Number
 	}
 
 	@Override
+	public double getValue() {
+		return doubleValue();
+	}
+
+	@Override
 	public float floatValue() {
 		int lastIndex = size() - 1;
 		float z = getZ();

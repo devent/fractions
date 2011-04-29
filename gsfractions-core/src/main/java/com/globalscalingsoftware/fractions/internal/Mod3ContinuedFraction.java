@@ -18,6 +18,7 @@ public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 	private final Mod3Round round;
 	private final float z;
 	private final int maxDenominators;
+	private final double value;
 
 	@Inject
 	Mod3ContinuedFraction(Mod3Round round, @Assisted("value") double value,
@@ -27,6 +28,7 @@ public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 		this.round = round;
 		this.z = z;
 		this.maxDenominators = maxDenominators;
+		this.value = value;
 		evaluate(value, denominators);
 	}
 
@@ -64,4 +66,8 @@ public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 		return z;
 	}
 
+	@Override
+	public double getValue() {
+		return value;
+	}
 }
