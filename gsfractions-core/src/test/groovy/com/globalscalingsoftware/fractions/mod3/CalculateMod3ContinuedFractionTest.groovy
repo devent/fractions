@@ -1,9 +1,9 @@
-package com.globalscalingsoftware.fractions.mod3.internal
+package com.globalscalingsoftware.fractions.mod3
 
 import org.junit.Before
 import org.junit.Test
 
-import com.globalscalingsoftware.fractions.mod3.internal.Mod3ContinuedFraction.Mod3ContinuedFractionFactory
+import com.globalscalingsoftware.fractions.mod3.api.Mod3ContinuedFractionFactory
 
 class CalculateMod3ContinuedFractionTest extends AbstractValuesResults {
 

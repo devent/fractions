@@ -1,4 +1,4 @@
-package com.globalscalingsoftware.fractions.mod3.internal
+package com.globalscalingsoftware.fractions.mod3
 
 import org.junit.Before
 import org.junit.BeforeClass
