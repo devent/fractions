@@ -15,7 +15,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.build.groovy.version>1.7.5</project.build.groovy.version>
+		<project.build.groovy.version>1.8.0</project.build.groovy.version>
 	</properties>
 
 	<scm>
