@@ -1,11 +1,12 @@
 package com.globalscalingsoftware.fractions.mod3.internal;
 
-import static com.google.inject.assistedinject.FactoryProvider.newFactory;
-
+import com.globalscalingsoftware.fractions.api.ContinuedFraction;
 import com.globalscalingsoftware.fractions.mod3.api.Mod3ContinuedFractionFactory;
 import com.globalscalingsoftware.fractions.mod3.api.Mod3ContinuedFractionFromValueFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
+import com.google.inject.TypeLiteral;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
  * Internal {@link Module} for the mod3 continued fraction implementation.
@@ -19,12 +20,14 @@ public class Mod3ContinuedFractionInternalModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(Mod3ContinuedFractionFactory.class).toProvider(
-				newFactory(Mod3ContinuedFractionFactory.class,
-						Mod3ContinuedFraction.class));
-		bind(Mod3ContinuedFractionFromValueFactory.class).toProvider(
-				newFactory(Mod3ContinuedFractionFromValueFactory.class,
-						Mod3ContinuedFractionFromValue.class));
+		install(new FactoryModuleBuilder().implement(
+				new TypeLiteral<ContinuedFraction<?>>() {
+				}, Mod3ContinuedFraction.class).build(
+				Mod3ContinuedFractionFactory.class));
+		install(new FactoryModuleBuilder().implement(
+				new TypeLiteral<ContinuedFraction<?>>() {
+				}, Mod3ContinuedFractionFromValue.class).build(
+				Mod3ContinuedFractionFromValueFactory.class));
 	}
 
 }
