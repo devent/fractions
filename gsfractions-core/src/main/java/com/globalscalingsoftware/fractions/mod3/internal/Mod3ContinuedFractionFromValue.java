@@ -6,13 +6,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 @SuppressWarnings("serial")
-public class Mod3ContinuedFractionFromValue extends
-		AbstractContinuedFraction<Integer> {
-
-	public interface Mod3ContinuedFractionFromValueFactory {
-		Mod3ContinuedFractionFromValue create(@Assisted float z,
-				@Assisted List<Integer> denominators);
-	}
+class Mod3ContinuedFractionFromValue extends AbstractContinuedFraction<Integer> {
 
 	private final float z;
 

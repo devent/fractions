@@ -2,8 +2,8 @@ package com.globalscalingsoftware.fractions.mod3.internal;
 
 import static com.google.inject.assistedinject.FactoryProvider.newFactory;
 
-import com.globalscalingsoftware.fractions.mod3.internal.Mod3ContinuedFraction.Mod3ContinuedFractionFactory;
-import com.globalscalingsoftware.fractions.mod3.internal.Mod3ContinuedFractionFromValue.Mod3ContinuedFractionFromValueFactory;
+import com.globalscalingsoftware.fractions.mod3.api.Mod3ContinuedFractionFactory;
+import com.globalscalingsoftware.fractions.mod3.api.Mod3ContinuedFractionFromValueFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 
