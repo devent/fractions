@@ -3,7 +3,9 @@ package com.globalscalingsoftware.fractions.api;
 import java.util.List;
 
 /**
- * Represents a continued fraction with the denominators as {@link Number}s.
+ * Represents a continued fraction with the denominators as {@link Number}s. You
+ * can use the continued fraction as a {@link List} and get, delete and add
+ * denominators.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  */
