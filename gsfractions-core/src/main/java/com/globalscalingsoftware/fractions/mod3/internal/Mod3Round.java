@@ -1,4 +1,4 @@
-package com.globalscalingsoftware.fractions.internal;
+package com.globalscalingsoftware.fractions.mod3.internal;
 
 class Mod3Round {
 

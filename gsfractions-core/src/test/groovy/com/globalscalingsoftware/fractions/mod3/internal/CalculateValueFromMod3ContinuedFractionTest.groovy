@@ -1,4 +1,4 @@
-package com.globalscalingsoftware.fractions.internal
+package com.globalscalingsoftware.fractions.mod3.internal
 
 import com.globalscalingsoftware.fractions.internal.Mod3ContinuedFractionFromValue.Mod3ContinuedFractionFromValueFactory 
 import org.junit.Before;

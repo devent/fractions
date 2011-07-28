@@ -1,14 +1,14 @@
-package com.globalscalingsoftware.fractions.internal
+package com.globalscalingsoftware.fractions.mod3.internal
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.Before
+import org.junit.Test
 
-import com.globalscalingsoftware.fractions.internal.Mod3ContinuedFraction.Mod3ContinuedFractionFactory;
+import com.globalscalingsoftware.fractions.mod3.internal.Mod3ContinuedFraction.Mod3ContinuedFractionFactory
 
 class CalculateMod3ContinuedFractionTest extends AbstractValuesResults {
-	
+
 	def factory
-	
+
 	@Before
 	void beforeTest() {
 		factory = injector.getInstance(Mod3ContinuedFractionFactory)
@@ -16,14 +16,14 @@ class CalculateMod3ContinuedFractionTest extends AbstractValuesResults {
 		resultsFileName = "mod3continuedfractions_results.txt"
 		super.beforeTest()
 	}
-	
+
 	def processOneLineOfTestValues(def line) {
 		def vs = []
 		line.split(',').each {	vs << Double.parseDouble(it) }
 		testValues << vs
 		return true
 	}
-	
+
 	@Test
 	void testValues() {
 		testValues.eachWithIndex { it, idx ->
