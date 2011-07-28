@@ -1,6 +1,7 @@
 package com.globalscalingsoftware.fractions.mod3.api;
 
 import com.globalscalingsoftware.fractions.api.ContinuedFraction;
+import com.globalscalingsoftware.fractions.api.ContinuedFractionFactory;
 import com.google.inject.assistedinject.Assisted;
 
 /**
@@ -9,7 +10,7 @@ import com.google.inject.assistedinject.Assisted;
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  */
-public interface Mod3ContinuedFractionFactory {
+public interface Mod3ContinuedFractionFactory extends ContinuedFractionFactory {
 
 	/**
 	 * Factory to create a new mod3 implementation of a
@@ -29,6 +30,7 @@ public interface Mod3ContinuedFractionFactory {
 	 *         {@link ContinuedFraction}. The continued fraction is calculated
 	 *         from the given value.
 	 */
+	@Override
 	ContinuedFraction<?> create(@Assisted("value") double value,
 			@Assisted("z") float z,
 			@Assisted("maxDenominators") int maxDenominators);
