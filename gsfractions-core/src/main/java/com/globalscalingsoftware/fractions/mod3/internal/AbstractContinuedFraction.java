@@ -1,5 +1,7 @@
 package com.globalscalingsoftware.fractions.mod3.internal;
 
+import static java.util.Collections.unmodifiableList;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,12 +12,23 @@ import org.antlr.stringtemplate.StringTemplate;
 
 import com.globalscalingsoftware.fractions.api.ContinuedFraction;
 
+/**
+ * Base implementation of an {@link ContinuedFraction}. Holds the denominators
+ * in a {@link List} implementation and can calculate the value of the continued
+ * fraction.
+ * 
+ * @author Erwin Mueller, erwin.mueller@deventm.org
+ */
 @SuppressWarnings("serial")
 abstract class AbstractContinuedFraction<Type extends Number> extends Number
 		implements ContinuedFraction<Type> {
 
 	protected final List<Type> denominators;
 
+	/**
+	 * Use the given values from the {@link List} as the denominators of the
+	 * continued fraction.
+	 */
 	protected AbstractContinuedFraction(List<Type> denominators) {
 		this.denominators = denominators;
 	}
@@ -171,18 +184,17 @@ abstract class AbstractContinuedFraction<Type extends Number> extends Number
 
 	@Override
 	public ListIterator<Type> listIterator() {
-		return Collections.unmodifiableList(denominators).listIterator();
+		return unmodifiableList(denominators).listIterator();
 	}
 
 	@Override
 	public ListIterator<Type> listIterator(int index) {
-		return Collections.unmodifiableList(denominators).listIterator(index);
+		return unmodifiableList(denominators).listIterator(index);
 	}
 
 	@Override
 	public List<Type> subList(int fromIndex, int toIndex) {
-		return Collections.unmodifiableList(denominators.subList(fromIndex,
-				toIndex));
+		return unmodifiableList(denominators.subList(fromIndex, toIndex));
 	}
 
 	private UnsupportedOperationException createReadOnlyException() {
