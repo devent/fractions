@@ -9,7 +9,7 @@
 		<relativePath>../gsfractions-parent</relativePath>
 	</parent>
 
-	<artifactId>gsfractions-core</artifactId>
+	<artifactId>gsfractions-mod3</artifactId>
 
 	<dependencies>
 		<dependency>
@@ -23,7 +23,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.globalscalingsoftware.fractions</groupId>
-			<artifactId>gsfractions-public</artifactId>
+			<artifactId>gsfractions-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.antlr</groupId>

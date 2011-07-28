@@ -9,7 +9,7 @@
 		<relativePath>../gsfractions-parent</relativePath>
 	</parent>
 
-	<artifactId>gsfractions-public</artifactId>
+	<artifactId>gsfractions-api</artifactId>
 
 	<dependencies>
 	</dependencies>

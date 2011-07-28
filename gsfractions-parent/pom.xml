@@ -9,8 +9,8 @@
 	<name>Global Scaling Continued Fractions Parent POM</name>
 
 	<modules>
-		<module>../gsfractions-core</module>
-		<module>../gsfractions-public</module>
+        <module>../gsfractions-api</module>
+		<module>../gsfractions-mod3</module>
 	</modules>
 
 	<properties>
@@ -80,7 +80,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.globalscalingsoftware.fractions</groupId>
-				<artifactId>gsfractions-public</artifactId>
+				<artifactId>gsfractions-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
