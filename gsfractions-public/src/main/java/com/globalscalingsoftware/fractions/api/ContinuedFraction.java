@@ -2,6 +2,11 @@ package com.globalscalingsoftware.fractions.api;
 
 import java.util.List;
 
+/**
+ * Represents a continued fraction with the denominators as {@link Number}s.
+ * 
+ * @author Erwin Mueller, erwin.mueller@deventm.org
+ */
 public interface ContinuedFraction<Type extends Number> extends List<Type> {
 
 	/**
