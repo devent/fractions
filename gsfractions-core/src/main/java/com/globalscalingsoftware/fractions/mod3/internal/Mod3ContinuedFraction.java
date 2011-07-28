@@ -3,21 +3,27 @@ package com.globalscalingsoftware.fractions.mod3.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.globalscalingsoftware.fractions.api.ContinuedFraction;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
+/**
+ * Implements a {@link ContinuedFraction} where the denominators are chosen that
+ * way that they can be divided by three.
+ * 
+ * @author Erwin Mueller, erwin.mueller@deventm.org
+ */
 @SuppressWarnings("serial")
 public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 
-	public interface Mod3ContinuedFractionFactory {
-		Mod3ContinuedFraction create(@Assisted("value") double value,
-				@Assisted("z") float z,
-				@Assisted("maxDenominators") int maxDenominators);
-	}
+	private static final int MAX_LIMES = 32766;
 
 	private final Mod3Round round;
+
 	private final float z;
+
 	private final int maxDenominators;
+
 	private final double value;
 
 	@Inject
@@ -44,7 +50,7 @@ public class Mod3ContinuedFraction extends AbstractContinuedFraction<Integer> {
 			lmax = 0;
 		}
 		int nenner = denominators.get(0);
-		int limes = 32766;
+		int limes = MAX_LIMES;
 		double dn = 0.0;
 		int level = 1;
 		while (level <= lmax) {
