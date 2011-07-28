@@ -8,7 +8,7 @@ import java.util.ListIterator;
 
 import org.antlr.stringtemplate.StringTemplate;
 
-import com.globalscalingsoftware.fractions.ContinuedFraction;
+import com.globalscalingsoftware.fractions.api.ContinuedFraction;
 
 @SuppressWarnings("serial")
 abstract class AbstractContinuedFraction<Type extends Number> extends Number

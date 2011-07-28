@@ -1,4 +1,4 @@
-package com.globalscalingsoftware.fractions;
+package com.globalscalingsoftware.fractions.api;
 
 import java.util.List;
 
