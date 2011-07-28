@@ -5,6 +5,7 @@
 		<artifactId>gsfractions-parent</artifactId>
 		<groupId>com.globalscalingsoftware.fractions</groupId>
 		<version>1.2-SNAPSHOT</version>
+        <relativePath>../gsfractions-parent</relativePath>
 	</parent>
 
 	<groupId>com.globalscalingsoftware.fractions</groupId>

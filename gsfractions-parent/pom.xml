@@ -8,8 +8,8 @@
 	<name>Global Scaling Continued Fractions Parent POM</name>
 
 	<modules>
-		<module>gsfractions-core</module>
-		<module>gsfractions-public</module>
+        <module>../gsfractions-core</module>
+		<module>../gsfractions-public</module>
 	</modules>
 
 	<properties>
