@@ -1,11 +1,14 @@
 package com.globalscalingsoftware.fractions.mod3.internal;
 
+import java.io.Serializable;
+
 /**
  * Helper class to calculate the round mod 3.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  */
-class Mod3Round {
+@SuppressWarnings("serial")
+class Mod3Round implements Serializable {
 
 	/**
 	 * Returns the rounded value of a given x that can be divided by 3.
