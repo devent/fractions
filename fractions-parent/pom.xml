@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.anrisoftware.globalpom</groupId>
+		<artifactId>globalpom-groovy</artifactId>
+		<version>1.11</version>
+        <relativePath />
+	</parent>
+
+	<groupId>com.anrisoftware.fractions</groupId>
+	<artifactId>fractions-parent</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Parent POM</name>
+
+    <developers>
+        <developer>
+            <id>EM</id>
+            <name>Erwin Müller</name>
+            <organization>Advanced Natural Research Insitute GmbH</organization>
+            <email>erwin.mueller@deventm.org</email>
+            <roles>
+                <role>Owner</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Proprietary</name>
+            <distribution>repo</distribution>
+            <comments>Copyright 2012 Erwin Müller</comments>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:${custom.gitprivate.url}fractions.git</connection>
+        <developerConnection>scm:git:${custom.gitprivate.url}fractions.git</developerConnection>
+        <url>scm:git:${custom.gitprivate.url}fractions.git</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>${custom.repository.anrisprivate.id}</id>
+            <url>${custom.repository.root}${custom.repository.anrisprivate.path}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${custom.repository.anrisprivatesnapshots.id}</id>
+            <url>${custom.repository.root}${custom.repository.anrisprivatesnapshots.path}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.anrisoftware.globalpom</groupId>
+                <artifactId>globalpom-log</artifactId>
+                <version>${project.custom.globalpom.log.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anrisoftware.globalpom</groupId>
+                <artifactId>globalpom-groovytestutils</artifactId>
+                <version>${project.custom.globalpom.groovytestutils.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
