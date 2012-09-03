@@ -14,9 +14,13 @@ public interface IntegerFractionFactory {
 	 * Creates a new integer continued fraction from the specified value.
 	 * 
 	 * @param value
-	 *            the {@link Number} value.
+	 *            the value.
+	 * 
+	 * @param z
+	 *            the partial numerator for all denominators of this continued
+	 *            fraction.
 	 * 
 	 * @return the {@link ContinuedFraction}.
 	 */
-	ContinuedFraction<Number> fromValue(Number value);
+	ContinuedFraction<Number> fromValue(double value, Number z);
 }
