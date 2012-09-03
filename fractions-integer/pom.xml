@@ -14,4 +14,15 @@
 	<name>Integer Continued Fraction</name>
 	<description>Continued fraction with the denominators n in ℤ*.</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.anrisoftware.fractions</groupId>
+			<artifactId>fractions-core</artifactId>
+			<version>1.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-assistedinject</artifactId>
+		</dependency>
+	</dependencies>
 </project>
