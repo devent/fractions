@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>fractions-parent</artifactId>
 		<groupId>com.anrisoftware.fractions</groupId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
 		<relativePath>../fractions-parent</relativePath>
 	</parent>
 
