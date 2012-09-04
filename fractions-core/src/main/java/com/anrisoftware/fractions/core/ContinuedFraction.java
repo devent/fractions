@@ -24,11 +24,12 @@ public interface ContinuedFraction<Type extends Number> extends List<Type> {
 	double getValue();
 
 	/**
-	 * Returns the z value of this continued fraction.
+	 * Returns the partial numerator for all denominators of this continued
+	 * fraction.
 	 * 
 	 * @return the partial numerator for all denominators.
 	 */
-	double getZ();
+	Type getZ();
 
 	/**
 	 * Returns a calculated value from this continued fraction.

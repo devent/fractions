@@ -5,7 +5,10 @@
  */
 package com.anrisoftware.fractions.core.integer;
 
+import static com.anrisoftware.fractions.core.integer.MathUtils.fix;
 import static java.util.Collections.unmodifiableList;
+import static org.apache.commons.math3.util.FastMath.abs;
+import static org.apache.commons.math3.util.FastMath.log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,14 +31,45 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 
 	private final double value;
 
+	private final int maxDenominators;
+
 	@AssistedInject
-	IntegerFraction(@Assisted double value, @Assisted Number z) {
+	IntegerFraction(@Assisted double value, @Assisted Number z,
+			@Assisted int maxDenominators) {
 		this.value = value;
+		this.maxDenominators = maxDenominators;
 		this.denominators = unmodifiableList(evaluateFraction());
 	}
 
 	private List<Number> evaluateFraction() {
 		List<Number> denos = new ArrayList<Number>();
+
+		int k = 1;
+		double y = fix(value);
+		double r = value - y;
+		if (r > 0.5) {
+			r = r - 1.0;
+			y = y + 1.0;
+		}
+		denos.add(y);
+		double e = abs(r / value);
+
+		while (log(e) > -16.0 && k < maxDenominators) {
+			k++;
+			double s = 1 / r;
+			y = fix(s);
+			r = s - y;
+			if (r > 0.5) {
+				r -= 1.0;
+				y += 1.0;
+			} else if (r < -0.5) {
+				r += 1.0;
+				y -= 1.0;
+			}
+			e = abs(r / value);
+			denos.add(y);
+		}
+
 		return denos;
 	}
 
@@ -46,14 +80,19 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 
 	@Override
 	public Number getZ() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1.0;
 	}
 
 	@Override
 	public double doubleValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		int lastIndex = size() - 1;
+		double z = getZ().doubleValue();
+		double x = z / get(lastIndex).doubleValue();
+		for (int i = lastIndex - 1; i > 0; i--) {
+			x = z / (get(i).doubleValue() + x);
+		}
+		x = get(0).doubleValue() / z + x;
+		return x;
 	}
 
 	@Override
@@ -145,16 +184,6 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		return denominators.equals(o);
-	}
-
-	@Override
-	public int hashCode() {
-		return denominators.hashCode();
-	}
-
-	@Override
 	public Number get(int index) {
 		return denominators.get(index);
 	}
@@ -197,6 +226,21 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 	@Override
 	public List<Number> subList(int fromIndex, int toIndex) {
 		return denominators.subList(fromIndex, toIndex);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s=[%s]", doubleValue(), denominators.toString());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return denominators.equals(o);
+	}
+
+	@Override
+	public int hashCode() {
+		return denominators.hashCode();
 	}
 
 }
