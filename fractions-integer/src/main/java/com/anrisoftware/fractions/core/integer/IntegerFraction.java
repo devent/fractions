@@ -6,7 +6,6 @@
 package com.anrisoftware.fractions.core.integer;
 
 import static com.anrisoftware.fractions.core.integer.MathUtils.fix;
-import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.math3.util.FastMath.abs;
 import static org.apache.commons.math3.util.FastMath.log;
 
@@ -20,10 +19,16 @@ import com.anrisoftware.fractions.core.ContinuedFraction;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
+/**
+ * Continued fraction with integer number denominators.
+ * 
+ * @author Erwin Mueller, erwin.mueller@deventm.org
+ * @since 1.0
+ */
 class IntegerFraction extends Number implements ContinuedFraction<Number> {
 
 	/**
-	 * 
+	 * Serial UID.
 	 */
 	private static final long serialVersionUID = -9017458577046687007L;
 
@@ -33,12 +38,25 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 
 	private final int maxDenominators;
 
+	/**
+	 * Calculates the denominators from the specified value.
+	 * 
+	 * @param value
+	 *            the value.
+	 * 
+	 * @param z
+	 *            the partial numerator for all denominators of this continued
+	 *            fraction.
+	 * 
+	 * @param maxDenominators
+	 *            the maximum count of the denominators.
+	 */
 	@AssistedInject
 	IntegerFraction(@Assisted double value, @Assisted Number z,
 			@Assisted int maxDenominators) {
 		this.value = value;
 		this.maxDenominators = maxDenominators;
-		this.denominators = unmodifiableList(evaluateFraction());
+		this.denominators = evaluateFraction();
 	}
 
 	private List<Number> evaluateFraction() {
@@ -52,11 +70,12 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 			y = y + 1.0;
 		}
 		denos.add(y);
-		double e = abs(r / value);
+		double relativeError = abs(r / value);
+		double s;
 
-		while (log(e) > -16.0 && k < maxDenominators) {
+		while (log(relativeError) > -16.0 && k < maxDenominators) {
 			k++;
-			double s = 1 / r;
+			s = 1 / r;
 			y = fix(s);
 			r = s - y;
 			if (r > 0.5) {
@@ -66,7 +85,7 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 				r += 1.0;
 				y -= 1.0;
 			}
-			e = abs(r / value);
+			relativeError = abs(r / value);
 			denos.add(y);
 		}
 
@@ -97,20 +116,17 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 
 	@Override
 	public float floatValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (float) doubleValue();
 	}
 
 	@Override
 	public int intValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) doubleValue();
 	}
 
 	@Override
 	public long longValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (long) doubleValue();
 	}
 
 	@Override
@@ -230,7 +246,7 @@ class IntegerFraction extends Number implements ContinuedFraction<Number> {
 
 	@Override
 	public String toString() {
-		return String.format("%s=[%s]", doubleValue(), denominators.toString());
+		return String.format("%s=%s", doubleValue(), denominators.toString());
 	}
 
 	@Override
