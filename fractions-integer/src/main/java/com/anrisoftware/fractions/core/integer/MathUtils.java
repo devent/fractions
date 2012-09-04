@@ -26,9 +26,14 @@ class MathUtils {
 	 */
 	static public double fix(double value) {
 		if (value < 0) {
-			return ceil(value);
+			value = ceil(value);
+			if (value == -0.0) {
+				value = 0.0;
+			}
+		} else {
+			value = floor(value);
 		}
-		return floor(value);
+		return value;
 	}
 
 }

@@ -15,9 +15,9 @@ import org.junit.Test
  */
 class FixTest {
 
-	static def inputs = [-5.2, 5.2]
+	static double[] inputs = [-5.2, 5.2, -1.9, -0.2, 3.4, 5.6, 7.0]
 	
-	static def outputs = [-5.0, 5.0]
+	static double[] outputs = [-5.0, 5.0, -1.0, 0.0, 3.0, 5.0, 7.0]
 	
 	@Test
 	void "fix inputs to outputs"() {
