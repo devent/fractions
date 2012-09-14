@@ -3,20 +3,23 @@
  *
  * This file is part of fractions-integer. All rights reserved.
  */
-package com.anrisoftware.fractions.core.integer;
+package com.anrisoftware.fractions.core.integer.factories;
 
 import com.anrisoftware.fractions.core.ContinuedFraction;
 
 /**
  * Factory to create a new integer continued fraction from the specified value.
+ * The denominators of this continued fraction cannot be of value -1. The
+ * partial numerator for all denominators of this continued fraction will be 1.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.0
+ * @since 1.1
  */
-public interface IntegerFractionFactory {
+public interface IntegerNoMinusOneFractionFactory {
 
 	/**
 	 * Creates a new integer continued fraction from the specified value. The
+	 * denominators of this continued fraction cannot be of value -1. The
 	 * partial numerator for all denominators of this continued fraction will be
 	 * 1.
 	 * 

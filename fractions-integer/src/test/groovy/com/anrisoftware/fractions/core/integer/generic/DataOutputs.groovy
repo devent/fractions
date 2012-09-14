@@ -1,4 +1,4 @@
-package com.anrisoftware.fractions.core.integer
+package com.anrisoftware.fractions.core.integer.generic
 
 [
 [0,-1,-99],

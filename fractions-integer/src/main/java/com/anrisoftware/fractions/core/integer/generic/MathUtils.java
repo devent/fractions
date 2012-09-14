@@ -1,9 +1,9 @@
 /*
  * Copyright 2012 Erwin Müller <erwin.mueller@deventm.org>
- * 
+ *
  * This file is part of fractions-integer. All rights reserved.
  */
-package com.anrisoftware.fractions.core.integer;
+package com.anrisoftware.fractions.core.integer.generic;
 
 import static org.apache.commons.math3.util.FastMath.ceil;
 import static org.apache.commons.math3.util.FastMath.floor;
@@ -14,7 +14,7 @@ import static org.apache.commons.math3.util.FastMath.floor;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-class MathUtils {
+public class MathUtils {
 
 	/**
 	 * Rounds the specified value toward zero.

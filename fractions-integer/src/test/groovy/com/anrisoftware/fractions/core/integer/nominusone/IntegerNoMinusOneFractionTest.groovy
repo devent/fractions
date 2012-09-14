@@ -5,6 +5,7 @@ import groovy.util.logging.Slf4j
 import org.junit.Before
 import org.junit.Test
 
+import com.anrisoftware.fractions.core.integer.factories.IntegerNoMinusOneFractionFactory;
 import com.google.inject.Guice
 import com.google.inject.Injector
 

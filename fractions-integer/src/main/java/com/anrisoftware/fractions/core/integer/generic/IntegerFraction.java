@@ -3,9 +3,9 @@
  *
  * This file is part of fractions-integer. All rights reserved.
  */
-package com.anrisoftware.fractions.core.integer;
+package com.anrisoftware.fractions.core.integer.generic;
 
-import static com.anrisoftware.fractions.core.integer.MathUtils.fix;
+import static com.anrisoftware.fractions.core.integer.generic.MathUtils.fix;
 import static org.apache.commons.math3.util.FastMath.abs;
 import static org.apache.commons.math3.util.FastMath.log;
 

@@ -6,6 +6,7 @@
 package com.anrisoftware.fractions.core.integer.nominusone;
 
 import com.anrisoftware.fractions.core.ContinuedFraction;
+import com.anrisoftware.fractions.core.integer.factories.IntegerNoMinusOneFractionFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;

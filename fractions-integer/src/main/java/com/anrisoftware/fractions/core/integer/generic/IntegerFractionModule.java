@@ -3,9 +3,11 @@
  *
  * This file is part of fractions-integer. All rights reserved.
  */
-package com.anrisoftware.fractions.core.integer;
+package com.anrisoftware.fractions.core.integer.generic;
 
 import com.anrisoftware.fractions.core.ContinuedFraction;
+import com.anrisoftware.fractions.core.integer.factories.IntegerFractionFactory;
+import com.anrisoftware.fractions.core.integer.nominusone.IntegerNoMinusOneFractionModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
@@ -30,5 +32,6 @@ public class IntegerFractionModule extends AbstractModule {
 		install(new FactoryModuleBuilder().implement(
 				new TypeLiteral<ContinuedFraction<Integer>>() {
 				}, IntegerFraction.class).build(IntegerFractionFactory.class));
+		install(new IntegerNoMinusOneFractionModule());
 	}
 }

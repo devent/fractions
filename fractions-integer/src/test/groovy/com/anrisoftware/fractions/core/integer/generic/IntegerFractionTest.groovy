@@ -1,10 +1,12 @@
-package com.anrisoftware.fractions.core.integer
+package com.anrisoftware.fractions.core.integer.generic
 
 import groovy.util.logging.Slf4j
 
 import org.junit.Before
 import org.junit.Test
 
+import com.anrisoftware.fractions.core.integer.factories.IntegerFractionFactory;
+import com.anrisoftware.fractions.core.integer.generic.IntegerFractionModule;
 import com.google.inject.Guice
 import com.google.inject.Injector
 
