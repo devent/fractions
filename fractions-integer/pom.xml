@@ -28,5 +28,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.perfidix</groupId>
+			<artifactId>perfidix</artifactId>
+			<version>3.6.6</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

@@ -4,8 +4,12 @@ import groovy.util.logging.Slf4j
 
 import org.junit.Before
 import org.junit.Test
+import org.perfidix.Benchmark
+import org.perfidix.annotation.Bench
+import org.perfidix.ouput.TabularSummaryOutput
 
-import com.anrisoftware.fractions.core.integer.factories.IntegerNoMinusOneFractionFactory;
+import com.anrisoftware.fractions.core.ContinuedFraction
+import com.anrisoftware.fractions.core.integer.factories.IntegerNoMinusOneFractionFactory
 import com.google.inject.Guice
 import com.google.inject.Injector
 
@@ -26,10 +30,13 @@ class IntegerNoMinusOneFractionTest {
 
 	IntegerNoMinusOneFractionFactory factory
 
+	Random random
+
 	@Before
 	void beforeTest() {
 		injector = createInjector()
 		factory = injector.getInstance IntegerNoMinusOneFractionFactory
+		random = new Random(0)
 	}
 
 	Injector createInjector() {
@@ -47,5 +54,30 @@ class IntegerNoMinusOneFractionTest {
 				log.warn "The denominators are not match, but the value match"
 			}
 		}
+	}
+
+	double benmarkValue
+
+	int benchmarkIndex
+
+	@Test
+	void "run benchmark"() {
+		benchmarkIndex = 0
+		def benchmark = new Benchmark()
+		benchmark.add(this)
+		def result = benchmark.run()
+		new TabularSummaryOutput().visitBenchmark result
+	}
+
+	@Bench(runs = 125, beforeEachRun = "chooseValue")
+	void "benmark continued fraction"() {
+		ContinuedFraction fraction = factory.fromValue(benmarkValue, 9i)
+	}
+
+	void chooseValue() {
+		if (benchmarkIndex >= inputs.size()) {
+			benchmarkIndex = 0
+		}
+		benmarkValue = inputs.get(benchmarkIndex++)
 	}
 }
