@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Erwin Müller <erwin.mueller@deventm.org>
- * 
+ *
  * This file is part of fractions-core. All rights reserved.
  */
 package com.anrisoftware.fractions.core;
@@ -11,10 +11,20 @@ import java.util.List;
  * Represents a continued fraction with the denominators as {@link Number}s. You
  * can use the continued fraction as a {@link List} to access the denominators.
  * 
+ * @param <Type>
+ *            the value type of the denominators.
+ * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.2
  */
 public interface ContinuedFraction<Type extends Number> extends List<Type> {
+
+	/**
+	 * Returns the maximum count of denominators for the continued fraction.
+	 * 
+	 * @return the maximum count.
+	 */
+	int getMaxDenominators();
 
 	/**
 	 * Returns the original value of this continued fraction.
@@ -29,7 +39,7 @@ public interface ContinuedFraction<Type extends Number> extends List<Type> {
 	 * 
 	 * @return the partial numerator for all denominators.
 	 */
-	Type getZ();
+	double getZ();
 
 	/**
 	 * Returns a calculated value from this continued fraction.

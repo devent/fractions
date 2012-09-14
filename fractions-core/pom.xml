@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>fractions-core</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<name>Core</name>
 	<description>The core interfaces and classes of fractions.</description>
 
