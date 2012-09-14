@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>fractions-integer</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<name>Integer Continued Fraction</name>
 	<description>Continued fraction with the denominators n in ℤ*.</description>
 
