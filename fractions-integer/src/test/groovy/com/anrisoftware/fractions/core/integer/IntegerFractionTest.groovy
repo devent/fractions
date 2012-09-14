@@ -36,10 +36,10 @@ class IntegerFractionTest {
 	}
 
 	@Test
-	void "calculate continued fractions with z 1,0"() {
+	void "calculate continued fractions"() {
 		int max = 9
 		inputs.eachWithIndex { double value, i ->
-			def fraction = factory.fromValue(value, 1.0d, max)
+			def fraction = factory.fromValue(value, max)
 			log.info "{}. fraction: {}", i, fraction
 			assert outputs[i].size() == fraction.size()
 			if (!fraction.equals(outputs[i])) {

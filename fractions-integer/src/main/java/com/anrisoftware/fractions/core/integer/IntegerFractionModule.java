@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Erwin Müller <erwin.mueller@deventm.org>
- * 
+ *
  * This file is part of fractions-integer. All rights reserved.
  */
 package com.anrisoftware.fractions.core.integer;
@@ -17,7 +17,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  * <pre>
  * injector = Guice.createInjector(new IntegerFractionModule());
  * factory = injector.getInstance(IntegerFractionFactory.class);
- * fraction = factory.fromValue(value, 1.0, 9);
+ * fraction = factory.fromValue(value, 9);
  * </pre>
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
@@ -28,7 +28,7 @@ public class IntegerFractionModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		install(new FactoryModuleBuilder().implement(
-				new TypeLiteral<ContinuedFraction<Number>>() {
+				new TypeLiteral<ContinuedFraction<Integer>>() {
 				}, IntegerFraction.class).build(IntegerFractionFactory.class));
 	}
 }
