@@ -35,6 +35,10 @@
 			<artifactId>perfidix</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.globalpom</groupId>
+			<artifactId>globalpom-groovytestutils</artifactId>
+		</dependency>
 
 		<!-- own modules dependencies -->
 		<dependency>
@@ -51,6 +55,10 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.globalpom</groupId>
+			<artifactId>globalpom-utils</artifactId>
 		</dependency>
 	</dependencies>
 </project>

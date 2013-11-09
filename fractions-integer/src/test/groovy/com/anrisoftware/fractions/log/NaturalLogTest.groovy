@@ -16,8 +16,9 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.core.integer
+package com.anrisoftware.fractions.log
 
+import static com.anrisoftware.globalpom.utils.TestUtils.*
 import groovy.util.logging.Slf4j
 
 import org.apache.commons.math3.complex.Complex
@@ -26,24 +27,34 @@ import org.junit.Test
 
 /**
  * Test of natural logarithm algorithms.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
 @Slf4j
 class NaturalLogTest {
-	
+
 	static double[] inputs = [0.0, 1.0, -1.0]
-	
-	static double[] javaOutputs = [Double.NEGATIVE_INFINITY, 0.0, Double.NaN]
-	
-	static def complexOutputs = [new Complex(Double.NEGATIVE_INFINITY, 0.0), new Complex(0.0), new Complex(0.0, 3.141592653589793)]
-	
+
+	static List javaOutputs = [
+		{ double result -> assert result.isInfinite() },
+		{ double result -> assertDecimalEquals result, 0.0 },
+		{ double result ->
+			assert result.isNaN()
+		}
+	]
+
+	static def complexOutputs = [
+		new Complex(Double.NEGATIVE_INFINITY, 0.0),
+		new Complex(0.0),
+		new Complex(0.0, 3.141592653589793)
+	]
+
 	@Test
-	void "use java log"() {
+	void "use fast math log"() {
 		inputs.eachWithIndex { double value, int i ->
 			double result = FastMath.log(value)
-			assert javaOutputs[i] == result
+			javaOutputs[i](result)
 		}
 	}
 
@@ -52,9 +63,8 @@ class NaturalLogTest {
 		inputs.eachWithIndex { double value, int i ->
 			def complex = new Complex(value)
 			def result = complex.log()
-			log.info "{}: complex {}", i, result
+			log.info "#{} - value: {}; result: {}", i, value, result
 			assert complexOutputs[i] == result
 		}
 	}
-
 }

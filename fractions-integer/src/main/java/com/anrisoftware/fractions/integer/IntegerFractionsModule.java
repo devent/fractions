@@ -16,12 +16,9 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.core.integer.nominusone;
+package com.anrisoftware.fractions.integer;
 
-import com.anrisoftware.fractions.core.ContinuedFraction;
-import com.anrisoftware.fractions.core.integer.factories.IntegerNoMinusOneFractionFactory;
 import com.google.inject.AbstractModule;
-import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
@@ -29,21 +26,26 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  * Guice.
  * 
  * <pre>
- * injector = Guice.createInjector(new IntegerFractionModule());
- * factory = injector.getInstance(IntegerNoMinusOneFractionFactory.class);
+ * injector = Guice.createInjector(new IntegerFractionsModule());
+ * factory = injector.getInstance(IntegerFractionFactory.class);
  * fraction = factory.fromValue(value, 9);
  * </pre>
  * 
+ * @see IntegerFraction
+ * @see IntegerNoMinusOneFraction
+ * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.1
+ * @since 2.0
  */
-public class IntegerNoMinusOneFractionModule extends AbstractModule {
+public class IntegerFractionsModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		install(new FactoryModuleBuilder().implement(IntegerFraction.class,
+				IntegerFraction.class).build(IntegerFractionFactory.class));
 		install(new FactoryModuleBuilder().implement(
-				new TypeLiteral<ContinuedFraction<Integer>>() {
-				}, IntegerNoMinusOneFraction.class).build(
+				IntegerNoMinusOneFraction.class,
+				IntegerNoMinusOneFraction.class).build(
 				IntegerNoMinusOneFractionFactory.class));
 	}
 }

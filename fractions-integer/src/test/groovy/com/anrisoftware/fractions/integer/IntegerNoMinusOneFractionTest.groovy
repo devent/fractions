@@ -16,60 +16,38 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.core.integer.nominusone
+package com.anrisoftware.fractions.integer
 
 import groovy.util.logging.Slf4j
 
-import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.perfidix.Benchmark
 import org.perfidix.annotation.Bench
 import org.perfidix.ouput.TabularSummaryOutput
 
-import com.anrisoftware.fractions.core.ContinuedFraction
-import com.anrisoftware.fractions.core.integer.factories.IntegerNoMinusOneFractionFactory
 import com.google.inject.Guice
 import com.google.inject.Injector
 
+/**
+ * @see IntegerNoMinusOneFraction
+ *
+ * @author Erwin Mueller, erwin.mueller@deventm.org
+ * @since 1.0
+ */
 @Slf4j
 class IntegerNoMinusOneFractionTest {
-
-	/**
-	 * The input values.
-	 */
-	static def inputs = new DataInputs().run()
-
-	/**
-	 * The expected denominators for each input value.
-	 */
-	static def outputs = new DataOutputs().run()
-
-	Injector injector
-
-	IntegerNoMinusOneFractionFactory factory
-
-	Random random
-
-	@Before
-	void beforeTest() {
-		injector = createInjector()
-		factory = injector.getInstance IntegerNoMinusOneFractionFactory
-		random = new Random(0)
-	}
-
-	Injector createInjector() {
-		Guice.createInjector new IntegerNoMinusOneFractionModule()
-	}
 
 	@Test
 	void "calculate continued fractions"() {
 		int max = 9
+		double z = 1.0
 		inputs.eachWithIndex { double value, i ->
+			int[] denos = outputs[i] as int[]
 			def fraction = factory.fromValue(value, max)
 			log.info "{}. fraction: {}", i, fraction
-			//assert outputs[i].size() == fraction.size()
-			if (!fraction.equals(outputs[i])) {
-				log.warn "The denominators are not match, but the value match"
+			if (!fraction.equals(factory.create(z, denos))) {
+				log.warn "{}. fraction: {}; expected denominators: {}", i, fraction, outputs[i]
 			}
 		}
 	}
@@ -89,7 +67,7 @@ class IntegerNoMinusOneFractionTest {
 
 	@Bench(runs = 125, beforeEachRun = "chooseValue")
 	void "benmark continued fraction"() {
-		ContinuedFraction fraction = factory.fromValue(benmarkValue, 9i)
+		def fraction = factory.fromValue(benmarkValue, 1)
 	}
 
 	void chooseValue() {
@@ -97,5 +75,26 @@ class IntegerNoMinusOneFractionTest {
 			benchmarkIndex = 0
 		}
 		benmarkValue = inputs.get(benchmarkIndex++)
+	}
+
+	static inputs = new DataInputs().run()
+
+	static outputs = new IntegerNoMinusOneFractionData().run()
+
+	static Injector injector
+
+	static IntegerNoMinusOneFractionFactory factory
+
+	static Random random
+
+	@BeforeClass
+	static void beforeTest() {
+		injector = createInjector()
+		factory = injector.getInstance IntegerNoMinusOneFractionFactory
+		random = new Random(0)
+	}
+
+	static Injector createInjector() {
+		Guice.createInjector new IntegerFractionsModule()
 	}
 }

@@ -16,55 +16,55 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.core.integer.generic
+package com.anrisoftware.fractions.integer
 
 import groovy.util.logging.Slf4j
 
-import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 
-import com.anrisoftware.fractions.core.integer.factories.IntegerFractionFactory;
-import com.anrisoftware.fractions.core.integer.generic.IntegerFractionModule;
 import com.google.inject.Guice
 import com.google.inject.Injector
 
+/**
+ * @see IntegerFraction
+ *
+ * @author Erwin Mueller, erwin.mueller@deventm.org
+ * @since 1.0
+ */
 @Slf4j
 class IntegerFractionTest {
-
-	/**
-	 * The input values.
-	 */
-	static def inputs = new DataInputs().run()
-
-	/**
-	 * The expected denominators for each input value.
-	 */
-	static def outputs = new DataOutputs().run()
-
-	Injector injector
-
-	IntegerFractionFactory factory
-
-	@Before
-	void beforeTest() {
-		injector = createInjector()
-		factory = injector.getInstance IntegerFractionFactory
-	}
-
-	Injector createInjector() {
-		Guice.createInjector new IntegerFractionModule()
-	}
 
 	@Test
 	void "calculate continued fractions"() {
 		int max = 9
+		double z = 1.0
 		inputs.eachWithIndex { double value, i ->
+			int[] denos = outputs[i] as int[]
 			def fraction = factory.fromValue(value, max)
 			log.info "{}. fraction: {}", i, fraction
 			assert outputs[i].size() == fraction.size()
-			if (!fraction.equals(outputs[i])) {
-				log.warn "The denominators are not match, but the value match"
+			if (!fraction.equals(factory.create(z, denos))) {
+				log.warn "{}. fraction: {}; expected denominators: {}", i, fraction, outputs[i]
 			}
 		}
+	}
+
+	static inputs = new DataInputs().run()
+
+	static outputs = new IntegerFractionData().run()
+
+	static Injector injector
+
+	static IntegerFractionFactory factory
+
+	@BeforeClass
+	static void beforeTest() {
+		injector = createInjector()
+		factory = injector.getInstance IntegerFractionFactory
+	}
+
+	static Injector createInjector() {
+		Guice.createInjector new IntegerFractionsModule()
 	}
 }

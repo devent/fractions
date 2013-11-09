@@ -13,18 +13,29 @@
 	<artifactId>fractions-core</artifactId>
 	<name>Fractions :: Core</name>
 	<description>The core interfaces and classes of fractions.</description>
-    <inceptionYear>2011</inceptionYear>
-    <url>https://www.anr-institute.com/projects/projects/fractions-core</url>
+	<inceptionYear>2011</inceptionYear>
+	<url>https://www.anr-institute.com/projects/projects/fractions-core</url>
 
-    <issueManagement>
-        <system>Redmine</system>
-        <url>https://www.anr-institute.com/projects/projects/fractions-core</url>
-    </issueManagement>
+	<issueManagement>
+		<system>Redmine</system>
+		<url>https://www.anr-institute.com/projects/projects/fractions-core</url>
+	</issueManagement>
 
-    <scm>
-        <connection>scm:git:${custom.gitpublic.url}fractions.git</connection>
-        <developerConnection>scm:git:${custom.gitpublic.url}fractions.git</developerConnection>
-        <url>scm:git:${custom.gitpublic.url}fractions.git</url>
-    </scm>
+	<scm>
+		<connection>scm:git:${custom.gitpublic.url}fractions.git</connection>
+		<developerConnection>scm:git:${custom.gitpublic.url}fractions.git</developerConnection>
+		<url>scm:git:${custom.gitpublic.url}fractions.git</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.trove4j</groupId>
+			<artifactId>trove4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

@@ -8,9 +8,9 @@
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  *
- * fractions-core is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * fractions-core is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  *
  * You should have received a copy of the GNU General Public License along with
@@ -18,29 +18,19 @@
  */
 package com.anrisoftware.fractions.core;
 
-import java.util.List;
+import gnu.trove.iterator.TIntIterator;
 
 /**
- * Represents a continued fraction with the denominators as {@link Number}s. You
- * can use the continued fraction as a {@link List} to access the denominators.
- * 
- * @param <Type>
- *            the value type of the denominators.
- * 
+ * Represents a continued fraction.
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.2
+ * @since 2.0
  */
-public interface ContinuedFraction<Type extends Number> extends List<Type> {
+public interface ContinuedFraction {
 
 	/**
-	 * Returns the maximum count of denominators for the continued fraction.
-	 * 
-	 * @return the maximum count.
-	 */
-	int getMaxDenominators();
-
-	/**
-	 * Returns the original value of this continued fraction.
+	 * Returns the original value of the continued fraction. That is the value
+	 * from which the denominators are calculated.
 	 * 
 	 * @return the original value.
 	 */
@@ -55,17 +45,120 @@ public interface ContinuedFraction<Type extends Number> extends List<Type> {
 	double getZ();
 
 	/**
-	 * Returns a calculated value from this continued fraction.
+	 * Returns the denominator value with the specified index.
 	 * 
+	 * @param index
+	 *            the index in the range of {@code [0,size-1]}.
+	 * 
+	 * @return the denominator value.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the specified index is negative or greater then
+	 *             {@code size-1}.
+	 */
+	int get(int index);
+
+	/**
+	 * Replaces the demoninator with the specified index.
+	 * 
+	 * @param index
+	 *            the index in the range of {@code [0,size-1]}.
+	 * 
+	 * @param value
+	 *            the denominator value.
+	 * 
+	 * @return the {@link ContinuedFraction} with the replaced denominator.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the specified index is negative or greater then
+	 *             {@code size-1}.
+	 */
+	ContinuedFraction set(int index, int value);
+
+	/**
+	 * Expands the continued fraction by the specified denominator.
+	 * 
+	 * @param denominator
+	 *            the denominator.
+	 * 
+	 * @return the expanded {@link ContinuedFraction}.
+	 */
+	ContinuedFraction expand(int denominator);
+
+	/**
+	 * Contracts the continued fraction removing the last denominator.
+	 *
+	 * @return the contracted {@link ContinuedFraction}.
+	 */
+	ContinuedFraction contract();
+
+	/**
+	 * Returns if the continued fraction does not have any denominators.
+	 * 
+	 * @return {@code true} if {@code size = 0}.
+	 */
+	boolean isEmpty();
+
+	/**
+	 * Returns the numbers of denominators.
+	 * 
+	 * @return the size.
+	 */
+	int size();
+
+	/**
+	 * Returns the denominators in an integer array.
+	 * 
+	 * @return the denominators array.
+	 */
+	int[] toArray();
+
+	/**
+	 * Returns the denominators in an integer array.
+	 * 
+	 * @param array
+	 *            the array in which the denominator values are set.
+	 * 
+	 * @return the denominators array.
+	 * 
+	 * @throws NullPointerException
+	 *             if the specified array is {@code null}.
+	 */
+	int[] toArray(int[] array);
+
+	/**
+	 * Returns an iterator over the denominator values.
+	 * 
+	 * @return the {@link TIntIterator}.
+	 */
+	TIntIterator iterator();
+
+	/**
+	 * Returns a calculated value from this continued fraction.
+	 *
 	 * @return the float value.
 	 */
 	float floatValue();
 
 	/**
 	 * Returns a calculated value from this continued fraction.
-	 * 
+	 *
 	 * @return the double value.
 	 */
 	double doubleValue();
+
+	/**
+	 * Returns a calculated value from this continued fraction.
+	 *
+	 * @return the integer value.
+	 */
+	int intValue();
+
+	/**
+	 * Returns a calculated value from this continued fraction.
+	 *
+	 * @return the long integer value.
+	 */
+	long longValue();
 
 }

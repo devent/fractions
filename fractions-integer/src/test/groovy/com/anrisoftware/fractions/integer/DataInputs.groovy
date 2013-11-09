@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.core.integer.nominusone
+package com.anrisoftware.fractions.integer
 
-[	
+[
 	-0.99,
 	-0.949,
 	-0.908,

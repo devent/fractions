@@ -16,30 +16,42 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.core.integer.factories;
-
-import com.anrisoftware.fractions.core.ContinuedFraction;
+package com.anrisoftware.fractions.integer;
 
 /**
  * Factory to create a new integer continued fraction from the specified value.
+ * The denominators of this continued fraction cannot be of value -1. The
+ * partial numerator for all denominators of this continued fraction will be 1.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.0
+ * @since 2.0
  */
-public interface IntegerFractionFactory {
+public interface IntegerNoMinusOneFractionFactory {
 
 	/**
-	 * Creates a new integer continued fraction from the specified value. The
-	 * partial numerator for all denominators of this continued fraction will be
-	 * 1.
+	 * Create a new integer continued fraction from the partial numerator and
+	 * the denominators.
+	 * 
+	 * @param z
+	 *            the partial numerator.
+	 * 
+	 * @param denos
+	 *            the array of denominator values.
+	 * 
+	 * @return the {@link IntegerNoMinusOneFraction}.
+	 */
+	IntegerNoMinusOneFraction create(double z, int[] denos);
+
+	/**
+	 * Creates a new integer continued fraction from the specified value.
 	 * 
 	 * @param value
 	 *            the value.
 	 * 
-	 * @param maxDenominators
+	 * @param max
 	 *            the maximum count of the denominators.
 	 * 
-	 * @return the {@link ContinuedFraction}.
+	 * @return the {@link IntegerNoMinusOneFraction}.
 	 */
-	ContinuedFraction<Integer> fromValue(double value, int maxDenominators);
+	IntegerNoMinusOneFraction fromValue(double value, int max);
 }

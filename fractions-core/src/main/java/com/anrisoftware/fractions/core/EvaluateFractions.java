@@ -18,18 +18,13 @@
  */
 package com.anrisoftware.fractions.core;
 
-import java.util.List;
-
 /**
  * Calculate the denominators of a continued fraction from the value.
  * 
- * @param <Type>
- *            the value type of the denominators.
- * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.3
+ * @since 2.0
  */
-public interface EvaluateFractions<Type extends Number> {
+public interface EvaluateFractions {
 
 	/**
 	 * Calculate the denominators of a continued fraction from the specified
@@ -38,10 +33,10 @@ public interface EvaluateFractions<Type extends Number> {
 	 * @param value
 	 *            the value.
 	 * 
-	 * @param maxDenominators
+	 * @param max
 	 *            the maximum count of denominators for the continued fraction.
 	 * 
-	 * @return a {@link List} of {@link Type} that are the denominators.
+	 * @return the denominators.
 	 */
-	List<Type> evaluate(double value, int maxDenominators);
+	int[] evaluate(double value, int max);
 }
