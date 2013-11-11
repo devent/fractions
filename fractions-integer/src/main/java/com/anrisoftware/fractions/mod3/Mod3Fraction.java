@@ -16,11 +16,8 @@
  * You should have received a copy of the GNU General Public License along with
  * fractions-integer. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.fractions.integer;
+package com.anrisoftware.fractions.mod3;
 
-import static com.anrisoftware.globalpom.math.MathUtils.fix;
-import static org.apache.commons.math3.util.FastMath.abs;
-import static org.apache.commons.math3.util.FastMath.log;
 import gnu.trove.list.TIntList;
 import gnu.trove.list.array.TIntArrayList;
 
@@ -33,63 +30,73 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
 /**
- * Continued fraction with integer number denominators.
- *
+ * Mod3 continued fraction.
+ * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public class IntegerFraction extends AbstractContinuedFraction {
+public class Mod3Fraction extends AbstractContinuedFraction {
+
+	private static final double Z_DEFAULT = 1.0;
+	private static final int MAX_LIMES = 32766;
 
 	@Inject
-	private IntegerFractionFactory factory;
+	private Mod3FractionFactory factory;
 
 	/**
-	 * @see IntegerFractionFactory#create(double, int[])
+	 * @see Mod3FractionFactory#create(double, int[])
 	 */
 	@AssistedInject
-	IntegerFraction(@Assisted double z, @Assisted int[] denos) {
+	Mod3Fraction(@Assisted double z, @Assisted int[] denos) {
 		super(z, denos);
 	}
 
 	/**
-	 * @see IntegerFractionFactory#fromValue(double, int)
+	 * @see Mod3FractionFactory#fromValue(double, int)
 	 */
 	@AssistedInject
-	IntegerFraction(@Assisted double value, @Assisted int max) {
+	Mod3Fraction(final Mod3Round round, @Assisted double value,
+			@Assisted int max) {
 		super(new EvaluateFractions() {
 
 			@Override
 			public int[] evaluate(double value, int max) {
-				TIntList denos = new TIntArrayList(max);
-				int k = 1;
-				double y = fix(value);
-				double r = value - y;
-				if (r > 0.5) {
-					r = r - 1.0;
-					y = y + 1.0;
-				}
-				denos.add((int) y);
-				double relativeError = abs(r / value);
-				double s;
-				while (log(relativeError) > -16.0 && k < max) {
-					k++;
-					s = 1 / r;
-					y = fix(s);
-					r = s - y;
-					if (r > 0.5) {
-						r -= 1.0;
-						y += 1.0;
-					} else if (r < -0.5) {
-						r += 1.0;
-						y -= 1.0;
-					}
-					relativeError = abs(r / value);
-					denos.add((int) y);
-				}
-				return denos.toArray();
+				return evaluateDenos(value, max, round);
 			}
 		}, value, 1.0, max);
+	}
+
+	private static int[] evaluateDenos(double value, int max, Mod3Round round) {
+		TIntList denos = new TIntArrayList(max);
+		double logvalue = value;
+		denos.add(round.round(logvalue));
+		return calculateDenos(denos, round, logvalue, Z_DEFAULT, max).toArray();
+	}
+
+	private static TIntList calculateDenos(TIntList denos, Mod3Round round,
+			double logvalue, double z, int max) {
+		int lmax = max;
+		if (denos.get(0) % 3 != 0) {
+			lmax = 0;
+		}
+		int nenner = denos.get(0);
+		int limes = MAX_LIMES;
+		double dn = 0.0;
+		int level = 1;
+		while (level <= lmax) {
+			dn = logvalue - nenner;
+			if (Math.abs(dn) <= 1.0 / limes) {
+				denos.add(limes);
+				lmax = level;
+			} else {
+				logvalue = z / dn;
+				nenner = round.round(logvalue);
+				denos.add(nenner);
+			}
+			level++;
+		}
+		return denos;
 	}
 
 	@Override
