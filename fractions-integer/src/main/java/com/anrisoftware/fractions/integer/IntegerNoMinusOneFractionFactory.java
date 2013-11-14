@@ -18,6 +18,8 @@
  */
 package com.anrisoftware.fractions.integer;
 
+import com.anrisoftware.fractions.core.FractionFactory;
+
 /**
  * Factory to create a new integer continued fraction from the specified value.
  * The denominators of this continued fraction cannot be of value -1. The
@@ -26,32 +28,6 @@ package com.anrisoftware.fractions.integer;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
-public interface IntegerNoMinusOneFractionFactory {
+public interface IntegerNoMinusOneFractionFactory extends FractionFactory {
 
-	/**
-	 * Create a new integer continued fraction from the partial numerator and
-	 * the denominators.
-	 * 
-	 * @param z
-	 *            the partial numerator.
-	 * 
-	 * @param denos
-	 *            the array of denominator values.
-	 * 
-	 * @return the {@link IntegerNoMinusOneFraction}.
-	 */
-	IntegerNoMinusOneFraction create(double z, int[] denos);
-
-	/**
-	 * Creates a new integer continued fraction from the specified value.
-	 * 
-	 * @param value
-	 *            the value.
-	 * 
-	 * @param max
-	 *            the maximum count of the denominators.
-	 * 
-	 * @return the {@link IntegerNoMinusOneFraction}.
-	 */
-	IntegerNoMinusOneFraction fromValue(double value, int max);
 }

@@ -18,41 +18,14 @@
  */
 package com.anrisoftware.fractions.integer;
 
+import com.anrisoftware.fractions.core.FractionFactory;
+
 /**
  * Factory to create a new integer continued fraction from the specified value.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
-public interface IntegerFractionFactory {
-
-	/**
-	 * Create a new integer continued fraction from the partial numerator and
-	 * the denominators.
-	 * 
-	 * @param z
-	 *            the partial numerator.
-	 * 
-	 * @param denos
-	 *            the array of denominator values.
-	 * 
-	 * @return the {@link IntegerFraction}.
-	 */
-	IntegerFraction create(double z, int[] denos);
-
-	/**
-	 * Creates a new integer continued fraction from the specified value. The
-	 * partial numerator for all denominators {@code z} of this continued
-	 * fraction will be 1.
-	 * 
-	 * @param value
-	 *            the value.
-	 * 
-	 * @param max
-	 *            the maximum count of the denominators.
-	 * 
-	 * @return the {@link IntegerFraction}.
-	 */
-	IntegerFraction fromValue(double value, int max);
+public interface IntegerFractionFactory extends FractionFactory {
 
 }

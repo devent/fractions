@@ -18,6 +18,7 @@
  */
 package com.anrisoftware.fractions.integer;
 
+import com.anrisoftware.fractions.core.ContinuedFraction;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
@@ -31,8 +32,8 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  * fraction = factory.fromValue(value, 9);
  * </pre>
  * 
- * @see IntegerFraction
- * @see IntegerNoMinusOneFraction
+ * @see IntegerFractionFactory
+ * @see IntegerNoMinusOneFractionFactory
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
@@ -41,10 +42,9 @@ public class IntegerFractionsModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		install(new FactoryModuleBuilder().implement(IntegerFraction.class,
+		install(new FactoryModuleBuilder().implement(ContinuedFraction.class,
 				IntegerFraction.class).build(IntegerFractionFactory.class));
-		install(new FactoryModuleBuilder().implement(
-				IntegerNoMinusOneFraction.class,
+		install(new FactoryModuleBuilder().implement(ContinuedFraction.class,
 				IntegerNoMinusOneFraction.class).build(
 				IntegerNoMinusOneFractionFactory.class));
 	}
