@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.anrisoftware.fractions</groupId>
+		<artifactId>fractions-parent</artifactId>
+		<version>2.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>fractions-calculator-cli</artifactId>
+	<name>Fractions :: Calculator Command Line</name>
+	<description>Calculates the continued fraction from a specified value.</description>
+	<url>https://www.anr-institute.com/projects/projects/fractions-calculator-cli</url>
+	<inceptionYear>2013</inceptionYear>
+
+	<issueManagement>
+		<system>Redmine</system>
+		<url>https://www.anr-institute.com/projects/projects/fractions-calculator-cli</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:git:${custom.gitpublic.url}fractions.git</connection>
+		<developerConnection>scm:git:${custom.gitpublic.url}fractions.git</developerConnection>
+		<url>scm:git:${custom.gitpublic.url}fractions.git</url>
+	</scm>
+
+	<dependencies>
+		<!-- test dependencies -->
+		<dependency>
+			<groupId>com.anrisoftware.globalpom</groupId>
+			<artifactId>globalpom-groovytestutils</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- own modules dependencies -->
+		<dependency>
+			<groupId>com.anrisoftware.fractions</groupId>
+			<artifactId>fractions-integer</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- compile dependencies -->
+		<dependency>
+			<groupId>com.anrisoftware.globalpom</groupId>
+			<artifactId>globalpom-utils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>args4j</groupId>
+			<artifactId>args4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.propertiesutils</groupId>
+			<artifactId>propertiesutils-contextproperties</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

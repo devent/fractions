@@ -79,6 +79,11 @@
 				<artifactId>globalpom-utils</artifactId>
 				<version>1.9-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>com.anrisoftware.propertiesutils</groupId>
+                <artifactId>propertiesutils-contextproperties</artifactId>
+                <version>1.9</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
