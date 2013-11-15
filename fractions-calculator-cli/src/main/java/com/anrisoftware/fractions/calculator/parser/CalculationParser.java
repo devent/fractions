@@ -37,7 +37,7 @@ public class CalculationParser {
 	 * @throws ArgsException
 	 *             if the command line arguments could not be parsed.
 	 */
-	public CalculationParser parse() {
+	public CalculationParser parse() throws ArgsException {
 		try {
 			CmdLineParser parser = new CmdLineParser(model);
 			parser.parseArgument(args);

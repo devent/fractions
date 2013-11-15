@@ -23,4 +23,11 @@ public interface CalculationModel {
 	 * @return the {@link FractionFactory}.
 	 */
 	FractionFactory getFractionFactory();
+
+	/**
+	 * Returns the maximum denominators for the continued fractions.
+	 * 
+	 * @return the maximum denominators.
+	 */
+	int getMax();
 }

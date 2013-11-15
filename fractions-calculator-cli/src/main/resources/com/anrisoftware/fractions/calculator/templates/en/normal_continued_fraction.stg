@@ -1,0 +1,3 @@
+fraction(d) ::= <%
+[<first(d)>;<rest(d);separator=",">]
+%>

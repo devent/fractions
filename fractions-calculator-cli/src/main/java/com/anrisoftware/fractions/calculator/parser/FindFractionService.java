@@ -29,7 +29,7 @@ class FindFractionService {
 	 *             if the service with the specified information could not be
 	 *             found.
 	 */
-	FractionService findService(Object info) {
+	FractionService findService(Object info) throws ArgsException {
 		for (FractionService service : load(FractionService.class)) {
 			if (service.getInfo().equals(info)) {
 				return service;

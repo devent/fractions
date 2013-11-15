@@ -2,6 +2,9 @@ package com.anrisoftware.fractions.calculator.parser;
 
 import static com.anrisoftware.fractions.calculator.parser.CalculationArgsLogger._.error_parse_value;
 import static com.anrisoftware.fractions.calculator.parser.CalculationArgsLogger._.error_parse_value_message;
+import static com.anrisoftware.fractions.calculator.parser.CalculationArgsLogger._.max_set;
+import static com.anrisoftware.fractions.calculator.parser.CalculationArgsLogger._.service_set;
+import static com.anrisoftware.fractions.calculator.parser.CalculationArgsLogger._.value_set;
 
 import java.text.ParseException;
 
@@ -24,7 +27,13 @@ class CalculationArgsLogger extends AbstractLogger {
 
 		error_parse_value_message("Error parse value '{}'."),
 
-		value("value");
+		value("value"),
+
+		service_set("Continued fraction service '{}' set."),
+
+		max_set("Maximum denominators {} set."),
+
+		value_set("Continued fraction value '{}' set.");
 
 		private String name;
 
@@ -49,6 +58,18 @@ class CalculationArgsLogger extends AbstractLogger {
 		return logException(
 				new ArgsException(error_parse_value, e).add(value, value),
 				error_parse_value_message, value);
+	}
+
+	void serviceSet(String service) {
+		debug(service_set, service);
+	}
+
+	void maxSet(int max) {
+		debug(max_set, max);
+	}
+
+	void valueSet(String value) {
+		debug(value_set, value);
 	}
 
 }

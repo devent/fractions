@@ -11,12 +11,12 @@ import com.anrisoftware.globalpom.exceptions.Context;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public class ArgsException extends RuntimeException {
+public class ArgsException extends Exception {
 
 	private final Context<ArgsException> context;
 
 	/**
-	 * @see RuntimeException#RuntimeException(String, Throwable)
+	 * @see Exception#Exception(String, Throwable)
 	 */
 	public ArgsException(String message, Throwable cause) {
 		super(message, cause);
@@ -24,7 +24,7 @@ public class ArgsException extends RuntimeException {
 	}
 
 	/**
-	 * @see RuntimeException#RuntimeException(String)
+	 * @see Exception#Exception(String)
 	 */
 	public ArgsException(String message) {
 		super(message);
@@ -32,7 +32,7 @@ public class ArgsException extends RuntimeException {
 	}
 
 	/**
-	 * @see RuntimeException#RuntimeException(String, Throwable)
+	 * @see Exception#Exception(String, Throwable)
 	 */
 	public ArgsException(Object message, Throwable cause) {
 		super(message.toString(), cause);
@@ -40,7 +40,7 @@ public class ArgsException extends RuntimeException {
 	}
 
 	/**
-	 * @see RuntimeException#RuntimeException(String)
+	 * @see Exception#Exception(String)
 	 */
 	public ArgsException(Object message) {
 		super(message.toString());

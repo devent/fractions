@@ -21,11 +21,19 @@ class CalculationParserTest {
 	@Test
 	void "parse arguments"() {
 		String service = "IntegerFraction"
+		String max = "6"
 		String value = "62.8908766605"
-		String[] args = ["-service", service, value]
+		String[] args = [
+			"-service",
+			service,
+			"-max",
+			max,
+			value
+		]
 		def parser = parserFactory.create args
 		def model = parser.parse().getModel()
 		assertDecimalEquals model.getValue(), 62.8908766605d
+		assert model.getMax() == 6
 		assert model.getFractionFactory() instanceof IntegerFractionFactory
 	}
 
