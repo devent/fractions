@@ -84,6 +84,28 @@
                 <artifactId>propertiesutils-contextproperties</artifactId>
                 <version>1.9</version>
             </dependency>
+
+            <!-- resources -->
+            <dependency>
+                <groupId>com.anrisoftware.resources</groupId>
+                <artifactId>resources-templates</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anrisoftware.resources</groupId>
+                <artifactId>resources-st</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anrisoftware.resources</groupId>
+                <artifactId>resources-api</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anrisoftware.resources</groupId>
+                <artifactId>resources-texts</artifactId>
+                <version>1.10</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
