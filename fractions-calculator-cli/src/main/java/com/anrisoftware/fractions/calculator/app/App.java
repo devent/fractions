@@ -7,9 +7,8 @@ import com.anrisoftware.fractions.calculator.parser.ArgsException;
 import com.anrisoftware.fractions.calculator.parser.CalculationParser;
 import com.anrisoftware.fractions.calculator.parser.CalculationParserFactory;
 import com.anrisoftware.fractions.core.ContinuedFraction;
-import com.anrisoftware.resources.templates.api.TemplateResource;
-import com.anrisoftware.resources.templates.api.Templates;
-import com.anrisoftware.resources.templates.api.TemplatesFactory;
+import com.anrisoftware.fractions.core.FractionFactory;
+import com.anrisoftware.fractions.format.FractionFormatFactory;
 
 /**
  * Parses the command line arguments and print the calculated continued
@@ -26,16 +25,8 @@ public class App {
 	@Inject
 	private CalculationParserFactory parserFactory;
 
-	private Templates appTemplates;
-
-	private TemplateResource fractionTemplate;
-
 	@Inject
-	void setTemplates(TemplatesFactory factory) {
-		this.appTemplates = factory.create("AppTemplates");
-		this.fractionTemplate = appTemplates
-				.getResource("normal_continued_fraction");
-	}
+	private FractionFormatFactory formatFactory;
 
 	/**
 	 * Calculate the continued fraction from the specified command line
@@ -49,16 +40,17 @@ public class App {
 	 */
 	public void doStart(String[] args) throws AppException {
 		CalculationModel model = parseArgs(args);
-		int[] denos = calculateFraction(model);
-		System.out.println(fractionTemplate.getText("fraction", "d", denos));
+		FractionFactory factory = model.getFractionFactory();
+		ContinuedFraction fraction = calculateFraction(model);
+		System.out.println(formatFactory.create(factory).format(fraction));
 	}
 
-	private int[] calculateFraction(CalculationModel model) {
+	private ContinuedFraction calculateFraction(CalculationModel model) {
 		double value = model.getValue();
 		int max = model.getMax();
 		ContinuedFraction fraction;
 		fraction = model.getFractionFactory().fromValue(value, max);
-		return fraction.toArray();
+		return fraction;
 	}
 
 	private CalculationModel parseArgs(String[] args) throws AppException {

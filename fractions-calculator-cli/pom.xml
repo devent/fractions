@@ -58,16 +58,6 @@
 			<groupId>org.antlr</groupId>
 			<artifactId>ST4</artifactId>
 		</dependency>
-
-		<!-- resources -->
-		<dependency>
-			<groupId>com.anrisoftware.resources</groupId>
-			<artifactId>resources-templates</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.anrisoftware.resources</groupId>
-			<artifactId>resources-st</artifactId>
-		</dependency>
 	</dependencies>
 
 </project>
