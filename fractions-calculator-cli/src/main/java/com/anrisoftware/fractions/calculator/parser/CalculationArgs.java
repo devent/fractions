@@ -1,6 +1,6 @@
 package com.anrisoftware.fractions.calculator.parser;
 
-import java.text.Format;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
@@ -36,12 +36,16 @@ class CalculationArgs implements CalculationModel {
 
 	private double value;
 
-	private Format valueFormat;
+	private NumberFormat valueFormat;
 
 	private FractionService service;
 
+	private String denominators;
+
 	CalculationArgs() {
 		this.valueFormat = NumberFormat.getInstance();
+		this.max = 10;
+		this.denominators = null;
 	}
 
 	@Inject
@@ -55,10 +59,16 @@ class CalculationArgs implements CalculationModel {
 	 * Sets the format to parse the continued fraction value.
 	 * 
 	 * @param format
-	 *            the {@link Format}.
+	 *            the format patterns.
 	 */
-	public void setValueFormat(Format format) {
-		this.valueFormat = format;
+	@Option(name = "-value-format", required = false, metaVar = "FORMAT")
+	public void setValueFormat(String format) {
+		this.valueFormat = new DecimalFormat(format);
+	}
+
+	@Override
+	public NumberFormat getValueFormat() {
+		return valueFormat;
 	}
 
 	/**
@@ -100,6 +110,23 @@ class CalculationArgs implements CalculationModel {
 	}
 
 	/**
+	 * Sets the denominators of the continued fraction from the command line
+	 * argument.
+	 * 
+	 * @param denominators
+	 *            the denominators.
+	 */
+	@Option(name = "-denominators", required = false)
+	public void setDenominators(String denominators) {
+		this.denominators = denominators;
+	}
+
+	@Override
+	public String getDenominators() {
+		return denominators;
+	}
+
+	/**
 	 * Parses the value of the continued fraction command line argument.
 	 * 
 	 * @param value
@@ -109,7 +136,7 @@ class CalculationArgs implements CalculationModel {
 	 *             if the value could not be parsed for the specified command
 	 *             line argument.
 	 */
-	@Argument(index = 0, required = true)
+	@Argument(index = 0, required = false)
 	public void setValue(String value) throws ArgsException {
 		try {
 			Number number = (Number) valueFormat.parseObject(value);

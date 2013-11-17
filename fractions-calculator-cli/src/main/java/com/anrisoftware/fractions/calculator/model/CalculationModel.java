@@ -1,6 +1,9 @@
 package com.anrisoftware.fractions.calculator.model;
 
+import java.text.NumberFormat;
+
 import com.anrisoftware.fractions.core.FractionFactory;
+import com.anrisoftware.fractions.format.FractionFormat;
 
 /**
  * Calculation model.
@@ -30,4 +33,21 @@ public interface CalculationModel {
 	 * @return the maximum denominators.
 	 */
 	int getMax();
+
+	/**
+	 * Returns the denominators of the continued fraction to calculate a value
+	 * from.
+	 * 
+	 * @return the denominators or {@code null}.
+	 * 
+	 * @see FractionFormat#parse(String)
+	 */
+	String getDenominators();
+
+	/**
+	 * Returns the value number formatter.
+	 * 
+	 * @return the {@link NumberFormat}.
+	 */
+	NumberFormat getValueFormat();
 }

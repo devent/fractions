@@ -1,5 +1,8 @@
 package com.anrisoftware.fractions.calculator.app;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 import javax.inject.Inject;
 
 import com.anrisoftware.fractions.calculator.model.CalculationModel;
@@ -28,6 +31,8 @@ public class App {
 	@Inject
 	private FractionFormatFactory formatFactory;
 
+	private String output;
+
 	/**
 	 * Calculate the continued fraction from the specified command line
 	 * arguments.
@@ -41,8 +46,32 @@ public class App {
 	public void doStart(String[] args) throws AppException {
 		CalculationModel model = parseArgs(args);
 		FractionFactory factory = model.getFractionFactory();
+		String out = null;
+		if (model.getDenominators() != null) {
+			out = calculateValue(model, factory);
+		} else {
+			out = calculateFraction(model, factory);
+		}
+		this.output = out;
+		System.out.println(out);
+	}
+
+	private String calculateValue(CalculationModel model,
+			FractionFactory factory) throws AppException {
+		String d = model.getDenominators();
+		NumberFormat format = model.getValueFormat();
+		try {
+			ContinuedFraction fraction = formatFactory.create(factory).parse(d);
+			return format.format(fraction.doubleValue());
+		} catch (ParseException e) {
+			throw log.errorParseFraction(e, d);
+		}
+	}
+
+	private String calculateFraction(CalculationModel model,
+			FractionFactory factory) {
 		ContinuedFraction fraction = calculateFraction(model);
-		System.out.println(formatFactory.create(factory).format(fraction));
+		return formatFactory.create(factory).format(fraction);
 	}
 
 	private ContinuedFraction calculateFraction(CalculationModel model) {
@@ -61,5 +90,14 @@ public class App {
 		} catch (ArgsException e) {
 			throw log.errorParseArgs(e, args);
 		}
+	}
+
+	/**
+	 * Returns the output of the application.
+	 * 
+	 * @return the output or {@code null}.
+	 */
+	public String getOutput() {
+		return output;
 	}
 }
