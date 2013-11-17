@@ -21,7 +21,6 @@ package com.anrisoftware.fractions.mod3
 import groovy.util.logging.Slf4j
 
 import org.junit.BeforeClass
-import org.junit.Test
 
 import com.anrisoftware.fractions.integer.DataInputs
 import com.google.inject.Guice
@@ -36,11 +35,11 @@ import com.google.inject.Injector
 @Slf4j
 class Mod3FractionTest {
 
-	@Test
+	//@Test
 	void "calculate continued fractions"() {
 		int max = 9
 		double z = 1.0
-		inputs.eachWithIndex { double value, i ->
+		inputs.eachWithIndex { value, i ->
 			int[] denos = outputs[i] as int[]
 			def fraction = factory.fromValue(value, max)
 			log.info "{}. fraction: {}", i, fraction
