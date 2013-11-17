@@ -7,6 +7,7 @@
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-izpack-singlejar</artifactId>
 		<version>2.3</version>
+		<relativePath />
 	</parent>
 
 	<groupId>com.anrisoftware.fractions</groupId>
