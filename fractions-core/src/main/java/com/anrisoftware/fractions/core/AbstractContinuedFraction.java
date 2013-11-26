@@ -18,6 +18,10 @@
  */
 package com.anrisoftware.fractions.core;
 
+import static org.apache.commons.math3.util.FastMath.max;
+import static org.apache.commons.math3.util.FastMath.min;
+import static org.apache.commons.math3.util.FastMath.pow;
+import static org.apache.commons.math3.util.FastMath.signum;
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.TIntList;
 import gnu.trove.list.array.TIntArrayList;
@@ -28,7 +32,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 /**
  * Implements denominator methods and calculates the value of this continued
  * fraction.
- *
+ * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -44,16 +48,16 @@ public abstract class AbstractContinuedFraction extends Number implements
 
 	private final double fractionValue;
 
-	/**
-	 * Sets the partial numerator and the denominators.
-	 *
-	 * @param z
-	 *            the partial numerator for all denominators of this continued
-	 *            fraction.
-	 *
-	 * @param denos
-	 *            the array containing the denominator values.
-	 */
+	            /**
+     * Sets the partial numerator and the denominators.
+     * 
+     * @param z
+     *            the partial numerator for all denominators of this continued
+     *            fraction.
+     * 
+     * @param denos
+     *            the array containing the denominator values.
+     */
 	protected AbstractContinuedFraction(double z, int[] denos) {
 		this.z = z;
 		this.denominators = new TIntArrayList(denos);
@@ -61,23 +65,23 @@ public abstract class AbstractContinuedFraction extends Number implements
 		this.value = fractionValue;
 	}
 
-	/**
-	 * Calculates the denominators from the specified value.
-	 *
-	 * @param evaluate
-	 *            the {@link EvaluateFractions} that calculated the denominators
-	 *            of the continued fraction.
-	 *
-	 * @param value
-	 *            the value.
-	 *
-	 * @param z
-	 *            the partial numerator for all denominators of this continued
-	 *            fraction.
-	 *
-	 * @param max
-	 *            the maximum count of the denominators.
-	 */
+	            /**
+     * Calculates the denominators from the specified value.
+     * 
+     * @param evaluate
+     *            the {@link EvaluateFractions} that calculated the denominators
+     *            of the continued fraction.
+     * 
+     * @param value
+     *            the value.
+     * 
+     * @param z
+     *            the partial numerator for all denominators of this continued
+     *            fraction.
+     * 
+     * @param max
+     *            the maximum count of the denominators.
+     */
 	protected AbstractContinuedFraction(EvaluateFractions evaluate,
 			double value, double z, int max) {
 		this.value = value;
@@ -177,18 +181,18 @@ public abstract class AbstractContinuedFraction extends Number implements
 		return (long) doubleValue();
 	}
 
-	/**
-	 * Creates the continued fraction with the spezified partial numerator and
-	 * denominators.
-	 *
-	 * @param z
-	 *            the partial numerator for all denominators.
-	 *
-	 * @param denos
-	 *            the array containing the denominator values.
-	 *
-	 * @return the {@link ContinuedFraction}.
-	 */
+	            /**
+     * Creates the continued fraction with the spezified partial numerator and
+     * denominators.
+     * 
+     * @param z
+     *            the partial numerator for all denominators.
+     * 
+     * @param denos
+     *            the array containing the denominator values.
+     * 
+     * @return the {@link ContinuedFraction}.
+     */
 	protected abstract ContinuedFraction createFraction(double z, int[] denos);
 
 	@Override
@@ -243,6 +247,32 @@ public abstract class AbstractContinuedFraction extends Number implements
 		ContinuedFraction rhs = (ContinuedFraction) obj;
 		return new EqualsBuilder().append(getZ(), rhs.getZ())
 				.append(toArray(), rhs.toArray()).isEquals();
+	}
+
+	@Override
+	public int compareTo(ContinuedFraction o) {
+		double az = getZ(), bz = o.getZ();
+		if (az != bz) {
+			return (int) signum(az - bz);
+		}
+		int asize = size(), bsize = o.size(), size = min(asize, bsize);
+        int maxsize = max(asize, bsize);
+		int k = 0, ak = 0, bk = 0;
+        for (; k < size; k++) {
+			ak = get(k);
+			bk = o.get(k);
+			if (ak != bk) {
+				break;
+			}
+		}
+        if (k == maxsize) {
+			return 0;
+		}
+        if (k < size) {
+            return (int) (pow(-1, k) * (ak - bk));
+		} else {
+            return bsize - asize;
+		}
 	}
 
 	@Override

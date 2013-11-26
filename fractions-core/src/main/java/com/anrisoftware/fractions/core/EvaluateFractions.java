@@ -26,17 +26,17 @@ package com.anrisoftware.fractions.core;
  */
 public interface EvaluateFractions {
 
-	/**
-	 * Calculate the denominators of a continued fraction from the specified
-	 * value.
-	 * 
-	 * @param value
-	 *            the value.
-	 * 
-	 * @param max
-	 *            the maximum count of denominators for the continued fraction.
-	 * 
-	 * @return the denominators.
-	 */
-	int[] evaluate(double value, int max);
+    /**
+     * Calculate the denominators of a continued fraction from the specified
+     * value.
+     * 
+     * @param value
+     *            the value.
+     * 
+     * @param max
+     *            the maximum count of denominators for the continued fraction.
+     * 
+     * @return the denominators.
+     */
+    int[] evaluate(double value, int max);
 }

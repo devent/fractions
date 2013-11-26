@@ -35,36 +35,123 @@ import com.google.inject.Injector
 @Slf4j
 class IntegerFractionTest {
 
-	@Test
-	void "calculate continued fractions"() {
-		int max = 9
-		double z = 1.0
-		inputs.eachWithIndex { double value, i ->
-			int[] denos = outputs[i] as int[]
-			def fraction = factory.fromValue(value, max)
-			log.info "{}. fraction: {}", i, fraction
-			assert outputs[i].size() == fraction.size()
-			if (!fraction.equals(factory.create(z, denos))) {
-				log.warn "{}. fraction: {}; expected denominators: {}", i, fraction, outputs[i]
-			}
-		}
-	}
+    @Test
+    void "calculate continued fractions"() {
+        int max = 9
+        double z = 1.0
+        inputs.eachWithIndex { double value, i ->
+            int[] denos = outputs[i] as int[]
+            def fraction = factory.fromValue(value, max)
+            log.info "{}. fraction: {}", i, fraction
+            assert outputs[i].size() == fraction.size()
+            if (!fraction.equals(factory.create(z, denos))) {
+                log.warn "{}. fraction: {}; expected denominators: {}", i, fraction, outputs[i]
+            }
+        }
+    }
 
-	static inputs = new DataInputs().run()
+    @Test
+    void "compare continued fractions a<b"() {
+        double z = 1.0
+        def a = factory.create(z, [1, 8, 11] as int[])
+        def b = factory.create(z, [1, 8, 27] as int[])
+        assert !a.equals(b)
+        assert a.compareTo(b) < 0
+    }
 
-	static outputs = new IntegerFractionData().run()
+    @Test
+    void "compare continued fractions a<<b"() {
+        double z = 1.0
+        def a = factory.create(z, [1, 8, 11] as int[])
+        def b = factory.create(z, [1, 8] as int[])
+        assert !a.equals(b)
+        assert a.compareTo(b) < 0
+    }
 
-	static Injector injector
+    @Test
+    void "compare continued fractions a>b"() {
+        double z = 1.0
+        def a = factory.create(z, [1, 8, 27] as int[])
+        def b = factory.create(z, [1, 8, 11] as int[])
+        assert !a.equals(b)
+        assert a.compareTo(b) > 0
+    }
 
-	static IntegerFractionFactory factory
+    @Test
+    void "compare continued fractions a>>b"() {
+        double z = 1.0
+        def a = factory.create(z, [1, 8] as int[])
+        def b = factory.create(z, [1, 8, 11] as int[])
+        assert !a.equals(b)
+        assert a.compareTo(b) > 0
+    }
 
-	@BeforeClass
-	static void beforeTest() {
-		injector = createInjector()
-		factory = injector.getInstance IntegerFractionFactory
-	}
+    @Test
+    void "compare continued fractions a=b"() {
+        double z = 1.0
+        def a = factory.create(z, [1, 8, 11] as int[])
+        def b = factory.create(z, [1, 8, 11] as int[])
+        assert a.equals(b)
+        assert a.compareTo(b) == 0
+    }
 
-	static Injector createInjector() {
-		Guice.createInjector new IntegerFractionsModule()
-	}
+    @Test
+    void "compare continued fractions az!=bz"() {
+        double az = 1.0
+        double bz = 2.0
+        def a = factory.create(az, [1, 8, 11] as int[])
+        def b = factory.create(bz, [1, 8, 11] as int[])
+        assert !a.equals(b)
+        assert a.compareTo(b) < 0
+    }
+
+    @Test
+    void "to array"() {
+        def a = factory.create(1.0, [1, 8, 11] as int[])
+        int[] array = new int[3]
+        a.toArray(array)
+        assert array == [1, 8, 11]
+    }
+
+    @Test
+    void "set denominator"() {
+        def a = factory.create(1.0, [1, 8, 11] as int[])
+        def b = a.set 1, 10
+        assert a.toArray() == [1, 8, 11]
+        assert b.toArray() == [1, 10, 11]
+    }
+
+    @Test
+    void "expand"() {
+        def a = factory.create(1.0, [1, 8, 11] as int[])
+        def b = a.expand 5
+        assert a.toArray() == [1, 8, 11]
+        assert b.toArray() == [1, 8, 11, 5]
+    }
+
+    @Test
+    void "contract"() {
+        def a = factory.create(1.0, [1, 8, 11] as int[])
+        def b = a.contract()
+        assert a.toArray() == [1, 8, 11]
+        assert b.toArray() == [1, 8]
+    }
+
+    static inputs = new DataInputs().run()
+
+    static outputs = new IntegerFractionData().run()
+
+    static Injector injector
+
+    static IntegerFractionFactory factory
+
+    @BeforeClass
+    static void beforeTest() {
+        injector = createInjector()
+        factory = injector.getInstance IntegerFractionFactory
+    }
+
+    static Injector createInjector() {
+        Guice.createInjector new IntegerFractionsModule()
+    }
 }

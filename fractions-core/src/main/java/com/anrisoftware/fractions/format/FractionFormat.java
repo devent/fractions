@@ -42,7 +42,7 @@ import com.google.inject.assistedinject.Assisted;
 
 /**
  * Parses and formats continued fraction.
- *
+ * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -99,7 +99,7 @@ public class FractionFormat extends Format {
 
 	/**
 	 * Formats the specified continued fraction.
-	 *
+	 * 
 	 * @param obj
 	 *            the {@link ContinuedFraction}.
 	 */
@@ -125,7 +125,7 @@ public class FractionFormat extends Format {
 	 * <ul>
 	 * <li>{@code "[n0;n1,...,ni]"}
 	 * </ul>
-	 *
+	 * 
 	 * @return the parsed {@link ContinuedFraction}.
 	 */
 	@Override
@@ -152,11 +152,11 @@ public class FractionFormat extends Format {
 
 	/**
 	 * @see #parseObject(String)
-	 *
+	 * 
 	 * @param pos
 	 *            the index {@link ParsePosition} position from where to start
 	 *            parsing.
-	 *
+	 * 
 	 * @throws ParseException
 	 *             if the string is not in the correct format.
 	 */
