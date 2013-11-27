@@ -18,6 +18,7 @@
  */
 package com.anrisoftware.fractions.mod3;
 
+import com.anrisoftware.fractions.core.ContinuedFraction;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 
@@ -39,7 +40,7 @@ public class Mod3FractionsModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		install(new FactoryModuleBuilder().implement(Mod3Fraction.class,
-				Mod3Fraction.class).build(Mod3FractionFactory.class));
+        install(new FactoryModuleBuilder().implement(ContinuedFraction.class,
+                Mod3Fraction.class).build(Mod3FractionFactory.class));
 	}
 }

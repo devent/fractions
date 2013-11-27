@@ -18,14 +18,42 @@
  */
 package com.anrisoftware.fractions.mod3;
 
+import org.mangosdk.spi.ProviderFor;
+
 import com.anrisoftware.fractions.core.FractionFactory;
+import com.anrisoftware.fractions.core.FractionService;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
- * Factory to create a new mod3 continued fraction from the specified value.
+ * Service for mod3 continued fraction.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 2.0
+ * @since 2.1
  */
-public interface Mod3FractionFactory extends FractionFactory {
+@ProviderFor(FractionService.class)
+public class Mod3FractionService implements FractionService {
+
+	private final Module[] modules;
+
+	public Mod3FractionService() {
+        this.modules = new Module[] { new Mod3FractionsModule() };
+	}
+
+	@Override
+	public Object getInfo() {
+        return Mod3Fraction.class.getSimpleName();
+	}
+
+	@Override
+	public FractionFactory getFactory(Object... parent) {
+        return createInjector(parent).getInstance(Mod3FractionFactory.class);
+	}
+
+	private Injector createInjector(Object[] parent) {
+		return parent.length > 0 ? ((Injector) parent[0])
+				.createChildInjector(modules) : Guice.createInjector(modules);
+	}
 
 }

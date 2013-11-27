@@ -55,9 +55,26 @@ class AppTest {
     }
 
     @Test
+    void "caluclate mod3 continued fraction"() {
+        String service = "Mod3Fraction"
+        String max = "6"
+        String value = "62.8908766605"
+        String[] args = [
+            "-service",
+            service,
+            "-max",
+            max,
+            value
+        ]
+        log.info "Arguments: '{}'", Arrays.toString(args)
+        App app = injector.getInstance App
+        app.doStart args
+        assert app.getOutput() == "[63;-9,-6,-11,2,-2,2]"
+    }
+
+    @Test
     void "caluclate value"() {
         String service = "IntegerFraction"
-        String max = "6"
         String denos = "[63;-9,-6,-10,-34,2]"
         String[] args = [
             "-service",
@@ -69,6 +86,22 @@ class AppTest {
         App app = injector.getInstance App
         app.doStart args
         assert app.getOutput() == "62.890876661"
+    }
+
+    @Test
+    void "caluclate mod3 value"() {
+        String service = "Mod3Fraction"
+        String denos = "[63;-9,-6,-11,2,-2,2]"
+        String[] args = [
+            "-service",
+            service,
+            "-denominators",
+            denos
+        ]
+        log.info "Arguments: '{}'", Arrays.toString(args)
+        App app = injector.getInstance App
+        app.doStart args
+        assert app.getOutput() == "62.890877346"
     }
 
     @Test
