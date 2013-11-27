@@ -18,19 +18,10 @@
  */
 package com.anrisoftware.fractions.calculator.parser;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-
 import javax.inject.Inject;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
-
-import com.anrisoftware.fractions.calculator.model.CalculationModel;
-import com.anrisoftware.fractions.core.FractionFactory;
-import com.anrisoftware.fractions.core.FractionService;
-import com.google.inject.Injector;
 
 /**
  * Parses command line arguments.
@@ -38,136 +29,141 @@ import com.google.inject.Injector;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
-class CalculationArgs implements CalculationModel {
+class CalculationArgs {
 
-	private static final String DEFAULT_SERVICE = "IntegerFraction";
+    @Inject
+    private CalculationArgsLogger log;
 
-	@Inject
-	private CalculationArgsLogger log;
+    private int max;
 
-	@Inject
-	private Injector injector;
+    private String value;
 
-	private FindFractionService findService;
+    private String valueFormat;
 
-	private Integer max;
+    private String service;
 
-	private double value;
+    private String denominators;
 
-	private NumberFormat valueFormat;
+    private String fractionA;
 
-	private FractionService service;
+    private String fractionB;
 
-	private String denominators;
+    CalculationArgs() {
+        this.valueFormat = "#.#########";
+        this.max = 10;
+        this.denominators = null;
+        this.fractionA = null;
+        this.fractionB = null;
+    }
 
-	CalculationArgs() {
-		this.valueFormat = NumberFormat.getInstance();
-		this.max = 10;
-		this.denominators = null;
-	}
+    @Option(name = "-value-format", aliases = { "-f" }, required = false, metaVar = "FORMAT")
+    public void setValueFormat(String format) {
+        this.valueFormat = format;
+        log.valueFormatSet(format);
+    }
 
-	@Inject
-	void setDefaultFractionService(FindFractionService findService)
-			throws ArgsException {
-		this.findService = findService;
-		this.service = findService.findService(DEFAULT_SERVICE);
-	}
+    public String getValueFormat() {
+        return valueFormat;
+    }
 
-	/**
-	 * Sets the format to parse the continued fraction value.
-	 * 
-	 * @param format
-	 *            the format patterns.
-	 */
-	@Option(name = "-value-format", required = false, metaVar = "FORMAT")
-	public void setValueFormat(String format) {
-		this.valueFormat = new DecimalFormat(format);
-	}
+    /**
+     * Parses the service command line argument.
+     * 
+     * @param service
+     *            the service name.
+     * 
+     * @throws ArgsException
+     *             if the continued fraction service could not be found for the
+     *             specified command line argument.
+     */
+    @Option(name = "-service", required = false)
+    public void setService(String service) {
+        this.service = service;
+        log.serviceSet(service);
+    }
 
-	@Override
-	public NumberFormat getValueFormat() {
-		return valueFormat;
-	}
+    public String getService() {
+        return service;
+    }
 
-	/**
-	 * Parses the service command line argument.
-	 * 
-	 * @param service
-	 *            the service name.
-	 * 
-	 * @throws ArgsException
-	 *             if the continued fraction service could not be found for the
-	 *             specified command line argument.
-	 */
-	@Option(name = "-service", required = false)
-	public void setService(String service) throws ArgsException {
-		this.service = findService.findService(service);
-		log.serviceSet(service);
-	}
+    /**
+     * Parses the maximum denominators command line argument.
+     * 
+     * @param max
+     *            the maximum denominators.
+     */
+    @Option(name = "-max", required = false)
+    public void setMax(int max) {
+        this.max = max;
+        log.maxSet(max);
+    }
 
-	@Override
-	public FractionFactory getFractionFactory() {
-		return service.getFactory(injector);
-	}
+    public int getMax() {
+        return max;
+    }
 
-	/**
-	 * Parses the maximum denominators command line argument.
-	 * 
-	 * @param max
-	 *            the maximum denominators.
-	 */
-	@Option(name = "-max", required = false)
-	public void setMax(int max) {
-		this.max = max;
-		log.maxSet(max);
-	}
+    /**
+     * Sets the denominators of the continued fraction from the command line
+     * argument.
+     * 
+     * @param denominators
+     *            the denominators.
+     */
+    @Option(name = "-denominators", aliases = { "-d" }, required = false)
+    public void setDenominators(String denominators) {
+        this.denominators = denominators;
+    }
 
-	@Override
-	public int getMax() {
-		return max;
-	}
+    public String getDenominators() {
+        return denominators;
+    }
 
-	/**
-	 * Sets the denominators of the continued fraction from the command line
-	 * argument.
-	 * 
-	 * @param denominators
-	 *            the denominators.
-	 */
-	@Option(name = "-denominators", required = false)
-	public void setDenominators(String denominators) {
-		this.denominators = denominators;
-	}
+    /**
+     * Sets the denominators of the first continued fraction from the command
+     * line argument.
+     * 
+     * @param denominators
+     *            the fraction.
+     */
+    @Option(name = "-fraction-a", aliases = { "-a" }, required = false)
+    public void setFractionA(String denominators) {
+        this.fractionA = denominators;
+    }
 
-	@Override
-	public String getDenominators() {
-		return denominators;
-	}
+    public String getFractionA() {
+        return fractionA;
+    }
 
-	/**
-	 * Parses the value of the continued fraction command line argument.
-	 * 
-	 * @param value
-	 *            the continued fraction value.
-	 * 
-	 * @throws ArgsException
-	 *             if the value could not be parsed for the specified command
-	 *             line argument.
-	 */
-	@Argument(index = 0, required = false)
-	public void setValue(String value) throws ArgsException {
-		try {
-			Number number = (Number) valueFormat.parseObject(value);
-			this.value = number.doubleValue();
-			log.valueSet(value);
-		} catch (ParseException e) {
-			throw log.errorParseValue(e, value);
-		}
-	}
+    /**
+     * Sets the denominators of the second continued fraction from the command
+     * line argument.
+     * 
+     * @param denominators
+     *            the fraction.
+     */
+    @Option(name = "-fraction-b", aliases = { "-b" }, required = false)
+    public void setFractionB(String denominators) {
+        this.fractionB = denominators;
+    }
 
-	@Override
-	public double getValue() {
-		return value;
-	}
+    public String getFractionB() {
+        return fractionB;
+    }
+
+    /**
+     * Sets the value of the continued fraction command line argument.
+     * 
+     * @param value
+     *            the continued fraction value.
+     */
+    @Argument(index = 0, required = false)
+    public void setValue(String value) {
+        this.value = value;
+        log.valueSet(value);
+    }
+
+    public String getValue() {
+        return value;
+    }
 
 }

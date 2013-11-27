@@ -24,17 +24,17 @@ import com.anrisoftware.fractions.core.FractionFactory;
  * Creates the duration format.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.9
+ * @since 2.0
  */
 public interface FractionFormatFactory {
 
-	/**
-	 * Creates duration format.
-	 * 
-	 * @param factory
-	 *            the continued fraction {@link FractionFactory} factory.
-	 * 
-	 * @return the {@link FractionFormat}.
-	 */
+	    /**
+     * Creates duration format.
+     * 
+     * @param factory
+     *            the continued fraction {@link FractionFactory} factory.
+     * 
+     * @return the {@link FractionFormat}.
+     */
 	FractionFormat create(FractionFactory factory);
 }

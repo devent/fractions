@@ -19,15 +19,25 @@
 package com.anrisoftware.fractions.calculator.parser;
 
 import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.arguments;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_both_value_fraction;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_both_value_fraction_message;
 import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_parse;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_parse_deno;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_parse_deno_message;
 import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_parse_message;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_parse_value;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.error_parse_value_message;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.fraction;
+import static com.anrisoftware.fractions.calculator.parser.CalculationParserLogger._.value;
 
+import java.text.ParseException;
 import java.util.Arrays;
 
 import javax.inject.Singleton;
 
 import org.kohsuke.args4j.CmdLineException;
 
+import com.anrisoftware.fractions.core.ContinuedFraction;
 import com.anrisoftware.globalpom.log.AbstractLogger;
 
 /**
@@ -39,38 +49,74 @@ import com.anrisoftware.globalpom.log.AbstractLogger;
 @Singleton
 class CalculationParserLogger extends AbstractLogger {
 
-	enum _ {
+    enum _ {
 
-		error_parse("Error parse command line arguments"),
+        value("value"),
 
-		error_parse_message("Error parse command line arguments {}."),
+        error_parse("Error parse command line arguments"),
 
-		arguments("arguments");
+        error_parse_message("Error parse command line arguments {}."),
 
-		private String name;
+        error_parse_value("Error parse value"),
 
-		private _(String name) {
-			this.name = name;
-		}
+        error_parse_value_message("Error parse value '{}'."),
 
-		@Override
-		public String toString() {
-			return name;
-		}
-	}
+        error_parse_deno("Error parse denominators"),
 
-	/**
-	 * Creates a logger for {@link CalculationParser}.
-	 */
-	public CalculationParserLogger() {
-		super(CalculationParser.class);
-	}
+        error_parse_deno_message("Error parse denominators '{}'."),
 
-	ArgsException errorParse(CmdLineException e, String[] args) {
-		String argss = Arrays.toString(args);
-		return logException(
-				new ArgsException(error_parse, e).add(arguments, argss),
-				error_parse_message, argss);
-	}
+        arguments("arguments"),
+
+        error_both_value_fraction(
+                "Both value and fraction can't be set at the same time"),
+
+        fraction("fraction"),
+
+        error_both_value_fraction_message(
+                "Both value {} and fraction {} can't be set at the same time");
+
+        private String name;
+
+        private _(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    /**
+     * Creates a logger for {@link CalculationParser}.
+     */
+    public CalculationParserLogger() {
+        super(CalculationParser.class);
+    }
+
+    ArgsException errorParse(CmdLineException e, String[] args) {
+        String argss = Arrays.toString(args);
+        return logException(
+                new ArgsException(error_parse, e).add(arguments, argss),
+                error_parse_message, argss);
+    }
+
+    ArgsException errorParseValue(ParseException e, String v) {
+        return logException(
+                new ArgsException(error_parse_value, e).add(value, v),
+                error_parse_value_message, v);
+    }
+
+    ArgsException errorParseDeno(ParseException e, String deno) {
+        return logException(
+                new ArgsException(error_parse_deno, e).add(value, deno),
+                error_parse_deno_message, deno);
+    }
+
+    ArgsException errorBothValueFraction(Double v, ContinuedFraction f) {
+        return logException(
+                new ArgsException(error_both_value_fraction).add(value, v).add(
+                        fraction, f), error_both_value_fraction_message, v, f);
+    }
 
 }

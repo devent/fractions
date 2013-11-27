@@ -17,65 +17,60 @@ Debug
 
                             MANUAL
 
-**fractionscli** - calculates and prints the continued fractions from the
-specified value
+fractionscli - calculates and prints the continued fractions from the specified value
+Synopsis
 
-h2. Synopsis
+fractionscli [-service service] [-value-format|-f format] (([-max maximum] -denominators|-d denominators)|(-fraction-a|-a denominators -fraction-b|-b denominators)|_value_)
+Description
 
-**fractionscli** [-service _service_] [-max _maximum_] [-value-format _format_]
-(-denominators _denominators_ | _value_)
+Prints the calculated continued fractions from the specified value or prints the calculated value from the specified denominators. Different calculation algorithms can be chosen to calculate the continued fraction. If two continued fractions are specified then those are compared for inequality.
+Options
+-service service
 
-h2. Description
+Sets the calculation algorithm specified by the service name. Defaults to the "IntegerFraction" algorithm.
 
-Prints the calculated continued fractions from the specified _value_ or prints
-the calculated value from the specified _denominators_. Different calculation
-algorithms can be chosen to calculate the continued fraction.
+    "IntegerFraction": standard algorithm, z=1.0; n0..ni ∈ ℕ
+    "IntegerNoMinusOneFraction"
+    "Mod3Fraction"
 
-h2. Options
+-max maximum
 
-h3. -service _service_
+Sets the maximum count of denominators for the value. Defaults to ten (10) denominators.
+-value-format|-f format
 
-Sets the calculation algorithm specified by the _service_ name. Defaults to the
-"IntegerFraction" algorithm.
+Sets the value format to parse the denominators and to format the calculated value of the continued fraction. Defaults to the NumberFormat#getInstance() formatter. See DecimalFormat
+-denominators|-d denominators
 
-* "IntegerFraction": standard algorithm, @z=1.0; n0..ni ∈ ℕ@
-* "IntegerNoMinusOneFraction"
-* "Mod3Fraction"
+If the denominators are specified then the value of the continued fraction with the specified denominators is printed.
+-fraction-a|-a denominators -fraction-b|-b denominators
 
-h3. -max _maximum_
+Sets the denominators for the first and second continued fraction to be compared for inequality and prints the inequality:
 
-Sets the _maximum_ count of denominators for the value. Defaults to ten (10)
-denominators.
+    -1 if a<b
+    0 if a=b
+    1 if a>b
 
-h3. -value-format _format_
+value
 
-Sets the value _format_ to parse the denominators and to format the calculated
-value of the continued fraction. Defaults to the @NumberFormat#getInstance()@
-formatter. See
-"DecimalFormat":http://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat
-.html
+If the value is specified then the continued fraction is calculated from this value and the denominators are printed. Either denominators or value can be specified at the same time.
+Examples
 
-h3. -denominators _denominators_
+$ fractionscli 62.8908766605
 
-If the _denominators_ are specified then the value of the continued fraction
-with the specified denominators is printed.
+    calculates and prints out the continued fraction of the value with a maximum depth of ten denominators;
 
-h3. _value_
-
-If the _value_ is specified then the continued fraction is calculated from this
-value and the denominators are printed. Either _denominators_ or _value_ can be
-specified at the same time.
-
-h2. Examples
-
-<pre>
 $ fractionscli -max 6 62.8908766605
-</pre>
 
-<pre>
-$ fractionscli -service IntegerFraction -value-format 0.###### -denominators
-"[63;-9,-6,-10,-34,2]"
-</pre>
+    calculates and prints out the continued fraction of the value with a maximum depth of six denominators;
+
+$ fractionscli -service IntegerFraction -value-format 0.###### -denominators "[63;-9,-6,-10,-34,2]"
+
+    calculates and prints out the value of the continued fraction from the specified denominators;
+
+$ fractionscli -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,20]"
+
+    compares and prints out the inequality the first and second continued fraction from the specified denominators;
+
 
                             LICENSE
 

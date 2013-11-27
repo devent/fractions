@@ -24,7 +24,8 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import com.anrisoftware.fractions.calculator.app.AppModule
-import com.anrisoftware.fractions.integer.IntegerFractionFactory
+import com.anrisoftware.fractions.calculator.model.CalculationModel
+import com.anrisoftware.fractions.integer.IntegerFractionService
 import com.google.inject.Guice
 import com.google.inject.Injector
 
@@ -36,32 +37,75 @@ import com.google.inject.Injector
  */
 class CalculationParserTest {
 
-	@Test
-	void "parse arguments"() {
-		String service = "IntegerFraction"
-		String max = "6"
-		String value = "62.8908766605"
-		String[] args = [
-			"-service",
-			service,
-			"-max",
-			max,
-			value
-		]
-		def parser = parserFactory.create args
-		def model = parser.parse().getModel()
-		assertDecimalEquals model.getValue(), 62.8908766605d
-		assert model.getMax() == 6
-		assert model.getFractionFactory() instanceof IntegerFractionFactory
-	}
+    @Test
+    void "parse value"() {
+        String service = "IntegerFraction"
+        String max = "6"
+        String value = "62.8908766605"
+        String[] args = [
+            "-service",
+            service,
+            "-max",
+            max,
+            value
+        ]
+        CalculationModel parser = parserFactory.create(args).parse()
+        assertDecimalEquals parser.getValue(), 62.8908766605d
+        assert parser.getMax() == 6
+        assert parser.getService().getClass() == IntegerFractionService
+    }
 
-	static Injector injector
+    @Test
+    void "parse both value and fraction"() {
+        String value = "62.8908766605"
+        String deno = "[1;5,6,7,8]"
+        String[] args = [
+            "-d",
+            deno,
+            value
+        ]
+        CalculationModel parser = parserFactory.create(args)
+        shouldFailWith ArgsException, { parser.parse() }
+    }
 
-	static CalculationParserFactory parserFactory
+    @Test
+    void "parse denominators"() {
+        String deno = "[1;5,6,7,8]"
+        String format = "#.###"
+        String[] args = [
+            "-f",
+            format,
+            "-d",
+            deno
+        ]
+        CalculationModel parser = parserFactory.create(args).parse()
+        assert parser.getFraction().toArray() == [1, 5, 6, 7, 8]
+        assert parser.getValueFormat().toPattern() == "#0.###"
+    }
 
-	@BeforeClass
-	static void createInjector() {
-		injector = Guice.createInjector(new AppModule())
-		parserFactory = injector.getInstance CalculationParserFactory
-	}
+    @Test
+    void "parse fraction-a-b"() {
+        String a = "[1;5,6,7,8]"
+        String b = "[1;5,2,3,4]"
+        String[] args = [
+            "-a",
+            a,
+            "-b",
+            b,
+        ]
+        CalculationModel parser = parserFactory.create(args).parse()
+        assert parser.getFractionA().toArray() == [1, 5, 6, 7, 8]
+        assert parser.getFractionB().toArray() == [1, 5, 2, 3, 4]
+        assert parser.getService().getClass() == IntegerFractionService
+    }
+
+    static Injector injector
+
+    static CalculationParserFactory parserFactory
+
+    @BeforeClass
+    static void createInjector() {
+        injector = Guice.createInjector(new AppModule())
+        parserFactory = injector.getInstance CalculationParserFactory
+    }
 }
