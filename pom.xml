@@ -13,7 +13,6 @@
         <module>fractions-core</module>
         <module>fractions-integer</module>
         <module>fractions-calculator-cli</module>
-        <module>fractions-calculator-cli-install</module>
     </modules>
 
 </project>
