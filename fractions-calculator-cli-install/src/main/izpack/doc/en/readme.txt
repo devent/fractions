@@ -17,17 +17,27 @@ Debug
 
                             MANUAL
 
-fractionscli - calculates and prints the continued fractions from the specified value
+fractionscli - calculates and prints the continued fractions from the specified
+value
+
 Synopsis
 
-fractionscli [-service service] [-value-format|-f format] (([-max maximum] -denominators|-d denominators)|(-fraction-a|-a denominators -fraction-b|-b denominators)|_value_)
+fractionscli [-service service] [-value-format|-f format] (([-max maximum]
+-denominators|-d denominators)|(-fraction-a|-a denominators -fraction-b|-b
+denominators)|_value_)
 Description
 
-Prints the calculated continued fractions from the specified value or prints the calculated value from the specified denominators. Different calculation algorithms can be chosen to calculate the continued fraction. If two continued fractions are specified then those are compared for inequality.
+Prints the calculated continued fractions from the specified value or prints the
+calculated value from the specified denominators. Different calculation
+algorithms can be chosen to calculate the continued fraction. If two continued
+fractions are specified then those are compared for inequality.
+
 Options
+
 -service service
 
-Sets the calculation algorithm specified by the service name. Defaults to the "IntegerFraction" algorithm.
+Sets the calculation algorithm specified by the service name. Defaults to the
+"IntegerFraction" algorithm.
 
     "IntegerFraction": standard algorithm, z=1.0; n0..ni ∈ ℕ
     "IntegerNoMinusOneFraction"
@@ -35,16 +45,23 @@ Sets the calculation algorithm specified by the service name. Defaults to the "I
 
 -max maximum
 
-Sets the maximum count of denominators for the value. Defaults to ten (10) denominators.
+Sets the maximum count of denominators for the value. Defaults to ten (10)
+denominators.
+
 -value-format|-f format
 
-Sets the value format to parse the denominators and to format the calculated value of the continued fraction. Defaults to the NumberFormat#getInstance() formatter. See DecimalFormat
+Sets the value format to parse the denominators and to format the calculated
+value of the continued fraction. Defaults to the NumberFormat#getInstance()
+formatter. See DecimalFormat
+
 -denominators|-d denominators
 
-If the denominators are specified then the value of the continued fraction with the specified denominators is printed.
+If the denominators are specified then the value of the continued fraction with
+the specified denominators is printed.
 -fraction-a|-a denominators -fraction-b|-b denominators
 
-Sets the denominators for the first and second continued fraction to be compared for inequality and prints the inequality:
+Sets the denominators for the first and second continued fraction to be compared
+for inequality and prints the inequality:
 
     -1 if a<b
     0 if a=b
@@ -52,24 +69,31 @@ Sets the denominators for the first and second continued fraction to be compared
 
 value
 
-If the value is specified then the continued fraction is calculated from this value and the denominators are printed. Either denominators or value can be specified at the same time.
+If the value is specified then the continued fraction is calculated from this
+value and the denominators are printed. Either denominators or value can be
+specified at the same time.
 Examples
 
 $ fractionscli 62.8908766605
 
-    calculates and prints out the continued fraction of the value with a maximum depth of ten denominators;
+    calculates and prints out the continued fraction of the value with a maximum
+depth of ten denominators;
 
 $ fractionscli -max 6 62.8908766605
 
-    calculates and prints out the continued fraction of the value with a maximum depth of six denominators;
+    calculates and prints out the continued fraction of the value with a maximum
+depth of six denominators;
 
-$ fractionscli -service IntegerFraction -value-format 0.###### -denominators "[63;-9,-6,-10,-34,2]"
+$ fractionscli -service IntegerFraction -value-format 0.###### -denominators
+"[63;-9,-6,-10,-34,2]"
 
-    calculates and prints out the value of the continued fraction from the specified denominators;
+    calculates and prints out the value of the continued fraction from the
+specified denominators;
 
 $ fractionscli -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,20]"
 
-    compares and prints out the inequality the first and second continued fraction from the specified denominators;
+    compares and prints out the inequality the first and second continued
+fraction from the specified denominators;
 
 
                             LICENSE
