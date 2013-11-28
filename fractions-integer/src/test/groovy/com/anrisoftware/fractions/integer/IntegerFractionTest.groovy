@@ -137,6 +137,20 @@ class IntegerFractionTest {
         assert b.toArray() == [1, 8]
     }
 
+    @Test
+    void "contract 2"() {
+        def a = factory.create(1.0, [1, 8, 11] as int[])
+        def b = a.contract(2)
+        assert a.toArray() == [1, 8, 11]
+        assert b.toArray() == [1]
+    }
+
+    @Test(expected = IndexOutOfBoundsException)
+    void "contract -1"() {
+        def a = factory.create(1.0, [1, 8, 11] as int[])
+        def b = a.contract(-1)
+    }
+
     static inputs = new DataInputs().run()
 
     static outputs = new IntegerFractionData().run()

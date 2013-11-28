@@ -48,7 +48,7 @@ public abstract class AbstractContinuedFraction extends Number implements
 
 	private final double fractionValue;
 
-	            /**
+	                        /**
      * Sets the partial numerator and the denominators.
      * 
      * @param z
@@ -65,7 +65,7 @@ public abstract class AbstractContinuedFraction extends Number implements
 		this.value = fractionValue;
 	}
 
-	            /**
+	                        /**
      * Calculates the denominators from the specified value.
      * 
      * @param evaluate
@@ -152,11 +152,16 @@ public abstract class AbstractContinuedFraction extends Number implements
 
 	@Override
 	public ContinuedFraction contract() {
-		TIntList denos = denominators.subList(0, size() - 1);
-		return createFraction(getZ(), denos.toArray());
+        return contract(1);
 	}
 
 	@Override
+    public ContinuedFraction contract(int n) {
+        TIntList denos = denominators.subList(0, size() - n);
+        return createFraction(getZ(), denos.toArray());
+    }
+
+    @Override
 	public TIntIterator iterator() {
 		return denominators.iterator();
 	}
@@ -181,7 +186,7 @@ public abstract class AbstractContinuedFraction extends Number implements
 		return (long) doubleValue();
 	}
 
-	            /**
+	                        /**
      * Creates the continued fraction with the spezified partial numerator and
      * denominators.
      * 

@@ -28,23 +28,23 @@ import gnu.trove.iterator.TIntIterator;
  */
 public interface ContinuedFraction extends Comparable<ContinuedFraction> {
 
-	    /**
+    /**
      * Returns the original value of the continued fraction. That is the value
      * from which the denominators are calculated.
      * 
      * @return the original value.
      */
-	double getValue();
+    double getValue();
 
-	    /**
+    /**
      * Returns the partial numerator for all denominators of this continued
      * fraction.
      * 
      * @return the partial numerator for all denominators.
      */
-	double getZ();
+    double getZ();
 
-	    /**
+    /**
      * Returns the denominator value with the specified index.
      * 
      * @param index
@@ -56,9 +56,9 @@ public interface ContinuedFraction extends Comparable<ContinuedFraction> {
      *             if the specified index is negative or greater then
      *             {@code size-1}.
      */
-	int get(int index);
+    int get(int index);
 
-	    /**
+    /**
      * Replaces the demoninator with the specified index.
      * 
      * @param index
@@ -73,9 +73,9 @@ public interface ContinuedFraction extends Comparable<ContinuedFraction> {
      *             if the specified index is negative or greater then
      *             {@code size-1}.
      */
-	ContinuedFraction set(int index, int value);
+    ContinuedFraction set(int index, int value);
 
-	    /**
+    /**
      * Expands the continued fraction by the specified denominator.
      * 
      * @param denominator
@@ -83,37 +83,49 @@ public interface ContinuedFraction extends Comparable<ContinuedFraction> {
      * 
      * @return the expanded {@link ContinuedFraction}.
      */
-	ContinuedFraction expand(int denominator);
+    ContinuedFraction expand(int denominator);
 
-	    /**
+    /**
      * Contracts the continued fraction removing the last denominator.
      * 
      * @return the contracted {@link ContinuedFraction}.
      */
-	ContinuedFraction contract();
+    ContinuedFraction contract();
 
-	    /**
+    /**
+     * Contracts the continued fraction removing the last n denominators.
+     * 
+     * @param n
+     *            how many denominators should be removed.
+     * 
+     * @return the contracted {@link ContinuedFraction}.
+     * 
+     * @since 2.2
+     */
+    ContinuedFraction contract(int n);
+
+    /**
      * Returns if the continued fraction does not have any denominators.
      * 
      * @return {@code true} if {@code size = 0}.
      */
-	boolean isEmpty();
+    boolean isEmpty();
 
-	    /**
+    /**
      * Returns the numbers of denominators.
      * 
      * @return the size.
      */
-	int size();
+    int size();
 
-	    /**
+    /**
      * Returns the denominators in an integer array.
      * 
      * @return the denominators array.
      */
-	int[] toArray();
+    int[] toArray();
 
-	    /**
+    /**
      * Returns the denominators in an integer array.
      * 
      * @param array
@@ -124,44 +136,44 @@ public interface ContinuedFraction extends Comparable<ContinuedFraction> {
      * @throws NullPointerException
      *             if the specified array is {@code null}.
      */
-	int[] toArray(int[] array);
+    int[] toArray(int[] array);
 
-	    /**
+    /**
      * Returns an iterator over the denominator values.
      * 
      * @return the {@link TIntIterator}.
      */
-	TIntIterator iterator();
+    TIntIterator iterator();
 
-	    /**
+    /**
      * Returns a calculated value from this continued fraction.
      * 
      * @return the float value.
      */
-	float floatValue();
+    float floatValue();
 
-	    /**
+    /**
      * Returns a calculated value from this continued fraction.
      * 
      * @return the double value.
      */
-	double doubleValue();
+    double doubleValue();
 
-	    /**
+    /**
      * Returns a calculated value from this continued fraction.
      * 
      * @return the integer value.
      */
-	int intValue();
+    int intValue();
 
-	    /**
+    /**
      * Returns a calculated value from this continued fraction.
      * 
      * @return the long integer value.
      */
-	long longValue();
+    long longValue();
 
-	    /**
+    /**
      * Compare this continued fractions with the specified object on equality.
      * 
      * @param obj
@@ -170,6 +182,7 @@ public interface ContinuedFraction extends Comparable<ContinuedFraction> {
      * @return {@code true} if the object is a continued fraction and equals
      *         this continued fraction.
      */
-	@Override
-	boolean equals(Object obj);
+    @Override
+    boolean equals(Object obj);
+
 }
