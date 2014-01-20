@@ -36,71 +36,73 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public class Mod3Fraction extends AbstractContinuedFraction {
+public final class Mod3Fraction extends AbstractContinuedFraction<Mod3Fraction> {
 
-	private static final double Z_DEFAULT = 1.0;
-	private static final int MAX_LIMES = 32766;
+    private static final double Z_DEFAULT = 1.0;
+    private static final int MAX_LIMES = 32766;
 
-	@Inject
-	private Mod3FractionFactory factory;
+    @Inject
+    private Mod3FractionFactory factory;
 
-	/**
-	 * @see Mod3FractionFactory#create(double, int[])
-	 */
-	@AssistedInject
-	Mod3Fraction(@Assisted double z, @Assisted int[] denos) {
-		super(z, denos);
-	}
+    /**
+     * @see Mod3FractionFactory#create(double, int[])
+     */
+    @AssistedInject
+    Mod3Fraction(@Assisted double z, @Assisted int[] denos) {
+        super(z, denos);
+    }
 
-	/**
-	 * @see Mod3FractionFactory#fromValue(double, int)
-	 */
-	@AssistedInject
-	Mod3Fraction(final Mod3Round round, @Assisted double value,
-			@Assisted int max) {
-		super(new EvaluateFractions() {
+    /**
+     * @see Mod3FractionFactory#fromValue(double, int)
+     */
+    @AssistedInject
+    Mod3Fraction(final Mod3Round round, @Assisted double value,
+            @Assisted int max) {
+        super(new EvaluateFractions() {
 
-			@Override
-			public int[] evaluate(double value, int max) {
-				return evaluateDenos(value, max, round);
-			}
-		}, value, 1.0, max);
-	}
+            @Override
+            public int[] evaluate(double value, int max) {
+                return evaluateDenos(value, max, round);
+            }
+        }, value, 1.0, max);
+    }
 
-	private static int[] evaluateDenos(double value, int max, Mod3Round round) {
-		TIntList denos = new TIntArrayList(max);
-		double logvalue = value;
-		denos.add(round.round(logvalue));
-		return calculateDenos(denos, round, logvalue, Z_DEFAULT, max).toArray();
-	}
+    private static int[] evaluateDenos(double value, int max, Mod3Round round) {
+        TIntList denos = new TIntArrayList(max);
+        double logvalue = value;
+        denos.add(round.round(logvalue));
+        return calculateDenos(denos, round, logvalue, Z_DEFAULT, max).toArray();
+    }
 
-	private static TIntList calculateDenos(TIntList denos, Mod3Round round,
-			double logvalue, double z, int max) {
-		int lmax = max;
-		if (denos.get(0) % 3 != 0) {
-			lmax = 0;
-		}
-		int nenner = denos.get(0);
-		int limes = MAX_LIMES;
-		double dn = 0.0;
-		int level = 1;
-		while (level <= lmax) {
-			dn = logvalue - nenner;
-			if (Math.abs(dn) <= 1.0 / limes) {
-				denos.add(limes);
-				lmax = level;
-			} else {
-				logvalue = z / dn;
-				nenner = round.round(logvalue);
-				denos.add(nenner);
-			}
-			level++;
-		}
-		return denos;
-	}
+    private static TIntList calculateDenos(TIntList denos, Mod3Round round,
+            double logvalue, double z, int max) {
+        int lmax = max;
+        if (denos.get(0) % 3 != 0) {
+            lmax = 0;
+        }
+        int nenner = denos.get(0);
+        int limes = MAX_LIMES;
+        double dn = 0.0;
+        int level = 1;
+        while (level <= lmax) {
+            dn = logvalue - nenner;
+            if (Math.abs(dn) <= 1.0 / limes) {
+                denos.add(limes);
+                lmax = level;
+            } else {
+                logvalue = z / dn;
+                nenner = round.round(logvalue);
+                denos.add(nenner);
+            }
+            level++;
+        }
+        return denos;
+    }
 
-	@Override
-	protected ContinuedFraction createFraction(double z, int[] denos) {
-		return factory.create(z, denos);
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    protected ContinuedFraction<Mod3Fraction> createFraction(double z,
+            int[] denos) {
+        return factory.create(z, denos);
+    }
 }

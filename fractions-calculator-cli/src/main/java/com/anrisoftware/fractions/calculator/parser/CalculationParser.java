@@ -66,11 +66,11 @@ public class CalculationParser implements CalculationModel {
 
     private Double value;
 
-    private ContinuedFraction fraction;
+    private ContinuedFraction<?> fraction;
 
-    private ContinuedFraction fractionA;
+    private ContinuedFraction<?> fractionA;
 
-    private ContinuedFraction fractionB;
+    private ContinuedFraction<?> fractionB;
 
     private NumberFormat valueFormat;
 
@@ -152,14 +152,15 @@ public class CalculationParser implements CalculationModel {
         }
     }
 
-    private ContinuedFraction parseFraction(String deno) throws ArgsException {
+    private ContinuedFraction<?> parseFraction(String deno)
+            throws ArgsException {
         if (deno == null) {
             return null;
         }
         try {
             FractionFactory factory = service.getFactory(injector);
             FractionFormat format = fractionFormatFactory.create(factory);
-            ContinuedFraction v = format.parse(deno);
+            ContinuedFraction<?> v = format.parse(deno);
             return v;
         } catch (ParseException e) {
             throw log.errorParseDeno(e, deno);
@@ -177,17 +178,17 @@ public class CalculationParser implements CalculationModel {
     }
 
     @Override
-    public ContinuedFraction getFraction() {
+    public ContinuedFraction<?> getFraction() {
         return fraction;
     }
 
     @Override
-    public ContinuedFraction getFractionA() {
+    public ContinuedFraction<?> getFractionA() {
         return fractionA;
     }
 
     @Override
-    public ContinuedFraction getFractionB() {
+    public ContinuedFraction<?> getFractionB() {
         return fractionB;
     }
 

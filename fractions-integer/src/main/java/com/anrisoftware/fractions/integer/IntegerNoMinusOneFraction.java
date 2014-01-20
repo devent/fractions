@@ -42,68 +42,71 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public class IntegerNoMinusOneFraction extends AbstractContinuedFraction {
+public final class IntegerNoMinusOneFraction extends
+        AbstractContinuedFraction<IntegerNoMinusOneFraction> {
 
-	@Inject
-	private IntegerNoMinusOneFractionFactory factory;
+    @Inject
+    private IntegerNoMinusOneFractionFactory factory;
 
-	/**
-	 * @see IntegerFractionFactory#create(double, int[])
-	 */
-	@AssistedInject
-	IntegerNoMinusOneFraction(@Assisted double z, @Assisted int[] denos) {
-		super(z, denos);
-	}
+    /**
+     * @see IntegerFractionFactory#create(double, int[])
+     */
+    @AssistedInject
+    IntegerNoMinusOneFraction(@Assisted double z, @Assisted int[] denos) {
+        super(z, denos);
+    }
 
-	/**
-	 * Calculates the denominators from the specified value.
-	 * 
-	 * @param value
-	 *            the value.
-	 * 
-	 * @param maxDenominators
-	 *            the maximum count of the denominators.
-	 */
-	@AssistedInject
-	IntegerNoMinusOneFraction(@Assisted double value,
-			@Assisted int maxDenominators) {
-		super(new EvaluateFractions() {
+    /**
+     * Calculates the denominators from the specified value.
+     * 
+     * @param value
+     *            the value.
+     * 
+     * @param maxDenominators
+     *            the maximum count of the denominators.
+     */
+    @AssistedInject
+    IntegerNoMinusOneFraction(@Assisted double value,
+            @Assisted int maxDenominators) {
+        super(new EvaluateFractions() {
 
-			@Override
-			public int[] evaluate(double value, int max) {
-				TIntList denos = new TIntArrayList(max);
-				int k = 1;
-				double y = round(value);
-				double r = value - y;
-				if (r > 0.5) {
-					r = r - 1.0;
-					y = y + 1.0;
-				}
-				denos.add((int) y);
-				double relativeError = abs(r / value);
-				double s;
-				while (log(relativeError) > -16.0 && k < max) {
-					k++;
-					s = 1 / r;
-					y = fix(s);
-					r = s - y;
-					if (r > 0.5) {
-						r -= 1.0;
-						y += 1.0;
-					} else if (r < -0.5) {
-						r += 1.0;
-						y -= 1.0;
-					}
-					relativeError = abs(r / value);
-					denos.add((int) y);
-				}
-				return denos.toArray();
-			}
-		}, value, 1, maxDenominators);
-	}
+            @Override
+            public int[] evaluate(double value, int max) {
+                TIntList denos = new TIntArrayList(max);
+                int k = 1;
+                double y = round(value);
+                double r = value - y;
+                if (r > 0.5) {
+                    r = r - 1.0;
+                    y = y + 1.0;
+                }
+                denos.add((int) y);
+                double relativeError = abs(r / value);
+                double s;
+                while (log(relativeError) > -16.0 && k < max) {
+                    k++;
+                    s = 1 / r;
+                    y = fix(s);
+                    r = s - y;
+                    if (r > 0.5) {
+                        r -= 1.0;
+                        y += 1.0;
+                    } else if (r < -0.5) {
+                        r += 1.0;
+                        y -= 1.0;
+                    }
+                    relativeError = abs(r / value);
+                    denos.add((int) y);
+                }
+                return denos.toArray();
+            }
+        }, value, 1, maxDenominators);
+    }
 
-	@Override
-	protected ContinuedFraction createFraction(double z, int[] denos) {
-		return factory.create(z, denos);
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    protected ContinuedFraction<IntegerNoMinusOneFraction> createFraction(
+            double z, int[] denos) {
+        return factory.create(z, denos);
+    }
 }
