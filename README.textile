@@ -4,6 +4,8 @@
 </div>
 <hr />
 
+!>http://www.mueller-public.de/wp-content/uploads/2014/03/fractionscli_example.png!
+
 h1. "Continued Fraction Calculator":http://www.mueller-public.de/2014/03/continued-fraction-calculator/
 
 To calculate the continued fraction from a specified value and to compare two different continued fractions I have implemented the continued fraction calculator library can command line application @fractionscli.@ The application is available under the "GPLv3":https://www.gnu.org/copyleft/gpl.html license free of charge.
@@ -37,7 +39,9 @@ h2. Manual
 h3. Synopsis
 
 <pre>
-fractionscli [-service service] [-value-format|-f format] (([-max maximum] -denominators|-d denominators)|(-fraction-a|-a denominators -fraction-b|-b denominators)|_value_)
+fractionscli [-service service] [-value-format|-f format] 
+    (([-max maximum] -denominators|-d denominators)|
+    (-fraction-a|-a denominators -fraction-b|-b denominators)|_value_)
 </pre>
 
 h3. Description
