@@ -12,6 +12,7 @@ The calculator can either be installed using the setup program or the @Jar@ file
 
 * "Continued Fraction Calculator Command Line Application Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-2.2.jar
 * "Continued Fraction Calculator Command Line Application Setup Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-calculator-cli-install-2.2-standard.jar
+* "Sources Github.com":https://github.com/devent/fractions
 
 h2. Start
 
