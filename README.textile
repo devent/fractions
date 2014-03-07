@@ -4,7 +4,7 @@
 </div>
 <hr />
 
-h1. Continued Fraction Calculator
+h1. "Continued Fraction Calculator":http://www.mueller-public.de/2014/03/continued-fraction-calculator/
 
 To calculate the continued fraction from a specified value and to compare
 two different continued fractions I have implemented the continued
@@ -12,8 +12,34 @@ fraction calculator library can command line application @fractionscli.@
 The application is available under 
 the "GPLv3":https://www.gnu.org/copyleft/gpl.html license free of charge.
 
+The calculator can either be installed using the setup program or the @Jar@
+file can be started directly.
+
+* "Continued Fraction Calculator Command Line Application Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-2.2.jar
+* "Continued Fraction Calculator Command Line Application Setup Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-calculator-cli-install-2.2-standard.jar
 
 h2. Manual
+
+Fractions :: Calculator Command Line Installation 2.2
+
+h3. Start
+
+    To start the application there are scripts installed in the bin/ directory.
+    For Linux it is the bin/linux/run.sh script, for Windows it is the
+    bin/windows/run.bat script. The script can be run from anywhere, i.e.:
+
+    <pre>
+    $ bin/linux/fractionscli.sh
+    </pre>
+
+h3. Debug
+
+    A version for debug purpose is in the same directory as the start script and
+    is run in the same matter, i.e.:
+
+    <pre>
+    $ bin/linux/fractionscli-debug.sh
+    </pre>
 
 @fractionscli@ - calculates and prints the continued fractions from the specified
 value.
