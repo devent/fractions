@@ -32,18 +32,21 @@ import com.google.inject.Injector;
  */
 public class Starter {
 
-	/**
-	 * Starts the application with the specified command line arguments.
-	 * 
-	 * @param args
-	 *            the command line arguments.
-	 * 
-	 * @throws AppException
-	 *             if there was an error in the application.
-	 */
-	public static void main(String[] args) throws AppException {
-		Injector injector = Guice.createInjector(new AppModule());
-		App app = injector.getInstance(App.class);
-		app.doStart(args);
-	}
+    /**
+     * Starts the application with the specified command line arguments.
+     * 
+     * @param args
+     *            the command line arguments.
+     * 
+     * @throws AppException
+     *             if there was an error in the application.
+     */
+    public static void main(String[] args) throws AppException {
+        Injector injector = Guice.createInjector(new AppModule());
+        App app = injector.getInstance(App.class);
+        app.doStart(args);
+        if (app.getOutput() != null) {
+            System.out.println(app.getOutput());
+        }
+    }
 }

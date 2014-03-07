@@ -24,6 +24,7 @@ import groovy.util.logging.Slf4j
 import org.junit.BeforeClass
 import org.junit.Test
 
+import com.anrisoftware.fractions.calculator.starter.Starter
 import com.google.inject.Guice
 import com.google.inject.Injector
 
@@ -35,6 +36,34 @@ import com.google.inject.Injector
  */
 @Slf4j
 class AppTest {
+
+    @Test
+    void "starter no args"() {
+        String[] args = []
+        Starter.main args
+    }
+
+    @Test(expected=AppException)
+    void "starter invalid args"() {
+        String[] args = ["-invalid"]
+        Starter.main args
+    }
+
+    @Test
+    void "caluclate continued fraction by starter"() {
+        String service = "IntegerFraction"
+        String max = "6"
+        String value = "62.8908766605"
+        String[] args = [
+            "-service",
+            service,
+            "-max",
+            max,
+            value
+        ]
+        log.info "Arguments: '{}'", Arrays.toString(args)
+        Starter.main args
+    }
 
     @Test
     void "caluclate continued fraction"() {
