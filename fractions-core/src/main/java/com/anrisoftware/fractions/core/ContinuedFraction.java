@@ -26,8 +26,7 @@ import gnu.trove.iterator.TIntIterator;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
-public interface ContinuedFraction<FractionType extends ContinuedFraction<FractionType>>
-        extends Comparable<FractionType> {
+public interface ContinuedFraction extends Comparable<ContinuedFraction> {
 
     /**
      * Returns the original value of the continued fraction. That is the value
@@ -74,7 +73,7 @@ public interface ContinuedFraction<FractionType extends ContinuedFraction<Fracti
      *             if the specified index is negative or greater then
      *             {@code size-1}.
      */
-    ContinuedFraction<FractionType> set(int index, int value);
+    ContinuedFraction set(int index, int value);
 
     /**
      * Expands the continued fraction by the specified denominator.
@@ -84,14 +83,14 @@ public interface ContinuedFraction<FractionType extends ContinuedFraction<Fracti
      * 
      * @return the expanded {@link ContinuedFraction}.
      */
-    ContinuedFraction<FractionType> expand(int denominator);
+    ContinuedFraction expand(int denominator);
 
     /**
      * Contracts the continued fraction removing the last denominator.
      * 
      * @return the contracted {@link ContinuedFraction}.
      */
-    ContinuedFraction<FractionType> contract();
+    ContinuedFraction contract();
 
     /**
      * Contracts the continued fraction removing the last n denominators.
@@ -103,7 +102,7 @@ public interface ContinuedFraction<FractionType extends ContinuedFraction<Fracti
      * 
      * @since 2.2
      */
-    ContinuedFraction<FractionType> contract(int n);
+    ContinuedFraction contract(int n);
 
     /**
      * Returns if the continued fraction does not have any denominators.

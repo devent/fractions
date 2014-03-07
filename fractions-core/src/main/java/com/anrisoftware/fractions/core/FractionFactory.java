@@ -38,7 +38,6 @@ public interface FractionFactory {
      * 
      * @return the {@link ContinuedFraction}.
      */
-    @SuppressWarnings("rawtypes")
     ContinuedFraction create(double z, int[] denos);
 
     /**
@@ -54,6 +53,5 @@ public interface FractionFactory {
      * 
      * @return the {@link ContinuedFraction}.
      */
-    @SuppressWarnings("rawtypes")
     ContinuedFraction fromValue(double value, int max);
 }

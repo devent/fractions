@@ -57,21 +57,21 @@ public interface CalculationModel {
      * 
      * @return the {@link ContinuedFraction} or {@code null}.
      */
-    ContinuedFraction<?> getFraction();
+    ContinuedFraction getFraction();
 
     /**
      * Returns the first continued fraction for comparison.
      * 
      * @return the {@link ContinuedFraction} or {@code null}.
      */
-    ContinuedFraction<?> getFractionA();
+    ContinuedFraction getFractionA();
 
     /**
      * Returns the second continued fraction for comparison.
      * 
      * @return the {@link ContinuedFraction} or {@code null}.
      */
-    ContinuedFraction<?> getFractionB();
+    ContinuedFraction getFractionB();
 
     /**
      * Returns the value number formatter.

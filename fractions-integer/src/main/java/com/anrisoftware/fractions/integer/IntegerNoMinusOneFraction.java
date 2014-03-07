@@ -42,8 +42,7 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public final class IntegerNoMinusOneFraction extends
-        AbstractContinuedFraction<IntegerNoMinusOneFraction> {
+public final class IntegerNoMinusOneFraction extends AbstractContinuedFraction {
 
     @Inject
     private IntegerNoMinusOneFractionFactory factory;
@@ -103,10 +102,8 @@ public final class IntegerNoMinusOneFraction extends
         }, value, 1, maxDenominators);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected ContinuedFraction<IntegerNoMinusOneFraction> createFraction(
-            double z, int[] denos) {
+    protected ContinuedFraction createFraction(double z, int[] denos) {
         return factory.create(z, denos);
     }
 }

@@ -37,8 +37,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public abstract class AbstractContinuedFraction<FractionType extends ContinuedFraction<FractionType>>
-        extends Number implements ContinuedFraction<FractionType> {
+public abstract class AbstractContinuedFraction extends Number implements
+        ContinuedFraction {
 
     private final TIntList denominators;
 
@@ -117,7 +117,7 @@ public abstract class AbstractContinuedFraction<FractionType extends ContinuedFr
     }
 
     @Override
-    public ContinuedFraction<FractionType> set(int index, int value) {
+    public ContinuedFraction set(int index, int value) {
         TIntArrayList denos = new TIntArrayList(denominators);
         denos.set(index, value);
         return createFraction(getZ(), denos.toArray());
@@ -144,19 +144,19 @@ public abstract class AbstractContinuedFraction<FractionType extends ContinuedFr
     }
 
     @Override
-    public ContinuedFraction<FractionType> expand(int denominator) {
+    public ContinuedFraction expand(int denominator) {
         TIntArrayList denos = new TIntArrayList(denominators);
         denos.add(denominator);
         return createFraction(getZ(), denos.toArray());
     }
 
     @Override
-    public ContinuedFraction<FractionType> contract() {
+    public ContinuedFraction contract() {
         return contract(1);
     }
 
     @Override
-    public ContinuedFraction<FractionType> contract(int n) {
+    public ContinuedFraction contract(int n) {
         TIntList denos = denominators.subList(0, size() - n);
         return createFraction(getZ(), denos.toArray());
     }
@@ -198,8 +198,7 @@ public abstract class AbstractContinuedFraction<FractionType extends ContinuedFr
      * 
      * @return the {@link ContinuedFraction}.
      */
-    protected abstract ContinuedFraction<FractionType> createFraction(double z,
-            int[] denos);
+    protected abstract ContinuedFraction createFraction(double z, int[] denos);
 
     @Override
     public String toString() {
@@ -250,14 +249,13 @@ public abstract class AbstractContinuedFraction<FractionType extends ContinuedFr
         if (!(obj instanceof ContinuedFraction)) {
             return false;
         }
-        @SuppressWarnings("rawtypes")
         ContinuedFraction rhs = (ContinuedFraction) obj;
         return new EqualsBuilder().append(getZ(), rhs.getZ())
                 .append(toArray(), rhs.toArray()).isEquals();
     }
 
     @Override
-    public int compareTo(FractionType o) {
+    public int compareTo(ContinuedFraction o) {
         double az = getZ(), bz = o.getZ();
         if (az != bz) {
             return (int) signum(az - bz);

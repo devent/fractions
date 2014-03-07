@@ -69,7 +69,6 @@ public class App {
         CalculationModel model = parseArgs(args);
         String output = createOutput(model);
         this.output = output;
-        System.out.println(output);
     }
 
     private String createOutput(CalculationModel model) {
@@ -85,7 +84,6 @@ public class App {
         return null;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     private String compareFractions(CalculationModel model) {
         ContinuedFraction a = model.getFractionA();
         ContinuedFraction b = model.getFractionB();
@@ -96,7 +94,7 @@ public class App {
     }
 
     private String outputFractionValue(CalculationModel model) {
-        ContinuedFraction<?> fraction = model.getFraction();
+        ContinuedFraction fraction = model.getFraction();
         NumberFormat format = model.getValueFormat();
         return format.format(fraction.doubleValue());
     }
@@ -106,7 +104,7 @@ public class App {
         int max = model.getMax();
         FractionService service = model.getService();
         FractionFactory factory = service.getFactory(injector);
-        ContinuedFraction<?> result;
+        ContinuedFraction result;
         result = service.getFactory(injector).fromValue(value, max);
         NumberFormat format = model.getValueFormat();
         FractionFormat fractionFormat = formatFactory.create(factory);

@@ -36,7 +36,7 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public final class Mod3Fraction extends AbstractContinuedFraction<Mod3Fraction> {
+public final class Mod3Fraction extends AbstractContinuedFraction {
 
     private static final double Z_DEFAULT = 1.0;
     private static final int MAX_LIMES = 32766;
@@ -99,10 +99,8 @@ public final class Mod3Fraction extends AbstractContinuedFraction<Mod3Fraction> 
         return denos;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected ContinuedFraction<Mod3Fraction> createFraction(double z,
-            int[] denos) {
+    protected ContinuedFraction createFraction(double z, int[] denos) {
         return factory.create(z, denos);
     }
 }

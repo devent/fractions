@@ -106,12 +106,12 @@ public class FractionFormat extends Format {
     @Override
     public StringBuffer format(Object obj, StringBuffer buff, FieldPosition pos) {
         if (obj instanceof ContinuedFraction) {
-            formatFraction(buff, (ContinuedFraction<?>) obj);
+            formatFraction(buff, (ContinuedFraction) obj);
         }
         return buff;
     }
 
-    private void formatFraction(StringBuffer buff, ContinuedFraction<?> fraction) {
+    private void formatFraction(StringBuffer buff, ContinuedFraction fraction) {
         int[] denos = fraction.toArray();
         String out = new ST(TEMPLATE).add(DENOMINATORS, denos).render();
         buff.append(out);
@@ -141,9 +141,9 @@ public class FractionFormat extends Format {
     /**
      * @see #parse(String, ParsePosition)
      */
-    public ContinuedFraction<?> parse(String source) throws ParseException {
+    public ContinuedFraction parse(String source) throws ParseException {
         ParsePosition pos = new ParsePosition(0);
-        ContinuedFraction<?> result = parse(source, pos);
+        ContinuedFraction result = parse(source, pos);
         if (pos.getIndex() == 0) {
             throw log.errorParse(source, pos);
         }
@@ -160,11 +160,11 @@ public class FractionFormat extends Format {
      * @throws ParseException
      *             if the string is not in the correct format.
      */
-    public ContinuedFraction<?> parse(String source, ParsePosition pos)
+    public ContinuedFraction parse(String source, ParsePosition pos)
             throws ParseException {
         try {
             source = source.substring(pos.getIndex());
-            ContinuedFraction<?> f = decodeFraction(source, pos);
+            ContinuedFraction f = decodeFraction(source, pos);
             pos.setErrorIndex(-1);
             pos.setIndex(pos.getIndex() + source.length());
             return f;
@@ -176,7 +176,7 @@ public class FractionFormat extends Format {
         }
     }
 
-    private ContinuedFraction<?> decodeFraction(String source, ParsePosition pos)
+    private ContinuedFraction decodeFraction(String source, ParsePosition pos)
             throws ParseException {
         Matcher matcher = PATTERN.matcher(source);
         log.checkMatches(matcher.find(), source, pos);

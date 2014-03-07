@@ -113,7 +113,7 @@ class CalculationParserLogger extends AbstractLogger {
                 error_parse_deno_message, deno);
     }
 
-    ArgsException errorBothValueFraction(Double v, ContinuedFraction<?> f) {
+    ArgsException errorBothValueFraction(Double v, ContinuedFraction f) {
         return logException(
                 new ArgsException(error_both_value_fraction).add(value, v).add(
                         fraction, f), error_both_value_fraction_message, v, f);

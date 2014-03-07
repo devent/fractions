@@ -39,8 +39,7 @@ import com.google.inject.assistedinject.AssistedInject;
  * @since 2.0
  */
 @SuppressWarnings("serial")
-public final class IntegerFraction extends
-        AbstractContinuedFraction<IntegerFraction> {
+public final class IntegerFraction extends AbstractContinuedFraction {
 
     @Inject
     private IntegerFractionFactory factory;
@@ -93,10 +92,8 @@ public final class IntegerFraction extends
         }, value, 1.0, max);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected ContinuedFraction<IntegerFraction> createFraction(double z,
-            int[] denos) {
+    protected ContinuedFraction createFraction(double z, int[] denos) {
         return factory.create(z, denos);
     }
 }
