@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-calculator-cli-install</artifactId>
-	<version>2.1</version>
+	<version>2.2</version>
 	<name>Fractions :: Calculator Command Line Installation</name>
 	<description>Packages the fractions calculator command line interface for deployment and installation.</description>
 	<inceptionYear>2013</inceptionYear>
@@ -22,7 +22,7 @@
 		<project.custom.year>${project.inceptionYear}</project.custom.year>
 		<project.custom.mainclass>com.anrisoftware.fractions.calculator.starter.Starter</project.custom.mainclass>
 		<project.custom.name>fractionscli</project.custom.name>
-		<project.custom.version>2.1</project.custom.version>
+		<project.custom.version>2.2</project.custom.version>
 		<project.custom.type>console</project.custom.type>
 		<project.custom.author.name>Erwin Müller</project.custom.author.name>
 		<project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
@@ -78,17 +78,17 @@
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-integer</artifactId>
-				<version>2.1</version>
+				<version>2.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-core</artifactId>
-				<version>2.1</version>
+				<version>2.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-calculator-cli</artifactId>
-				<version>2.1</version>
+				<version>2.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
