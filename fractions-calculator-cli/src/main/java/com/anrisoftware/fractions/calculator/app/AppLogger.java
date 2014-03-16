@@ -41,49 +41,49 @@ import com.anrisoftware.globalpom.log.AbstractLogger;
 @Singleton
 class AppLogger extends AbstractLogger {
 
-	enum _ {
+    enum _ {
 
-		invalid_args("Invalid command line arguments"),
+        invalid_args("Invalid command line arguments"),
 
-		invalid_args_message("Invalid command line arguments: '{}'"),
+        invalid_args_message("Invalid command line arguments: '{}'"),
 
-		args("arguments"),
+        args("arguments"),
 
-		error_parse_fraction("Eror parse continued fraction"),
+        error_parse_fraction("Eror parse continued fraction"),
 
-		error_parse_fraction_message("Eror parse continued fraction from '{}'."),
+        error_parse_fraction_message("Eror parse continued fraction from '{}'."),
 
-		denominators("denominators");
+        denominators("denominators");
 
-		private String name;
+        private String name;
 
-		private _(String name) {
-			this.name = name;
-		}
+        private _(String name) {
+            this.name = name;
+        }
 
-		@Override
-		public String toString() {
-			return name;
-		}
-	}
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
 
-	/**
-	 * Creates a logger for {@link App}.
-	 */
-	public AppLogger() {
-		super(App.class);
-	}
+    /**
+     * Creates a logger for {@link App}.
+     */
+    public AppLogger() {
+        super(App.class);
+    }
 
-	AppException errorParseArgs(ArgsException e, String[] args) {
-		String argss = Arrays.toString(args);
-		return logException(new AppException(invalid_args, e).add(args, argss),
-				invalid_args_message, argss);
-	}
+    AppException errorParseArgs(ArgsException e, String[] args) {
+        String argss = Arrays.toString(args);
+        return logException(new AppException(invalid_args, e).add(args, argss),
+                invalid_args_message, argss);
+    }
 
-	AppException errorParseFraction(ParseException e, String d) {
-		return logException(
-				new AppException(error_parse_fraction, e).add(denominators, d),
-				error_parse_fraction_message, d);
-	}
+    AppException errorParseFraction(ParseException e, String d) {
+        return logException(
+                new AppException(error_parse_fraction, e).add(denominators, d),
+                error_parse_fraction_message, d);
+    }
 
 }

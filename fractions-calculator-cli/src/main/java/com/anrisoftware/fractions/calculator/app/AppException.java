@@ -31,65 +31,75 @@ import com.anrisoftware.globalpom.exceptions.Context;
 @SuppressWarnings("serial")
 public class AppException extends Exception {
 
-	private final Context<AppException> context;
+    private final Context<AppException> context;
 
-	/**
-	 * @see Exception#Exception(String, Throwable)
-	 */
-	public AppException(String message, Throwable cause) {
-		super(message, cause);
-		this.context = new Context<AppException>(this);
-	}
+    /**
+     * @see Exception#Exception(String, Throwable)
+     */
+    public AppException(String message, Throwable cause) {
+        super(message, cause);
+        this.context = new Context<AppException>(this);
+    }
 
-	/**
-	 * @see Exception#Exception(String)
-	 */
-	public AppException(String message) {
-		super(message);
-		this.context = new Context<AppException>(this);
-	}
+    /**
+     * @see Exception#Exception(String)
+     */
+    public AppException(String message) {
+        super(message);
+        this.context = new Context<AppException>(this);
+    }
 
-	/**
-	 * @see Exception#Exception(String, Throwable)
-	 */
-	public AppException(Object message, Throwable cause) {
-		super(message.toString(), cause);
-		this.context = new Context<AppException>(this);
-	}
+    /**
+     * @see Exception#Exception(String, Throwable)
+     */
+    public AppException(Object message, Throwable cause) {
+        super(message.toString(), cause);
+        this.context = new Context<AppException>(this);
+    }
 
-	/**
-	 * @see Exception#Exception(String)
-	 */
-	public AppException(Object message) {
-		super(message.toString());
-		this.context = new Context<AppException>(this);
-	}
+    /**
+     * @see Exception#Exception(String)
+     */
+    public AppException(Object message) {
+        super(message.toString());
+        this.context = new Context<AppException>(this);
+    }
 
-	/**
-	 * @see Context#addContext(String, Object)
-	 */
-	public AppException add(String name, Object value) {
-		context.addContext(name, value);
-		return this;
-	}
+    /**
+     * @see Context#addContext(String, Object)
+     */
+    public AppException add(String name, Object value) {
+        context.addContext(name, value);
+        return this;
+    }
 
-	/**
-	 * @see Context#addContext(String, Object)
-	 */
-	public AppException add(Object name, Object value) {
-		context.addContext(name.toString(), value);
-		return this;
-	}
+    /**
+     * @see Context#addContext(String, Object)
+     */
+    public AppException add(Object name, Object value) {
+        context.addContext(name.toString(), value);
+        return this;
+    }
 
-	/**
-	 * @see Context#getContext()
-	 */
-	public Map<String, Object> getContext() {
-		return context.getContext();
-	}
+    /**
+     * @see Context#getContext()
+     */
+    public Map<String, Object> getContext() {
+        return context.getContext();
+    }
 
-	@Override
-	public String toString() {
-		return context.toString();
-	}
+    @Override
+    public String getMessage() {
+        return context.message(super.getMessage());
+    }
+
+    @Override
+    public String getLocalizedMessage() {
+        return context.message(super.getLocalizedMessage());
+    }
+
+    @Override
+    public String toString() {
+        return context.toString();
+    }
 }
