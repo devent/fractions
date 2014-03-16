@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-parent</artifactId>
-	<version>2.3-SNAPSHOT</version>
+	<version>2.3</version>
 	<packaging>pom</packaging>
 	<name>Fractions :: Parent POM</name>
 	<description>Manages the dependencies for the Fractions project modules.</description>
