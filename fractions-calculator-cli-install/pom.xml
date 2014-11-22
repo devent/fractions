@@ -6,28 +6,33 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-izpack-singlejar</artifactId>
-		<version>2.3</version>
+		<version>2.6-rc4</version>
 		<relativePath />
 	</parent>
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-calculator-cli-install</artifactId>
-	<version>2.3</version>
+	<version>2.5-SNAPSHOT</version>
 	<name>Fractions :: Calculator Command Line Installation</name>
 	<description>Packages the fractions calculator command line interface for deployment and installation.</description>
 	<inceptionYear>2013</inceptionYear>
-	<url>https://www.anr-institzasute.com/projects/projects/fractions-calculator-cli-install</url>
+	<url>https://anrisoftware.com/projects/projects/fractions-calculator-cli-install</url>
 
 	<properties>
-		<project.custom.year>${project.inceptionYear}</project.custom.year>
-		<project.custom.mainclass>com.anrisoftware.fractions.calculator.starter.Starter</project.custom.mainclass>
-		<project.custom.name>fractionscli</project.custom.name>
-		<project.custom.version>2.3</project.custom.version>
-		<project.custom.type>console</project.custom.type>
 		<project.custom.author.name>Erwin Müller</project.custom.author.name>
 		<project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
-		<project.custom.linuxbin>fractionscli.sh</project.custom.linuxbin>
-		<project.custom.linuxdebugbin>fractionscli-debug.sh</project.custom.linuxdebugbin>
+		<project.custom.app.name>fractionscli</project.custom.app.name>
+		<project.custom.app.description></project.custom.app.description>
+		<project.custom.app.path>fractionscli</project.custom.app.path>
+		<project.custom.app.version>2.5</project.custom.app.version>
+		<project.custom.app.author.name>Erwin Müller</project.custom.app.author.name>
+		<project.custom.app.author.email>erwin.mueller@deventm.org</project.custom.app.author.email>
+		<project.custom.app.mainclass>com.anrisoftware.fractions.calculator.starter.Starter</project.custom.app.mainclass>
+		<project.custom.app.organization.url>http://www.anr-institute.com</project.custom.app.organization.url>
+		<project.custom.app.copyright>${project.custom.year} ${project.custom.user.name}</project.custom.app.copyright>
+		<project.custom.app.type>console</project.custom.app.type>
+		<project.custom.app.linuxbin>fractionscli.sh</project.custom.app.linuxbin>
+		<project.custom.app.linuxdebugbin>fractionscli-debug.sh</project.custom.app.linuxdebugbin>
 	</properties>
 
 	<developers>
@@ -53,7 +58,7 @@
 
 	<issueManagement>
 		<system>Redmine</system>
-		<url>https://www.anr-institute.com/projects/projects/fractions-calculator-cli-install</url>
+		<url>https://anrisoftware.com/projects/projects/fractions-calculator-cli-install</url>
 	</issueManagement>
 
 	<scm>
@@ -78,30 +83,30 @@
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-integer</artifactId>
-				<version>2.3</version>
+				<version>2.5-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-core</artifactId>
-				<version>2.3</version>
+				<version>2.5-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-calculator-cli</artifactId>
-				<version>2.3</version>
+				<version>2.5-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.fractions</groupId>
 			<artifactId>fractions-integer</artifactId>
