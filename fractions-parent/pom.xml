@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-parent</artifactId>
-	<version>2.5-SNAPSHOT</version>
+	<version>2.5</version>
 	<packaging>pom</packaging>
 	<name>Fractions :: Parent POM</name>
 	<description>Manages the dependencies for the Fractions project modules.</description>
@@ -100,12 +100,12 @@
             <dependency>
                 <groupId>com.anrisoftware.fractions</groupId>
                 <artifactId>fractions-core</artifactId>
-                <version>2.5-SNAPSHOT</version>
+                <version>2.5</version>
             </dependency>
             <dependency>
                 <groupId>com.anrisoftware.fractions</groupId>
                 <artifactId>fractions-integer</artifactId>
-                <version>2.5-SNAPSHOT</version>
+                <version>2.5</version>
             </dependency>
 		</dependencies>
 	</dependencyManagement>
