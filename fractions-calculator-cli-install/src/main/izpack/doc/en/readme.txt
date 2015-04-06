@@ -6,14 +6,14 @@ Start
     For Linux it is the bin/linux/run.sh script, for Windows it is the
     bin/windows/run.bat script. The script can be run from anywhere, i.e.:
 
-    $ bin/linux/${project.custom.linuxbin}
+    $ bin/linux/${project.custom.app.linuxbin}
 
 Debug
 
     A version for debug purpose is in the same directory as the start script and
     is run in the same matter, i.e.:
 
-    $ bin/linux/${project.custom.linuxdebugbin}
+    $ bin/linux/${project.custom.app.linuxdebugbin}
 
                             MANUAL
 

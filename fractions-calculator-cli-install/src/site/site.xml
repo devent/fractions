@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
+
+    This file is part of fractions-calculator-cli-install.
+
+    fractions-calculator-cli-install is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the Free
+    Software Foundation, either version 3 of the License, or (at your option) any
+    later version.
+
+    fractions-calculator-cli-install is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+    details.
+
+    You should have received a copy of the GNU General Public License along with
+    fractions-calculator-cli-install. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<project name="${project.name}" xmlns="http://maven.apache.org/DECORATION/1.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+    <bannerLeft>
+        <name>${project.name}</name>
+        <title>${project.name}</title>
+        <href>${project.url}</href>
+        <src>images/em-logo-250x80.jpg</src>
+    </bannerLeft>
+    <bannerRight>
+        <name>Advanced Natural Research Institute Projects</name>
+        <title>Advanced Natural Research Institute Projects</title>
+        <src>images/anri_logo_48.png</src>
+        <href>https://anrisoftware.com/projects</href>
+    </bannerRight>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.1</version>
+    </skin>
+	<body>
+		<links>
+			<item name="${project.name}" href="${project.url}" />
+		</links>
+		<menu name="Overview">
+			<item name="Home" href="/index.html" />
+			<item name="Download" href="https://anrisoftware.com/l/1v" />
+			<item name="Javadoc" href="https://anrisoftware.com/javadoc/com.anrisoftware.fractions/fractions-calculator-cli-install/apidocs/index.html" />
+			<item name="Source code" href="https://anrisoftware.com/projects/projects/fractions-calculator-cli-install/repository" />
+            <item name="Source code (Github)" href="https://github.com/devent/fractions" />
+			<item name="Issues" href="https://anrisoftware.com/projects/projects/fractions-calculator-cli-install/issues" />
+		</menu>
+        <menu name="Releases">
+            <item name="fractions-calculator-cli-install-2.6.jar" href="https://anrisoftware.com/projects/attachments/download/372/fractions-calculator-cli-install-2.6.jar" />
+            <item name="fractions-calculator-cli-install-2.6-single-jar.jar" href="https://anrisoftware.com/projects/attachments/download/373/fractions-calculator-cli-install-2.6-single-jar.jar" />
+        </menu>
+		<menu ref="parent" />
+		<menu ref="modules" />
+		<menu ref="reports" />
+	</body>
+</project>

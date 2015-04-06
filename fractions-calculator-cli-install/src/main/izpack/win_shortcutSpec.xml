@@ -18,9 +18,12 @@
     fractions-calculator-cli-install. If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<shortcuts>
+<izpack:shortcuts version="5.0"
+                  xmlns:izpack="http://izpack.org/schema/shortcuts"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
     <skipIfNotSupported />
-    <programGroup defaultName="${project.custom.name} ${project.custom.version}"
+    <programGroup defaultName="${project.custom.name}"
         location="startMenu" />
     <shortcut
        name="Start ${project.name}"
@@ -29,8 +32,8 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="$JAVA_HOME\bin\java"
-     commandLine="-Dlog4j.configuration=file:///&quot;$INSTALL_PATH&quot;/etc/log4j.properties -jar &quot;$INSTALL_PATH&quot;/lib/${project.artifactId}-${project.version}-jar-with-dependencies.jar"
+     target="&quot;${INSTALL_PATH}&quot;/bin/windows/${project.custom.app.windowsbin}"
+     commandLine=""
      workingDirectory="$INSTALL_PATH"
      description="Start ${project.custom.name}. ${project.custom.description}"
      type="Application"
@@ -38,8 +41,8 @@
      terminal="false"
      KdeSubstUID="false"
      initialState="normal"
-     iconFile="$INSTALL_PATH/${project.custom.icon.windows}">
-        <createForPack name="Windows run files" />
+     iconFile="&quot;${INSTALL_PATH}&quot;/${project.custom.icon.windows}">
+        <createForPack name="Windows" />
     </shortcut>
     <shortcut
        name="Debug ${project.custom.name}"
@@ -48,17 +51,17 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="$JAVA_HOME\bin\java"
-     commandLine="-Dlog4j.configuration=file:///&quot;$INSTALL_PATH&quot;/etc/debug-log4j.properties -jar &quot;$INSTALL_PATH&quot;/lib/${project.artifactId}-${project.version}-jar-with-dependencies.jar"
-     workingDirectory="$INSTALL_PATH"
+     target="&quot;${INSTALL_PATH}&quot;/bin/windows/${project.custom.app.windowsdebugbin}"
+     commandLine=""
+     workingDirectory="&quot;${INSTALL_PATH}&quot;"
      description="Start debug mode of ${project.custom.name}. ${project.custom.description}"
      type="Application"
      encoding="UTF-8"
      terminal="true"
      KdeSubstUID="false"
      initialState="normal"
-     iconFile="$INSTALL_PATH/${project.custom.icon.windows}">
-        <createForPack name="Windows run files" />
+     iconFile="&quot;${INSTALL_PATH}&quot;/${project.custom.icon.windows}">
+        <createForPack name="Windows" />
     </shortcut>
     <shortcut
        name="Readme file"
@@ -67,29 +70,12 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="&quot;$INSTALL_PATH&quot;\doc\en\readme.txt"
+     target="&quot;${INSTALL_PATH}&quot;\doc\en\readme.txt"
      commandLine=""
      workingDirectory="$INSTALL_PATH\doc\en"
      description="${project.custom.name} readme file"
      type="Link"
      encoding="UTF-8">
-        <createForPack name="Doc-English" />
-    </shortcut>
-    <shortcut
-       name="Documentation ${project.version}"
-     programGroup="yes"
-     desktop="no"
-     applications="no"
-     startMenu="yes"
-     startup="no"
-     target="&quot;$INSTALL_PATH&quot;/doc/en/documentation-${project.custom.version}.pdf"
-     commandLine=""
-     workingDirectory="$INSTALL_PATH/doc/en"
-     description="${project.custom.name} documentation for version ${project.custom.version}."
-     type="link"
-     mimetype="application/pdf"
-     encoding="UTF-8">
-        <createForPack name="Doc-English" />
     </shortcut>
     <shortcut
        name="Liemich Datei"
@@ -98,12 +84,11 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="&quot;$INSTALL_PATH&quot;\doc\de\readme.txt"
+     target="&quot;${INSTALL_PATH}&quot;\doc\de\readme.txt"
      commandLine=""
-     workingDirectory="$INSTALL_PATH\doc\de"
+     workingDirectory="&quot;${INSTALL_PATH}&quot;\doc\de"
      description="${project.custom.name} liesmich Datei"
      type="Link"
      encoding="UTF-8">
-        <createForPack name="Doc-Deutsch" />
     </shortcut>
-</shortcuts>
+</izpack:shortcuts>

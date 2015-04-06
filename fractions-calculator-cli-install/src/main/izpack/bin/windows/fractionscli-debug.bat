@@ -17,7 +17,15 @@
 @REM fractions-calculator-cli-install. If not, see <http://www.gnu.org/licenses/>.
 @REM
 
-set mainjar="%CD%"\lib\\${project.custom.jarfile}
+set lib="%CD%"\lib\*
 set log="-Dlogback.configurationFile=file:///%CD%/etc/logback-debug.xml"
+set args=
+set mainClass="${project.custom.app.mainclass}"
 
-java %log% -jar %mainjar%
+java -version >nul 2>&1 && ( set found=true ) || ( set found=false )
+if %found% EQU false (
+    cscript bin/windows/MessageBox.vbs "Java is not correctly installed."
+    exit 1
+)
+
+java %log% -cp %lib% %mainClass% %args% %*
