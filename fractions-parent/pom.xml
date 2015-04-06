@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-groovy</artifactId>
-		<version>1.24</version>
+		<version>1.25</version>
 		<relativePath />
 	</parent>
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-parent</artifactId>
-	<version>2.5</version>
+	<version>2.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Fractions :: Parent POM</name>
 	<description>Manages the dependencies for the Fractions project modules.</description>
@@ -23,14 +23,21 @@
 		<developer>
 			<id>EM</id>
 			<name>Erwin Müller</name>
-			<organization>Advanced Natural Research Insitute GmbH</organization>
-			<email>erwin.mueller@deventm.org</email>
+            <email>erwin.mueller@deventm.org</email>
+            <url>http://www.mueller-public.de/</url>
+			<organization>Advanced Natural Research Institute</organization>
+			<organizationUrl>https://anrisoftware.com</organizationUrl>
 			<roles>
 				<role>Owner</role>
 				<role>Developer</role>
 			</roles>
 		</developer>
 	</developers>
+
+	<organization>
+		<name>Advanced Natural Research Institute</name>
+		<url>https://anrisoftware.com</url>
+	</organization>
 
 	<licenses>
 		<license>
@@ -46,19 +53,23 @@
 	</issueManagement>
 
 	<scm>
-		<connection>scm:git:${custom.gitpublic.url}fractions.git</connection>
-		<developerConnection>scm:git:${custom.gitpublic.url}fractions.git</developerConnection>
-		<url>scm:git:${custom.gitpublic.url}fractions.git</url>
+		<connection>scm:git:git@anrisoftware.com:fractions.git</connection>
+		<developerConnection>scm:git:git@anrisoftware.com:fractions.git</developerConnection>
+		<url>https://anrisoftware.com/projects/projects/fractions-parent/repository</url>
 	</scm>
 
 	<distributionManagement>
+		<site>
+			<id>anrisoftware</id>
+			<url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+		</site>
 		<repository>
-			<id>${custom.repository.anrispublic.id}</id>
-			<url>${custom.repository.root}${custom.repository.anrispublic.path}</url>
+			<id>osssonatype</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 		<snapshotRepository>
-			<id>${custom.repository.anrispublicsnapshots.id}</id>
-			<url>${custom.repository.root}${custom.repository.anrispublicsnapshots.path}</url>
+			<id>osssonatype_snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -67,46 +78,40 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-log</artifactId>
-				<version>1.18</version>
+				<version>1.20</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-				<version>1.24</version>
+				<version>1.25</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpomutils-core</artifactId>
-				<version>2.2</version>
+				<version>2.4</version>
 			</dependency>
-            <dependency>
-                <groupId>com.anrisoftware.propertiesutils</groupId>
-                <artifactId>propertiesutils-contextproperties</artifactId>
-                <version>1.12</version>
-            </dependency>
-            <dependency>
-            	<groupId>com.anrisoftware.globalpom</groupId>
-            	<artifactId>globalpomutils-math</artifactId>
-            	<version>2.2</version>
-            </dependency>
-            <!-- spi -->
-            <dependency>
-                <!-- Apache 2.0 -->
-                <groupId>org.mangosdk.spi</groupId>
-                <artifactId>spi</artifactId>
-                <version>0.2.7.r52822d</version>
-            </dependency>
-            <!-- own modules -->
-            <dependency>
-                <groupId>com.anrisoftware.fractions</groupId>
-                <artifactId>fractions-core</artifactId>
-                <version>2.5</version>
-            </dependency>
-            <dependency>
-                <groupId>com.anrisoftware.fractions</groupId>
-                <artifactId>fractions-integer</artifactId>
-                <version>2.5</version>
-            </dependency>
+			<dependency>
+				<groupId>com.anrisoftware.propertiesutils</groupId>
+				<artifactId>propertiesutils-contextproperties</artifactId>
+				<version>1.13</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.globalpom</groupId>
+				<artifactId>globalpomutils-math</artifactId>
+				<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>args4j</groupId>
+				<artifactId>args4j</artifactId>
+				<version>2.32</version>
+			</dependency>
+			<!-- spi -->
+			<dependency>
+				<!-- Apache 2.0 -->
+				<groupId>org.mangosdk.spi</groupId>
+				<artifactId>spi</artifactId>
+				<version>0.2.7.r52822d</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

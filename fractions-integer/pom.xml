@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.fractions</groupId>
 		<artifactId>fractions-parent</artifactId>
-		<version>2.5</version>
+		<version>2.6-SNAPSHOT</version>
 		<relativePath>../fractions-parent</relativePath>
 	</parent>
 
@@ -21,11 +21,26 @@
 		<url>https://www.anr-institute.com/projects/projects/fractions-integer</url>
 	</issueManagement>
 
-	<scm>
-		<connection>scm:git:${custom.gitpublic.url}fractions.git</connection>
-		<developerConnection>scm:git:${custom.gitpublic.url}fractions.git</developerConnection>
-		<url>scm:git:${custom.gitpublic.url}fractions.git</url>
-	</scm>
+    <scm>
+        <connection>scm:git:git@anrisoftware.com:fractions.git</connection>
+        <developerConnection>scm:git:git@anrisoftware.com:fractions.git</developerConnection>
+        <url>https://anrisoftware.com/projects/projects/fractions-integer/repository</url>
+    </scm>
+
+    <distributionManagement>
+        <site>
+          <id>anrisoftware</id>
+          <url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+        </site>
+        <repository>
+            <id>osssonatype</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>osssonatype_snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencies>
 
@@ -50,6 +65,7 @@
 		<dependency>
 			<groupId>com.anrisoftware.fractions</groupId>
 			<artifactId>fractions-core</artifactId>
+			<version>2.6-SNAPSHOT</version>
 		</dependency>
 
 		<!-- other dependencies -->

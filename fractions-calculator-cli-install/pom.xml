@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-calculator-cli-install</artifactId>
-	<version>2.5-SNAPSHOT</version>
+	<version>2.6-SNAPSHOT</version>
 	<name>Fractions :: Calculator Command Line Installation</name>
 	<description>Packages the fractions calculator command line interface for deployment and installation.</description>
 	<inceptionYear>2013</inceptionYear>
@@ -24,7 +24,7 @@
 		<project.custom.app.name>fractionscli</project.custom.app.name>
 		<project.custom.app.description></project.custom.app.description>
 		<project.custom.app.path>fractionscli</project.custom.app.path>
-		<project.custom.app.version>2.5</project.custom.app.version>
+		<project.custom.app.version>2.6</project.custom.app.version>
 		<project.custom.app.author.name>Erwin Müller</project.custom.app.author.name>
 		<project.custom.app.author.email>erwin.mueller@deventm.org</project.custom.app.author.email>
 		<project.custom.app.mainclass>com.anrisoftware.fractions.calculator.starter.Starter</project.custom.app.mainclass>
@@ -36,17 +36,24 @@
 	</properties>
 
 	<developers>
-		<developer>
-			<id>EM</id>
-			<name>Erwin Müller</name>
-			<organization>Advanced Natural Research Insitute GmbH</organization>
-			<email>erwin.mueller@deventm.org</email>
-			<roles>
-				<role>Owner</role>
-				<role>Developer</role>
-			</roles>
-		</developer>
+        <developer>
+            <id>EM</id>
+            <name>Erwin Müller</name>
+            <email>erwin.mueller@deventm.org</email>
+            <url>http://www.mueller-public.de/</url>
+            <organization>Advanced Natural Research Institute</organization>
+            <organizationUrl>https://anrisoftware.com</organizationUrl>
+            <roles>
+                <role>Owner</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
 	</developers>
+
+    <organization>
+        <name>Advanced Natural Research Institute</name>
+        <url>https://anrisoftware.com</url>
+    </organization>
 
 	<licenses>
 		<license>
@@ -61,39 +68,43 @@
 		<url>https://anrisoftware.com/projects/projects/fractions-calculator-cli-install</url>
 	</issueManagement>
 
-	<scm>
-		<connection>scm:git:${custom.gitpublic.url}fractions.git</connection>
-		<developerConnection>scm:git:${custom.gitpublic.url}fractions.git</developerConnection>
-		<url>scm:git:${custom.gitpublic.url}fractions.git</url>
-	</scm>
+    <scm>
+        <connection>scm:git:git@anrisoftware.com:fractions.git</connection>
+        <developerConnection>scm:git:git@anrisoftware.com:fractions.git</developerConnection>
+        <url>https://anrisoftware.com/projects/projects/fractions-calculator-cli-install/repository</url>
+    </scm>
 
-	<distributionManagement>
-		<repository>
-			<id>${custom.repository.anrispublic.id}</id>
-			<url>${custom.repository.root}${custom.repository.anrispublic.path}</url>
-		</repository>
-		<snapshotRepository>
-			<id>${custom.repository.anrispublicsnapshots.id}</id>
-			<url>${custom.repository.root}${custom.repository.anrispublicsnapshots.path}</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <distributionManagement>
+        <site>
+            <id>anrisoftware</id>
+            <url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+        </site>
+        <repository>
+            <id>osssonatype</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>osssonatype_snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-integer</artifactId>
-				<version>2.5</version>
+				<version>2.6-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-core</artifactId>
-				<version>2.5</version>
+				<version>2.6-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-calculator-cli</artifactId>
-				<version>2.5</version>
+				<version>2.6-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

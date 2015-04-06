@@ -1,0 +1,36 @@
+~~
+~~ Copyright 2011-2015 Erwin Müller <erwin.mueller@deventm.org>
+~~
+~~ This file is part of fractions-parent.
+~~
+~~ fractions-parent is free software: you can redistribute it and/or modify it
+~~ under the terms of the GNU General Public License as published by the Free
+~~ Software Foundation, either version 3 of the License, or (at your option) any
+~~ later version.
+~~
+~~ fractions-parent is distributed in the hope that it will be useful, but
+~~ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+~~ FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+~~ details.
+~~
+~~ You should have received a copy of the GNU General Public License along with
+~~ fractions-parent. If not, see <http://www.gnu.org/licenses/>.
+~~
+
+Description
+
+  Manages the dependencies for the Fractions project modules.
+
+SCM
+
+* Main
+
+  * {{{https://anrisoftware.com/projects/projects/fractions-parent/repository}Repository}}
+
+  * git@anrisoftware.com:fractions.git
+
+* GitHub
+
+  * {{{https://github.com/devent/fractions}Repository}}
+
+  * git@github.com:devent/fractions.git
