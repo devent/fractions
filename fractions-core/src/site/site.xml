@@ -49,7 +49,7 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
 			<item name="Javadoc" href="https://anrisoftware.com/javadoc/com.anrisoftware.fractions/fractions-core/apidocs/index.html" />
 			<item name="Source code" href="https://anrisoftware.com/projects/projects/fractions-core/repository" />
             <item name="Source code (Github)" href="https://github.com/devent/fractions" />
-			<item name="Issues" href="https://anrisoftware.com/projects/projects/fractions-integer/issues" />
+			<item name="Issues" href="https://anrisoftware.com/projects/projects/fractions-core/issues" />
 		</menu>
 		<menu ref="parent" />
 		<menu ref="modules" />
