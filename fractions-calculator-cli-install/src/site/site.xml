@@ -52,8 +52,8 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
 			<item name="Issues" href="https://anrisoftware.com/projects/projects/fractions-calculator-cli-install/issues" />
 		</menu>
         <menu name="Releases">
-            <item name="fractions-calculator-cli-install-2.6.jar" href="https://anrisoftware.com/projects/attachments/download/372/fractions-calculator-cli-install-2.6.jar" />
-            <item name="fractions-calculator-cli-install-2.6-single-jar.jar" href="https://anrisoftware.com/projects/attachments/download/373/fractions-calculator-cli-install-2.6-single-jar.jar" />
+            <item name="fractions-calculator-cli-install-2.6.jar" href="https://anrisoftware.com/l/1w" />
+            <item name="fractions-calculator-cli-install-2.6-single-jar.jar" href="https://anrisoftware.com/l/1x" />
         </menu>
 		<menu ref="parent" />
 		<menu ref="modules" />
