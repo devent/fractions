@@ -1,0 +1,144 @@
+~~
+~~ Copyright 2013-2015 Erwin Müller <erwin.mueller@deventm.org>
+~~
+~~ This file is part of fractions-calculator-cli.
+~~
+~~ fractions-calculator-cli is free software: you can redistribute it and/or modify it
+~~ under the terms of the GNU General Public License as published by the Free
+~~ Software Foundation, either version 3 of the License, or (at your option) any
+~~ later version.
+~~
+~~ fractions-calculator-cli is distributed in the hope that it will be useful, but
+~~ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+~~ FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+~~ details.
+~~
+~~ You should have received a copy of the GNU General Public License along with
+~~ fractions-calculator-cli. If not, see <http://www.gnu.org/licenses/>.
+~~
+
+Description
+
+  The command line application to calculates the continued fraction from a
+specified value. To start the application there are scripts installed in
+the bin/ directory. For Linux it is the bin/linux/run.sh script, for Windows
+it is the bin/windows/run.bat script. The script can be run from anywhere, i.e.:
+
+---
+$ bin/linux/fractionscli.sh
+---
+
+* Debug
+
+  A version for debug purpose is in the same directory as the start script and
+is run in the same matter, i.e.:
+
+---
+$ bin/linux/fractionscli-debug.sh
+---
+
+* Synopsis
+
+---
+fractionscli [-service service] [-value-format|-f format]
+    (([-max maximum] -denominators|-d denominators)|
+    (-fraction-a|-a denominators -fraction-b|-b denominators)|_value_)
+---
+
+* Description
+
+  Prints the calculated continued fractions from the specified value or
+prints the calculated value from the specified denominators. Different
+calculation algorithms can be chosen to calculate the continued fraction.
+If two continued fractions are specified then those are compared for inequality.
+
+* Options
+
+<<<-service service>>>
+
+  Sets the calculation algorithm specified by the service name.
+Defaults to the “IntegerFraction” algorithm.
+
+  * <<<"IntegerFraction">>> standard algorithm, z=1.0; n0..ni ∈ ℕ
+
+  * <<<"IntegerNoMinusOneFraction>>>
+
+  * <<<"Mod3Fraction>>>
+
+<<<-max maximum>>>
+
+  Sets the maximum count of denominators for the value. Defaults to
+ten (10) denominators.
+
+<<<-value-format|-f format>>>
+
+  Sets the value format to parse the denominators and to format the calculated
+value of the continued fraction. Defaults to the <<<NumberFormat#getInstance()>>>
+formatter. See DecimalFormat
+
+<<<-denominators|-d denominators>>>
+
+  If the denominators are specified then the value of the continued fraction
+with the specified denominators is printed.
+
+<<<-fraction-a|-a denominators -fraction-b|-b denominators>>>
+
+  Sets the denominators for the first and second continued fraction to be
+compared for inequality and prints the inequality:
+
+  * -1 if a\<b
+
+  * 0 if a=b
+
+  * 1 if a\>b
+
+<<<value>>>
+
+  If the value is specified then the continued fraction is calculated from
+this value and the denominators are printed. Either denominators or value
+can be specified at the same time.
+
+* Examples
+
+---
+$ fractionscli 62.8908766605
+---
+
+  calculates and prints out the continued fraction of the value with a
+maximum depth of ten denominators;
+
+---
+$ fractionscli -max 6 62.8908766605
+---
+
+  calculates and prints out the continued fraction of the value with a
+maximum depth of six denominators;
+
+---
+$ fractionscli -service IntegerFraction -value-format 0.###### -denominators
+"[63;-9,-6,-10,-34,2]"
+---
+
+  calculates and prints out the value of the continued fraction from the
+specified denominators;
+
+---
+$ fractionscli -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,20]"
+---
+
+  compares and prints out the inequality the first and second continued
+fraction from the specified denominators;
+
+SCM
+
+* Main
+
+  * {{{https://anrisoftware.com/projects/projects/fractions-calculator-cli/repository}Repository}}
+
+  * git@anrisoftware.com:fractions.git
+
+* GitHub
+
+  * {{{https://github.com/devent/fractions}Repository}}
+
+  * git@github.com:devent/fractions.git
