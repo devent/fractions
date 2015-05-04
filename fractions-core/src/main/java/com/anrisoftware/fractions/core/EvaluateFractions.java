@@ -20,7 +20,7 @@ package com.anrisoftware.fractions.core;
 
 /**
  * Calculate the denominators of a continued fraction from the value.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -29,14 +29,41 @@ public interface EvaluateFractions {
     /**
      * Calculate the denominators of a continued fraction from the specified
      * value.
-     * 
+     *
      * @param value
-     *            the value.
-     * 
+     *            the {@link Double} value.
+     *
+     * @param z
+     *            the partial {@link Double} numerator.
+     *
      * @param max
-     *            the maximum count of denominators for the continued fraction.
-     * 
-     * @return the denominators.
+     *            the maximum {@link Integer} count of the denominators.
+     *
+     * @return the denominators {@link Integer} array.
+     *
+     * @since 2.7
      */
-    int[] evaluate(double value, int max);
+    int[] evaluate(double value, double z, int max);
+
+    /**
+     * Calculate the denominators of a continued fraction from the specified
+     * value.
+     *
+     * @param value
+     *            the {@link Double} value.
+     *
+     * @param z
+     *            the partial {@link Double} numerator.
+     *
+     * @param d0
+     *            the denominator n0 {@link Integer} value.
+     *
+     * @param max
+     *            the maximum {@link Integer} count of the denominators.
+     *
+     * @return the denominators {@link Integer} array.
+     *
+     * @since 2.7
+     */
+    int[] evaluate(double value, double z, int d0, int max);
 }

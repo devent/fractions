@@ -32,7 +32,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 /**
  * Implements denominator methods and calculates the value of this continued
  * fraction.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -50,11 +50,11 @@ public abstract class AbstractContinuedFraction extends Number implements
 
     /**
      * Sets the partial numerator and the denominators.
-     * 
+     *
      * @param z
      *            the partial numerator for all denominators of this continued
      *            fraction.
-     * 
+     *
      * @param denos
      *            the array containing the denominator values.
      */
@@ -67,26 +67,58 @@ public abstract class AbstractContinuedFraction extends Number implements
 
     /**
      * Calculates the denominators from the specified value.
-     * 
+     *
      * @param evaluate
      *            the {@link EvaluateFractions} that calculated the denominators
      *            of the continued fraction.
-     * 
+     *
      * @param value
-     *            the value.
-     * 
+     *            the {@link Double} value.
+     *
      * @param z
-     *            the partial numerator for all denominators of this continued
-     *            fraction.
-     * 
+     *            the partial {@link Double} numerator for all denominators of
+     *            this continued fraction.
+     *
      * @param max
-     *            the maximum count of the denominators.
+     *            the maximum {@link Integer} count of the denominators.
      */
     protected AbstractContinuedFraction(EvaluateFractions evaluate,
             double value, double z, int max) {
         this.value = value;
         this.z = z;
-        this.denominators = new TIntArrayList(evaluate.evaluate(value, max));
+        this.denominators = new TIntArrayList(evaluate.evaluate(value, z, max));
+        this.fractionValue = calculateValue();
+    }
+
+    /**
+     * Calculates the denominators from the specified value.
+     *
+     * @param evaluate
+     *            the {@link EvaluateFractions} that calculated the denominators
+     *            of the continued fraction.
+     *
+     * @param value
+     *            the {@link Double} value.
+     *
+     * @param z
+     *            the partial {@link Double} numerator for all denominators of
+     *            this continued fraction.
+     *
+     * @param d0
+     *            the denominator n0 {@link Integer} value of the continued
+     *            fraction.
+     *
+     * @param max
+     *            the maximum {@link Integer} count of the denominators.
+     *
+     * @since 2.7
+     */
+    protected AbstractContinuedFraction(EvaluateFractions evaluate,
+            double value, double z, int d0, int max) {
+        this.value = value;
+        this.z = z;
+        int[] d = evaluate.evaluate(value, z, d0, max);
+        this.denominators = new TIntArrayList(d);
         this.fractionValue = calculateValue();
     }
 
@@ -97,7 +129,7 @@ public abstract class AbstractContinuedFraction extends Number implements
         for (int i = lastIndex - 1; i > 0; i--) {
             x = z / (get(i) + x);
         }
-        x = get(0) / z + x;
+        x = get(0) + x;
         return x;
     }
 
@@ -189,13 +221,13 @@ public abstract class AbstractContinuedFraction extends Number implements
     /**
      * Creates the continued fraction with the specified partial numerator and
      * denominators.
-     * 
+     *
      * @param z
      *            the partial numerator for all denominators.
-     * 
+     *
      * @param denos
      *            the array containing the denominator values.
-     * 
+     *
      * @return the {@link ContinuedFraction}.
      */
     protected abstract ContinuedFraction createFraction(double z, int[] denos);
@@ -233,7 +265,7 @@ public abstract class AbstractContinuedFraction extends Number implements
     private StringBuilder appendZ(StringBuilder b) {
         double z = getZ();
         if (z != 1.0) {
-            b.append(z).append(";");
+            b.append("z=").append(z).append(";");
         }
         return b;
     }

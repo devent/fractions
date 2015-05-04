@@ -31,7 +31,7 @@ import com.google.inject.assistedinject.AssistedInject;
 
 /**
  * Mod3 continued fraction.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -56,31 +56,84 @@ public final class Mod3Fraction extends AbstractContinuedFraction {
      * @see Mod3FractionFactory#fromValue(double, int)
      */
     @AssistedInject
-    Mod3Fraction(final Mod3Round round, @Assisted double value,
-            @Assisted int max) {
-        super(new EvaluateFractions() {
-
-            @Override
-            public int[] evaluate(double value, int max) {
-                return evaluateDenos(value, max, round);
-            }
-        }, value, 1.0, max);
+    Mod3Fraction(Mod3Round round, @Assisted double value, @Assisted int max) {
+        this(round, value, Z_DEFAULT, max);
     }
 
-    private static int[] evaluateDenos(double value, int max, Mod3Round round) {
+    /**
+     * @see Mod3FractionFactory#fromValue(double, double, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    Mod3Fraction(Mod3Round round, @Assisted("value") double value,
+            @Assisted("z") double z, @Assisted int max) {
+        super(createEvaluateFractions(round), value, z, max);
+    }
+
+    /**
+     * @see Mod3FractionFactory#fromValue(double, int, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    Mod3Fraction(Mod3Round round, @Assisted("value") double value,
+            @Assisted("d0") int d0, @Assisted("max") int max) {
+        this(round, value, Z_DEFAULT, d0, max);
+    }
+
+    /**
+     * @see Mod3FractionFactory#fromValue(double, double, int, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    Mod3Fraction(Mod3Round round, @Assisted("value") double value,
+            @Assisted("z") double z, @Assisted("d0") int d0,
+            @Assisted("max") int max) {
+        super(createEvaluateFractions(round), value, z, d0, max);
+    }
+
+    private static EvaluateFractions createEvaluateFractions(
+            final Mod3Round round) {
+        return new EvaluateFractions() {
+
+            @Override
+            public int[] evaluate(double value, double z, int max) {
+                return evaluateDenos(value, z, max, round);
+            }
+
+            @Override
+            public int[] evaluate(double value, double z, int d0, int max) {
+                return evaluateDenos(value, z, d0, max, round);
+            }
+        };
+    }
+
+    private static int[] evaluateDenos(final double value, final double z,
+            final int max, Mod3Round round) {
         TIntList denos = new TIntArrayList(max);
         double logvalue = value;
         denos.add(round.round(logvalue));
-        return calculateDenos(denos, round, logvalue, Z_DEFAULT, max).toArray();
+        return calculateDenos(denos, round, logvalue, z, max).toArray();
+    }
+
+    private static int[] evaluateDenos(final double value, final double z,
+            final int d0, final int max, Mod3Round round) {
+        TIntList denos = new TIntArrayList(max);
+        double logvalue = value;
+        denos.add(d0);
+        return calculateDenos(denos, round, logvalue, z, max).toArray();
     }
 
     private static TIntList calculateDenos(TIntList denos, Mod3Round round,
             double logvalue, double z, int max) {
         int lmax = max;
-        if (denos.get(0) % 3 != 0) {
+        int n0 = denos.get(0);
+        if (n0 % 3 != 0) {
             lmax = 0;
         }
-        int nenner = denos.get(0);
+        int nenner = n0;
         int limes = MAX_LIMES;
         double dn = 0.0;
         int level = 1;

@@ -51,6 +51,29 @@ class IntegerFractionTest {
     }
 
     @Test
+    void "calculate continued fractions with specified n0"() {
+        int max = 9
+        n0_cases.eachWithIndex { it, i ->
+            int[] expectedDenos = it.denos
+            def fraction = factory.fromValue(it.value, it.z, it.n0 as int, max)
+            log.info "{}. z: {} n0: {} value: {} fraction: {}", i, it.z, it.n0, it.value, fraction
+            assert expectedDenos.length == fraction.size()
+            assert fraction.equals(factory.create(it.z, expectedDenos))
+        }
+    }
+
+    @Test
+    void "calculate continued fractions with d0"() {
+        int max = 9
+        double value = 6
+        int d0 = 0
+        def fractiond0 = factory.fromValue(value, d0, max)
+        log.info "fraction d0={}: {}", d0, fractiond0
+        def fraction = factory.fromValue(value, max)
+        log.info "fraction: {}", fraction
+    }
+
+    @Test
     void "compare continued fractions a<b"() {
         double z = 1.0
         def a = factory.create(z, [1, 8, 11] as int[])
@@ -154,6 +177,8 @@ class IntegerFractionTest {
     static inputs = new DataInputs().run()
 
     static outputs = new IntegerFractionData().run()
+
+    static n0_cases = new n0_cases().run()
 
     static Injector injector
 

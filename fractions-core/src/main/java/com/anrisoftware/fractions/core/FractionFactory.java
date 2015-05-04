@@ -18,9 +18,11 @@
  */
 package com.anrisoftware.fractions.core;
 
+import com.google.inject.assistedinject.Assisted;
+
 /**
  * Factory to create continued fraction.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -29,13 +31,13 @@ public interface FractionFactory {
     /**
      * Create continued fraction from the partial numerator and the
      * denominators.
-     * 
+     *
      * @param z
-     *            the partial numerator.
-     * 
+     *            the partial {@link Double} numerator.
+     *
      * @param denos
-     *            the array of denominator values.
-     * 
+     *            the array of denominator {@link Integer} values.
+     *
      * @return the {@link ContinuedFraction}.
      */
     ContinuedFraction create(double z, int[] denos);
@@ -44,14 +46,79 @@ public interface FractionFactory {
      * Creates continued fraction from the specified value. The partial
      * numerator for all denominators {@code z} of this continued fraction will
      * be 1.
-     * 
+     *
      * @param value
-     *            the value.
-     * 
+     *            the {@link Double} value.
+     *
      * @param max
-     *            the maximum count of the denominators.
-     * 
+     *            the maximum {@link Integer} count of the denominators.
+     *
      * @return the {@link ContinuedFraction}.
      */
     ContinuedFraction fromValue(double value, int max);
+
+    /**
+     * Creates continued fraction from the specified value.
+     *
+     * @param value
+     *            the {@link Double} value.
+     *
+     * @param z
+     *            the partial {@link Double} numerator.
+     *
+     * @param max
+     *            the maximum {@link Integer} count of the denominators.
+     *
+     * @since 2.7
+     *
+     * @return the {@link ContinuedFraction}.
+     */
+    ContinuedFraction fromValue(@Assisted("value") double value,
+            @Assisted("z") double z, int max);
+
+    /**
+     * Creates continued fraction from the specified value. The partial
+     * numerator for all denominators {@code z} of this continued fraction will
+     * be 1.
+     *
+     * @param value
+     *            the {@link Double} value.
+     *
+     * @param d0
+     *            the denominator n0 {@link Integer} value.
+     *
+     * @param max
+     *            the maximum {@link Integer} count of the denominators.
+     *
+     * @return the {@link ContinuedFraction}.
+     *
+     * @since 2.7
+     */
+    ContinuedFraction fromValue(@Assisted("value") double value,
+            @Assisted("d0") int d0, @Assisted("max") int max);
+
+    /**
+     * Creates continued fraction from the specified value. The partial
+     * numerator for all denominators {@code z} of this continued fraction will
+     * be 1.
+     *
+     * @param value
+     *            the {@link Double} value.
+     *
+     * @param z
+     *            the partial {@link Double} numerator.
+     *
+     * @param d0
+     *            the denominator n0 {@link Integer} value.
+     *
+     * @param max
+     *            the maximum {@link Integer} count of the denominators.
+     *
+     * @return the {@link ContinuedFraction}.
+     *
+     * @since 2.7
+     */
+    ContinuedFraction fromValue(@Assisted("value") double value,
+            @Assisted("z") double z, @Assisted("d0") int d0,
+            @Assisted("max") int max);
 }

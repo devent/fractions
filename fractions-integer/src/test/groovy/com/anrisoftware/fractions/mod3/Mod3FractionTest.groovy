@@ -18,11 +18,12 @@
  */
 package com.anrisoftware.fractions.mod3
 
+import static org.apache.commons.math3.util.FastMath.*
 import groovy.util.logging.Slf4j
 
 import org.junit.BeforeClass
+import org.junit.Test
 
-import com.anrisoftware.fractions.integer.DataInputs
 import com.google.inject.Guice
 import com.google.inject.Injector
 
@@ -35,36 +36,50 @@ import com.google.inject.Injector
 @Slf4j
 class Mod3FractionTest {
 
-	//@Test
-	void "calculate continued fractions"() {
-		int max = 9
-		double z = 1.0
-		inputs.eachWithIndex { value, i ->
-			int[] denos = outputs[i] as int[]
-			def fraction = factory.fromValue(value, max)
-			log.info "{}. fraction: {}", i, fraction
-			assert outputs[i].size() == fraction.size()
-			if (!fraction.equals(factory.create(z, denos))) {
-				log.warn "{}. fraction: {}; expected denominators: {}", i, fraction, outputs[i]
-			}
-		}
-	}
+    @Test
+    void "calculate continued fractions"() {
+        int max = 9
+        double z = 1.0
+        inputs.eachWithIndex { value, i ->
+            int[] denos = outputsZ1[i] as int[]
+            def fraction = factory.fromValue(value, max)
+            log.info "{}. value: {} fraction: {}", i, value, fraction
+            assert outputsZ1[i].size() == fraction.size()
+            if (!fraction.equals(factory.create(z, denos))) {
+                log.warn "{}. fraction: {}; expected denominators: {}", i, fraction, outputsZ1[i]
+            }
+        }
+    }
 
-	static inputs = new DataInputs().run()
+    @Test
+    void "calculate continued fractions with specified n0"() {
+        int max = 9
+        n0_cases.eachWithIndex { it, i ->
+            int[] expectedDenos = it.denos
+            def fraction = factory.fromValue(it.value, it.z, it.n0 as int, max)
+            log.info "{}. z: {} n0: {} value: {} fraction: {}", i, it.z, it.n0, it.value, fraction
+            assert expectedDenos.length == fraction.size()
+            assert fraction.equals(factory.create(it.z, expectedDenos))
+        }
+    }
 
-	static outputs = new Mod3FractionData().run()
+    static inputs = new DataInputs().run()
 
-	static Injector injector
+    static n0_cases = new n0_cases().run()
 
-	static Mod3FractionFactory factory
+    static outputsZ1 = new Mod3FractionsZ1Data().run()
 
-	@BeforeClass
-	static void beforeTest() {
-		injector = createInjector()
-		factory = injector.getInstance Mod3FractionFactory
-	}
+    static Injector injector
 
-	static Injector createInjector() {
-		Guice.createInjector new Mod3FractionsModule()
-	}
+    static Mod3FractionFactory factory
+
+    @BeforeClass
+    static void beforeTest() {
+        injector = createInjector()
+        factory = injector.getInstance Mod3FractionFactory
+    }
+
+    static Injector createInjector() {
+        Guice.createInjector new Mod3FractionsModule()
+    }
 }

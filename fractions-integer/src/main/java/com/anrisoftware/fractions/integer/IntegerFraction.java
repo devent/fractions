@@ -41,6 +41,8 @@ import com.google.inject.assistedinject.AssistedInject;
 @SuppressWarnings("serial")
 public final class IntegerFraction extends AbstractContinuedFraction {
 
+    private static final double DEFAULT_Z = 1.0;
+
     @Inject
     private IntegerFractionFactory factory;
 
@@ -57,12 +59,48 @@ public final class IntegerFraction extends AbstractContinuedFraction {
      */
     @AssistedInject
     IntegerFraction(@Assisted double value, @Assisted int max) {
-        super(new EvaluateFractions() {
+        this(value, 1.0, max);
+    }
+
+    /**
+     * @see IntegerFractionFactory#fromValue(double, double, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    IntegerFraction(@Assisted("value") final double value,
+            @Assisted("z") final double z, @Assisted final int max) {
+        super(createEvaluateFractions(), value, z, max);
+    }
+
+    /**
+     * @see IntegerFractionFactory#fromValue(double, int, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    IntegerFraction(@Assisted("value") double value, @Assisted("d0") int d0,
+            @Assisted("max") int max) {
+        this(value, 1.0, d0, max);
+    }
+
+    /**
+     * @see IntegerFractionFactory#fromValue(double, int, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    IntegerFraction(@Assisted("value") double value, @Assisted("z") double z,
+            @Assisted("d0") int d0, @Assisted("max") int max) {
+        super(createEvaluateFractions(), value, z, d0, max);
+    }
+
+    private static EvaluateFractions createEvaluateFractions() {
+        return new EvaluateFractions() {
 
             @Override
-            public int[] evaluate(double value, int max) {
+            public int[] evaluate(double value, double z, int max) {
                 TIntList denos = new TIntArrayList(max);
-                int k = 1;
                 double y = fix(value);
                 double r = value - y;
                 if (r > 0.5) {
@@ -70,26 +108,46 @@ public final class IntegerFraction extends AbstractContinuedFraction {
                     y = y + 1.0;
                 }
                 denos.add((int) y);
-                double relativeError = abs(r / value);
-                double s;
-                while (log(relativeError) > -16.0 && k < max) {
-                    k++;
-                    s = 1 / r;
-                    y = fix(s);
-                    r = s - y;
-                    if (r > 0.5) {
-                        r -= 1.0;
-                        y += 1.0;
-                    } else if (r < -0.5) {
-                        r += 1.0;
-                        y -= 1.0;
-                    }
-                    relativeError = abs(r / value);
-                    denos.add((int) y);
-                }
-                return denos.toArray();
+                return evaluate0(value, DEFAULT_Z, max, denos, y, r);
             }
-        }, value, 1.0, max);
+
+            @Override
+            public int[] evaluate(double value, double z, int d0, int max) {
+                TIntList denos = new TIntArrayList(max);
+                double y = d0;
+                double r = value - y;
+                if (r > 0.5) {
+                    r = r - 1.0;
+                    y = y + 1.0;
+                }
+                denos.add(d0);
+                return evaluate0(value, z, max, denos, y, r);
+            }
+
+        };
+    }
+
+    private static int[] evaluate0(final double value, final double z,
+            final int max, TIntList denos, double y, double r) {
+        double relativeError = abs(r / value);
+        double s;
+        int k = 1;
+        while (log(relativeError) > -16.0 && k < max) {
+            k++;
+            s = z / r;
+            y = fix(s);
+            r = s - y;
+            if (r > 0.5) {
+                r -= 1.0;
+                y += 1.0;
+            } else if (r < -0.5) {
+                r += 1.0;
+                y -= 1.0;
+            }
+            relativeError = abs(r / value);
+            denos.add((int) y);
+        }
+        return denos.toArray();
     }
 
     @Override

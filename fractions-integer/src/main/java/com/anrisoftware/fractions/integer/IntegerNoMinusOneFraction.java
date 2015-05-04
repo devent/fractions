@@ -37,7 +37,7 @@ import com.google.inject.assistedinject.AssistedInject;
  * Continued fraction with integer number denominators. The denominators of this
  * continued fraction cannot be of value -1. The partial numerator for all
  * denominators of this continued fraction will be 1.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -48,7 +48,7 @@ public final class IntegerNoMinusOneFraction extends AbstractContinuedFraction {
     private IntegerNoMinusOneFractionFactory factory;
 
     /**
-     * @see IntegerFractionFactory#create(double, int[])
+     * @see IntegerNoMinusOneFractionFactory#create(double, int[])
      */
     @AssistedInject
     IntegerNoMinusOneFraction(@Assisted double z, @Assisted int[] denos) {
@@ -56,23 +56,53 @@ public final class IntegerNoMinusOneFraction extends AbstractContinuedFraction {
     }
 
     /**
-     * Calculates the denominators from the specified value.
-     * 
-     * @param value
-     *            the value.
-     * 
-     * @param maxDenominators
-     *            the maximum count of the denominators.
+     * @see IntegerNoMinusOneFractionFactory#fromValue(double, int)
      */
     @AssistedInject
-    IntegerNoMinusOneFraction(@Assisted double value,
-            @Assisted int maxDenominators) {
-        super(new EvaluateFractions() {
+    IntegerNoMinusOneFraction(@Assisted double value, @Assisted int max) {
+        this(value, 1.0, max);
+    }
+
+    /**
+     * @see IntegerNoMinusOneFractionFactory#fromValue(double, double, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    IntegerNoMinusOneFraction(@Assisted("value") final double value,
+            @Assisted("z") final double z, @Assisted final int max) {
+        super(createEvaluateFractions(), value, z, max);
+    }
+
+    /**
+     * @see IntegerNoMinusOneFractionFactory#fromValue(double, int, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    IntegerNoMinusOneFraction(@Assisted("value") double value,
+            @Assisted("d0") int d0, @Assisted("max") int max) {
+        this(value, 1.0, d0, max);
+    }
+
+    /**
+     * @see IntegerNoMinusOneFractionFactory#fromValue(double, int, int)
+     *
+     * @since 2.7
+     */
+    @AssistedInject
+    IntegerNoMinusOneFraction(@Assisted("value") double value,
+            @Assisted("z") double z, @Assisted("d0") int d0,
+            @Assisted("max") int max) {
+        super(createEvaluateFractions(), value, z, d0, max);
+    }
+
+    private static EvaluateFractions createEvaluateFractions() {
+        return new EvaluateFractions() {
 
             @Override
-            public int[] evaluate(double value, int max) {
+            public int[] evaluate(double value, double z, int max) {
                 TIntList denos = new TIntArrayList(max);
-                int k = 1;
                 double y = round(value);
                 double r = value - y;
                 if (r > 0.5) {
@@ -80,26 +110,46 @@ public final class IntegerNoMinusOneFraction extends AbstractContinuedFraction {
                     y = y + 1.0;
                 }
                 denos.add((int) y);
-                double relativeError = abs(r / value);
-                double s;
-                while (log(relativeError) > -16.0 && k < max) {
-                    k++;
-                    s = 1 / r;
-                    y = fix(s);
-                    r = s - y;
-                    if (r > 0.5) {
-                        r -= 1.0;
-                        y += 1.0;
-                    } else if (r < -0.5) {
-                        r += 1.0;
-                        y -= 1.0;
-                    }
-                    relativeError = abs(r / value);
-                    denos.add((int) y);
-                }
-                return denos.toArray();
+                return evaluate0(value, max, denos, y, r);
             }
-        }, value, 1, maxDenominators);
+
+            @Override
+            public int[] evaluate(double value, double z, int d0, int max) {
+                TIntList denos = new TIntArrayList(max);
+                double y = d0;
+                double r = value - y;
+                if (r > 0.5) {
+                    r = r - 1.0;
+                    y = y + 1.0;
+                }
+                denos.add(d0);
+                return evaluate0(value, max, denos, y, r);
+            }
+
+        };
+    }
+
+    private static int[] evaluate0(final double value, final int max,
+            TIntList denos, double y, double r) {
+        double relativeError = abs(r / value);
+        double s;
+        int k = 1;
+        while (log(relativeError) > -16.0 && k < max) {
+            k++;
+            s = 1 / r;
+            y = fix(s);
+            r = s - y;
+            if (r > 0.5) {
+                r -= 1.0;
+                y += 1.0;
+            } else if (r < -0.5) {
+                r += 1.0;
+                y -= 1.0;
+            }
+            relativeError = abs(r / value);
+            denos.add((int) y);
+        }
+        return denos.toArray();
     }
 
     @Override
