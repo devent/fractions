@@ -35,7 +35,7 @@ import com.google.inject.Injector;
 /**
  * Parses the command line arguments and print the calculated continued
  * fraction.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -58,10 +58,10 @@ public class App {
     /**
      * Calculate the continued fraction from the specified command line
      * arguments.
-     * 
+     *
      * @param args
      *            the command line arguments.
-     * 
+     *
      * @throws AppException
      *             if there was an error calculate the continued fraction.
      */
@@ -105,7 +105,12 @@ public class App {
         FractionService service = model.getService();
         FractionFactory factory = service.getFactory(injector);
         ContinuedFraction result;
-        result = service.getFactory(injector).fromValue(value, max);
+        if (model.getD0value() == null) {
+            result = service.getFactory(injector).fromValue(value, max);
+        } else {
+            int d0 = model.getD0value();
+            result = service.getFactory(injector).fromValue(value, d0, max);
+        }
         NumberFormat format = model.getValueFormat();
         FractionFormat fractionFormat = formatFactory.create(factory);
         fractionFormat.setNumberFormat(format);
@@ -122,7 +127,7 @@ public class App {
 
     /**
      * Returns the output of the application.
-     * 
+     *
      * @return the output or {@code null}.
      */
     public String getOutput() {

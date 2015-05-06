@@ -84,6 +84,21 @@ class AppTest {
     }
 
     @Test
+    void "caluclate continued fraction with d0"() {
+        String d0 = "0"
+        String value = "62.8908766605"
+        String[] args = [
+            "-d0",
+            d0,
+            value
+        ]
+        log.info "Arguments: '{}'", Arrays.toString(args)
+        App app = injector.getInstance App
+        app.doStart args
+        assert app.getOutput() == "[0;0,62,-9,-6,-10,-34,2,16,-4]"
+    }
+
+    @Test
     void "caluclate mod3 continued fraction"() {
         String service = "Mod3Fraction"
         String max = "6"

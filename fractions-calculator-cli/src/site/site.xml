@@ -47,9 +47,10 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
 			<item name="Home" href="/index.html" />
 			<item name="Download" href="https://anrisoftware.com/l/1u" />
 			<item name="Javadoc" href="https://anrisoftware.com/javadoc/com.anrisoftware.fractions/fractions-calculator-cli/apidocs/index.html" />
-			<item name="Source code" href="https://anrisoftware.com/projects/projects/fractions-calculator-cli/repository" />
+			<item name="Source code" href="https://anrisoftware.com/l/3b" />
             <item name="Source code (Github)" href="https://github.com/devent/fractions" />
-			<item name="Issues" href="https://anrisoftware.com/projects/projects/fractions-calculator-cli/issues" />
+            <item name="Roadmap" href="https://anrisoftware.com/l/3c" />
+			<item name="Issues" href="https://anrisoftware.com/l/3d" />
 		</menu>
 		<menu ref="parent" />
 		<menu ref="modules" />

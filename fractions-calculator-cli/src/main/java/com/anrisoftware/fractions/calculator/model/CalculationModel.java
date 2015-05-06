@@ -25,7 +25,7 @@ import com.anrisoftware.fractions.core.FractionService;
 
 /**
  * Calculation model.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -33,49 +33,56 @@ public interface CalculationModel {
 
     /**
      * Returns the value of the continued fraction.
-     * 
+     *
      * @return the {@link Double} value or {@code null}.
      */
     Double getValue();
 
     /**
+     * Returns the denominator n0 of the continued fraction.
+     *
+     * @return the denominator n0 {@link Integer} value or {@code null}.
+     */
+    Integer getD0value();
+
+    /**
      * Returns the maximum denominators for the continued fractions.
-     * 
+     *
      * @return the maximum denominators.
      */
     int getMax();
 
     /**
      * Returns the fraction service.
-     * 
+     *
      * @return the {@link FractionService}.
      */
     FractionService getService();
 
     /**
      * Returns the the continued fraction to calculate a value from.
-     * 
+     *
      * @return the {@link ContinuedFraction} or {@code null}.
      */
     ContinuedFraction getFraction();
 
     /**
      * Returns the first continued fraction for comparison.
-     * 
+     *
      * @return the {@link ContinuedFraction} or {@code null}.
      */
     ContinuedFraction getFractionA();
 
     /**
      * Returns the second continued fraction for comparison.
-     * 
+     *
      * @return the {@link ContinuedFraction} or {@code null}.
      */
     ContinuedFraction getFractionB();
 
     /**
      * Returns the value number formatter.
-     * 
+     *
      * @return the {@link NumberFormat}.
      */
     NumberFormat getValueFormat();

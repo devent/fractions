@@ -25,7 +25,7 @@ import org.kohsuke.args4j.Option;
 
 /**
  * Parses command line arguments.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -35,6 +35,8 @@ class CalculationArgs {
     private CalculationArgsLogger log;
 
     private int max;
+
+    private Integer d0value;
 
     private String value;
 
@@ -51,6 +53,7 @@ class CalculationArgs {
     CalculationArgs() {
         this.valueFormat = "#.#########";
         this.max = 10;
+        this.d0value = null;
         this.denominators = null;
         this.fractionA = null;
         this.fractionB = null;
@@ -68,10 +71,10 @@ class CalculationArgs {
 
     /**
      * Parses the service command line argument.
-     * 
+     *
      * @param service
      *            the service name.
-     * 
+     *
      * @throws ArgsException
      *             if the continued fraction service could not be found for the
      *             specified command line argument.
@@ -88,7 +91,7 @@ class CalculationArgs {
 
     /**
      * Parses the maximum denominators command line argument.
-     * 
+     *
      * @param max
      *            the maximum denominators.
      */
@@ -103,9 +106,30 @@ class CalculationArgs {
     }
 
     /**
+     * Sets the denominator n0 of the continued fraction from the command line
+     * argument.
+     *
+     * @param d0value
+     *            the denominator n0 {@link Integer} value.
+     */
+    @Option(name = "-d0", required = false)
+    public void setD0value(Integer d0value) {
+        this.d0value = d0value;
+    }
+
+    /**
+     * Returns the denominator n0 of the continued fraction.
+     *
+     * @return the denominator n0 {@link Integer} value or {@code null}.
+     */
+    public Integer getD0value() {
+        return d0value;
+    }
+
+    /**
      * Sets the denominators of the continued fraction from the command line
      * argument.
-     * 
+     *
      * @param denominators
      *            the denominators.
      */
@@ -121,7 +145,7 @@ class CalculationArgs {
     /**
      * Sets the denominators of the first continued fraction from the command
      * line argument.
-     * 
+     *
      * @param denominators
      *            the fraction.
      */
@@ -137,7 +161,7 @@ class CalculationArgs {
     /**
      * Sets the denominators of the second continued fraction from the command
      * line argument.
-     * 
+     *
      * @param denominators
      *            the fraction.
      */
@@ -152,7 +176,7 @@ class CalculationArgs {
 
     /**
      * Sets the value of the continued fraction command line argument.
-     * 
+     *
      * @param value
      *            the continued fraction value.
      */

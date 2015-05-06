@@ -38,7 +38,7 @@ import com.google.inject.assistedinject.Assisted;
 
 /**
  * Parses the command line arguments.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 2.0
  */
@@ -91,9 +91,9 @@ public class CalculationParser implements CalculationModel {
 
     /**
      * Parse the command line arguments.
-     * 
+     *
      * @return this {@link CalculationParser} parser.
-     * 
+     *
      * @throws ArgsException
      *             if the command line arguments could not be parsed.
      */
@@ -170,6 +170,11 @@ public class CalculationParser implements CalculationModel {
     @Override
     public Double getValue() {
         return value;
+    }
+
+    @Override
+    public Integer getD0value() {
+        return model.getD0value();
     }
 
     @Override
