@@ -4,9 +4,11 @@
 </div>
 <hr />
 
-h1. "Continued Fraction Calculator":http://www.mueller-public.de/2014/03/continued-fraction-calculator/
+h1. "Continued Fraction Calculator Version 2.7":http://www.mueller-public.de/2015/05/continued-frac…or-version-2-7/
 
 !>http://www.mueller-public.de/wp-content/uploads/2014/03/fractionscli_example.png!
+
+This is an update of the Continued Fraction Calculator, fractionscli for short, program. Version 2.7 released as of DATE brings two major new features. The first is to set the value of the k=0 partial denominator, n0, and to calculate the continued fraction with that n0 set. The second is to set the value of the numerator z and to calculate the continued fraction with that z set.
 
 To calculate the continued fraction from a specified value and to compare two different continued fractions I have implemented the continued fraction calculator library can command line application @fractionscli.@ The application is available under the "GPLv3":https://www.gnu.org/copyleft/gpl.html license free of charge.
 
@@ -16,11 +18,11 @@ The calculator can either be installed using the setup program or the @Jar@ file
 * "Continued Fraction Calculator Command Line Application Setup Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-calculator-cli-install-2.2-standard.jar
 * "Sources Github.com":https://github.com/devent/fractions
 
-h2. Start
+h2. Description
 
-To start the application there are scripts installed in the bin/ directory. For Linux it is the bin/linux/run.sh script, for Windows it is the bin/windows/run.bat script. The script can be run from anywhere, i.e.:
+The command line application to calculates the continued fraction from a specified value. To start the application there are scripts installed in the @bin/@ directory. For Linux it is the @bin/linux/run.sh@ script, for Windows it is the @bin/windows/run.bat@ script. The script can be run from anywhere, i.e.:
 
-<pre>
+<pre lang="bash">
 $ bin/linux/fractionscli.sh
 </pre>
 
@@ -28,49 +30,115 @@ h2. Debug
 
 A version for debug purpose is in the same directory as the start script and is run in the same matter, i.e.:
 
-<pre>
+<pre lang="bash">
 $ bin/linux/fractionscli-debug.sh
 </pre>
 
-h2. Manual
+h2. Synopsis
 
-@fractionscli@ - calculates and prints the continued fractions from the specified value.
-
-h3. Synopsis
-
-<pre>
-fractionscli [-service service] [-value-format|-f format] 
-    (([-max maximum] -denominators|-d denominators)|
-    (-fraction-a|-a denominators -fraction-b|-b denominators)|_value_)
+<pre lang="bash">
+fractionscli.sh [OPTIONS...] -fraction-a|-a VALUE
+fractionscli.sh [OPTIONS...] -denominators|-d DENOS
+fractionscli.sh [OPTIONS...] -fraction-a|-a DENOS -fraction-b|-b DENOS
 </pre>
 
-h3. Description
+h2. Description
 
-Prints the calculated continued fractions from the specified value or prints the calculated value from the specified denominators. Different calculation algorithms can be chosen to calculate the continued fraction. If two continued fractions are specified then those are compared for inequality.
+The program have three modes, to calculate a continued fraction from a given value, to calculate the value of a given continued fraction and to compare two continued fractions with each other.
 
-h3. Options
+h2. Usage
+
+To calculate a continued fraction from a given value, the VALUE must be entered after the optional OPTIONS. The value must be entered in the current locale format, i.e. for en_US with a dot as the decimal separator and for de_DE with a comma as the decimal separator. The calculate a continued fraction is then printed on the console in the abbreviated notation [a0;a1,... an−1,an]. The options @-service@, @-max@, @-value-format@, @-d0@ and @-z@ can be specified as OPTIONS.
+
+<pre lang="bash">
+fractionscli.sh 62.8908766605
+[63;-9,-6,-10,-34,2,16,-4,6,3]
+</pre>
+
+<pre lang="bash">
+fractionscli.sh -max 4 62.8908766605
+[63;-9,-6,-10]
+</pre>
+
+<pre lang="bash">
+fractionscli.sh -service Mod3Fraction 62.8908766605
+[63;-9,-6,-11,2,-2,2,-2,2,-2,2]
+</pre>
+
+In addition, the k=0 partial denominator can be set with the @-d0@ argument. If the k=0 partial denominator is set, the continued fraction is calculated with that denominator.
+
+<pre lang="bash">
+fractionscli.sh -d0 0 62.8908766605
+[0;0,62,-9,-6,-10,-34,2,16,-4]
+</pre>
+
+In addition, the numerator z can be set with the @-z@ argument. If the numerator is set, the continued fraction is calculated with that numerator for each fraction.
+
+<pre lang="bash">
+fractionscli.sh -z 2.0 62.8908766605
+[0;0,62,-9,-6,-10,-34,2,16,-4]
+</pre>
+
+The second usage is to calculate the value of the given continued fraction. The continued fraction is entered in the abbreviated notation (see above) after the argument @-denominators@ or @-d@. Care should be taken because in some terminals the square brackets @[@ and @]@ have special meaning and must be quoted or escaped. The options @-value-format@ and @-z@ can be specified as OPTIONS.
+
+<pre lang="bash">
+fractionscli.sh -d "[63;-9,-6,-10,-34,2,16,-4,6,3]"
+62.89087666
+</pre>
+
+<pre lang="bash">
+fractionscli.sh -f "0.00" -d "[63;-9,-6,-10,-34,2,16,-4,6,3]"
+62.89
+</pre>
+
+The third usage is to compare two continued fractions, using the algorithm as described in "Comparison of continued fractions":http://en.wikipedia.org/wiki/Continued_fraction#Comparison_of_continued_fractions. Care should be taken because in some terminals the square brackets @[@ and @]@ have special meaning and must be quoted or escaped. The option @-value-format@ can be specified as OPTIONS.
+
+<pre lang="bash">
+$ fractionscli.sh -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,20]"
+1
+</pre>
+
+<pre lang="bash">
+$ fractionscli.sh -a "[63;-9,-6,-10,-34,20]" -b "[63;-9,-6,-10,-34,2]"
+-1
+</pre>
+
+<pre lang="bash">
+$ fractionscli.sh -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,2]"
+0
+</pre>
+
+h2. Options
 
 @-service service@
 
 Sets the calculation algorithm specified by the service name. Defaults to the "IntegerFraction" algorithm.
 
-* @"IntegerFraction"@: standard algorithm, z=1.0; n0..ni ∈ ℕ
-* @"IntegerNoMinusOneFraction"@
-* @"Mod3Fraction"@
+* @"IntegerFraction"@ standard algorithm, z=1.0; n0..ni ∈ ℕ;
+* @"IntegerNoMinusOneFraction@ no -1 values for partial denominators, z=1.0; n0..ni ∈ ℕ;
+* @"Mod3Fraction@ Global Scaling algorithm, z=2.0; nk%3;
 
-@-max maximum@
+@-max COUNT@
 
 Sets the maximum count of denominators for the value. Defaults to ten (10) denominators.
 
-@-value-format|-f format@
+@-value-format|-f FORMAT@
 
-Sets the value format to parse the denominators and to format the calculated value of the continued fraction. Defaults to the @NumberFormat#getInstance()@ formatter. See "DecimalFormat":http://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html
+Sets the value format to parse the value and denominators and to format the calculated value of the continued fraction. Defaults to the @NumberFormat#getInstance()@ formatter. See @DecimalFormat@.
 
-@-denominators|-d denominators@
+@-d0 VALUE@
+
+Sets the value of the k=0 partial denominator.
+
+@-z VALUE@
+
+Sets the value of the numerator of the continued fraction.
+
+@-denominators|-d DENOS@
 
 If the denominators are specified then the value of the continued fraction with the specified denominators is printed.
 
-@-fraction-a|-a denominators -fraction-b|-b denominators@
+@-fraction-a|-a DENOS -fraction-b|-b DENOS@
 
 Sets the denominators for the first and second continued fraction to be compared for inequality and prints the inequality:
 
@@ -78,33 +146,6 @@ Sets the denominators for the first and second continued fraction to be compared
 * 0 if a=b
 * 1 if a>b
 
-@value@
+@VALUE@
 
 If the value is specified then the continued fraction is calculated from this value and the denominators are printed. Either denominators or value can be specified at the same time.
-
-h3. Examples
-
-<pre>
-$ fractionscli 62.8908766605
-</pre>
-
-calculates and prints out the continued fraction of the value with a maximum depth of ten denominators;
-
-<pre>
-$ fractionscli -max 6 62.8908766605
-</pre>
-
-    calculates and prints out the continued fraction of the value with a maximum depth of six denominators;
-
-<pre>
-$ fractionscli -service IntegerFraction -value-format 0.###### -denominators
-"[63;-9,-6,-10,-34,2]"
-</pre>
-
-calculates and prints out the value of the continued fraction from the specified denominators;
-
-<pre>
-$ fractionscli -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,20]"
-</pre>
-
-compares and prints out the inequality the first and second continued fraction from the specified denominators;

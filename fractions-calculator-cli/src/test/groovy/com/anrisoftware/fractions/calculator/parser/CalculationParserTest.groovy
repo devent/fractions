@@ -26,7 +26,6 @@ import org.junit.Test
 
 import com.anrisoftware.fractions.calculator.app.AppModule
 import com.anrisoftware.fractions.calculator.model.CalculationModel
-import com.anrisoftware.fractions.integer.IntegerFractionService
 import com.google.inject.Guice
 import com.google.inject.Injector
 
@@ -41,69 +40,7 @@ class CalculationParserTest {
 
     @Test
     void "parse args"() {
-        String value = "62.8908766605"
-        def cases = [
-            [
-                args: [value], test: { CalculationModel parser ->
-                    assertDecimalEquals parser.getValue(), 62.8908766605d
-                    assert parser.getMax() == 10
-                    assert parser.getService().getClass() == IntegerFractionService
-                }
-            ],
-            [
-                args: [
-                    "-service",
-                    "IntegerFraction",
-                    "-max",
-                    "6",
-                    value
-                ], test: { CalculationModel parser ->
-                    assertDecimalEquals parser.getValue(), 62.8908766605d
-                    assert parser.getMax() == 6
-                    assert parser.getService().getClass() == IntegerFractionService
-                }
-            ],
-            [
-                args: [
-                    "-d0",
-                    "0",
-                    value
-                ], test: { CalculationModel parser ->
-                    assertDecimalEquals parser.getValue(), 62.8908766605d
-                    assert parser.getD0value() == 0
-                    assert parser.getMax() == 10
-                    assert parser.getService().getClass() == IntegerFractionService
-                }
-            ],
-            [
-                args: [
-                    "-f",
-                    "#.###",
-                    "-d",
-                    "[1;5,6,7,8]"
-                ], test: { CalculationModel parser ->
-                    assert parser.getValue() == null
-                    assert parser.getFraction().toArray() == [1, 5, 6, 7, 8]
-                    assert parser.getValueFormat().toPattern() == "#0.###"
-                    assert parser.getService().getClass() == IntegerFractionService
-                }
-            ],
-            [
-                args: [
-                    "-a",
-                    "[1;5,6,7,8]",
-                    "-b",
-                    "[1;5,2,3,4]"
-                ], test: { CalculationModel parser ->
-                    assert parser.getValue() == null
-                    assert parser.getFractionA().toArray() == [1, 5, 6, 7, 8]
-                    assert parser.getFractionB().toArray() == [1, 5, 2, 3, 4]
-                    assert parser.getService().getClass() == IntegerFractionService
-                    assert parser.getService().getClass() == IntegerFractionService
-                }
-            ],
-        ]
-        cases.each {
+        parser_cases.each {
             log.info "Parse the arguments {}", it.args
             CalculationModel parser = parserFactory.create(it.args as String[]).parse()
             it.test parser
@@ -126,6 +63,8 @@ class CalculationParserTest {
     static Injector injector
 
     static CalculationParserFactory parserFactory
+
+    static parser_cases = new parser_cases().run()
 
     @BeforeClass
     static void createInjector() {

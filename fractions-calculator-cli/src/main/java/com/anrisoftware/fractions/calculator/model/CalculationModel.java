@@ -46,6 +46,13 @@ public interface CalculationModel {
     Integer getD0value();
 
     /**
+     * Returns the numerator of the continued fraction.
+     *
+     * @return the numerator z {@link Double} value or {@code null}.
+     */
+    Double getZvalue();
+
+    /**
      * Returns the maximum denominators for the continued fractions.
      *
      * @return the maximum denominators.

@@ -38,6 +38,8 @@ class CalculationArgs {
 
     private Integer d0value;
 
+    private Double zvalue;
+
     private String value;
 
     private String valueFormat;
@@ -124,6 +126,27 @@ class CalculationArgs {
      */
     public Integer getD0value() {
         return d0value;
+    }
+
+    /**
+     * Sets the numerator of the continued fraction from the command line
+     * argument.
+     *
+     * @param value
+     *            the numerator z {@link Double} value.
+     */
+    @Option(name = "-z", required = false)
+    public void setZvalue(Double value) {
+        this.zvalue = value;
+    }
+
+    /**
+     * Returns the numerator of the continued fraction.
+     *
+     * @return the numerator z {@link Double} value or {@code null}.
+     */
+    public Double getZvalue() {
+        return zvalue;
     }
 
     /**

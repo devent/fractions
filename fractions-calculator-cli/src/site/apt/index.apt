@@ -17,6 +17,8 @@
 ~~ fractions-calculator-cli. If not, see <http://www.gnu.org/licenses/>.
 ~~
 
+[./images/fractionscli_example.png]
+
 Description
 
   The command line application to calculates the continued fraction from a
@@ -58,7 +60,7 @@ entered after the optional OPTIONS. The value must be entered in the current
 locale format, i.e. for en_US with a dot as the decimal separator and for
 de_DE with a comma as the decimal separator. The calculate a continued fraction
 is then printed on the console in the abbreviated notation [a0;a1,... an−1,an].
-The options <<<-service>>>, <<<-max>>>, <<<-value-format>>>, <<<-d0>>
+The options <<<-service>>>, <<<-max>>>, <<<-value-format>>>, <<<-d0>>>
 and <<<-z>>> can be specified as OPTIONS.
 
 ---
@@ -112,7 +114,7 @@ fractionscli.sh -f "0.00" -d "[63;-9,-6,-10,-34,2,16,-4,6,3]"
 ---
 
   The third usage is to compare two continued fractions, using the algorithm
-as described in <<<http://en.wikipedia.org/wiki/Continued_fraction#Comparison_of_continued_fractions>>>
+as described in {{{http://en.wikipedia.org/wiki/Continued_fraction#Comparison_of_continued_fractions}Comparison of continued fractions (wikipedia.org).}}
 Care should be taken because in some terminals the square
 brackets [ and ] have special meaning and must be quoted or escaped.
 The option <<<-value-format>>> can be specified as OPTIONS.
@@ -137,7 +139,7 @@ $ fractionscli.sh -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,2]"
 <<<-service service>>>
 
   Sets the calculation algorithm specified by the service name.
-Defaults to the “IntegerFraction” algorithm.
+Defaults to the "IntegerFraction" algorithm.
 
   * <<<"IntegerFraction">>> standard algorithm, z=1.0; n0..ni ∈ ℕ;
 

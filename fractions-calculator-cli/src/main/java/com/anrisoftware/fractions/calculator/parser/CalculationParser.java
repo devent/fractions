@@ -178,6 +178,11 @@ public class CalculationParser implements CalculationModel {
     }
 
     @Override
+    public Double getZvalue() {
+        return model.getZvalue();
+    }
+
+    @Override
     public int getMax() {
         return model.getMax();
     }
