@@ -45,6 +45,7 @@ $ bin/linux/fractionscli-debug.sh
 fractionscli.sh [OPTIONS...] -fraction-a|-a VALUE
 fractionscli.sh [OPTIONS...] -denominators|-d DENOS
 fractionscli.sh [OPTIONS...] -fraction-a|-a DENOS -fraction-b|-b DENOS
+fractionscli.sh -help|-?
 ---
 
 * Description
@@ -187,6 +188,10 @@ compared for inequality and prints the inequality:
   If the value is specified then the continued fraction is calculated from
 this value and the denominators are printed. Either denominators or value
 can be specified at the same time.
+
+<<<-help|-?>>>
+
+  Shows this help.
 
 SCM
 

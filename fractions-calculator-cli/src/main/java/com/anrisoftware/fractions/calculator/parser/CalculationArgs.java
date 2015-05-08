@@ -18,6 +18,8 @@
  */
 package com.anrisoftware.fractions.calculator.parser;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import org.kohsuke.args4j.Argument;
@@ -33,6 +35,8 @@ class CalculationArgs {
 
     @Inject
     private CalculationArgsLogger log;
+
+    private boolean help;
 
     private int max;
 
@@ -52,13 +56,25 @@ class CalculationArgs {
 
     private String fractionB;
 
+    private Locale locale;
+
     CalculationArgs() {
+        this.help = false;
         this.valueFormat = "#.#########";
         this.max = 10;
         this.d0value = null;
         this.denominators = null;
         this.fractionA = null;
         this.fractionB = null;
+    }
+
+    @Option(name = "-help", aliases = { "-?" }, required = false, help = true)
+    public void setHelp(boolean help) {
+        this.help = help;
+    }
+
+    public boolean getHelp() {
+        return help;
     }
 
     @Option(name = "-value-format", aliases = { "-f" }, required = false, metaVar = "FORMAT")
@@ -211,6 +227,22 @@ class CalculationArgs {
 
     public String getValue() {
         return value;
+    }
+
+    /**
+     * Sets the application locale from the command line argument. Expects a
+     * locale tag in the IETF BCP 47 format.
+     *
+     * @param locale
+     *            the locale {@link String} tag.
+     */
+    @Option(name = "-locale", required = false)
+    public void setLocale(String locale) {
+        this.locale = Locale.forLanguageTag(locale);
+    }
+
+    public Locale getLocale() {
+        return locale;
     }
 
 }

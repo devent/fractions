@@ -66,6 +66,20 @@ class AppTest {
     }
 
     @Test
+    void "print help"() {
+        String[] args = [
+            "-help",
+            "-locale",
+            "en-US"
+        ]
+        log.info "Arguments: '{}'", Arrays.toString(args)
+        App app = injector.getInstance App
+        app.doStart args
+        assert app.getOutput().size() == 5217
+        assert app.getOutput()[0] == "D"
+    }
+
+    @Test
     void "caluclate continued fraction"() {
         String service = "IntegerFraction"
         String max = "6"

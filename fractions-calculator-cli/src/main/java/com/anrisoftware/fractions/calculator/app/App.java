@@ -19,6 +19,7 @@
 package com.anrisoftware.fractions.calculator.app;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -53,6 +54,9 @@ public class App {
     @Inject
     private FractionFormatFactory formatFactory;
 
+    @Inject
+    private AppHelpFactory helpFactory;
+
     private String output;
 
     /**
@@ -71,7 +75,10 @@ public class App {
         this.output = output;
     }
 
-    private String createOutput(CalculationModel model) {
+    private String createOutput(CalculationModel model) throws AppException {
+        if (model.getHelp() == true) {
+            return outputHelp(model);
+        }
         if (model.getValue() != null) {
             return outputFraction(model);
         }
@@ -81,7 +88,17 @@ public class App {
         if (model.getFractionA() != null && model.getFractionB() != null) {
             return compareFractions(model);
         }
-        return null;
+        return outputHelp(model);
+    }
+
+    private String outputHelp(CalculationModel model) throws AppException {
+        StringBuilder output = new StringBuilder();
+        Locale locale = model.getLocale();
+        if (locale == null) {
+            locale = Locale.getDefault();
+        }
+        helpFactory.create(locale).printHelp(output);
+        return output.toString();
     }
 
     private String compareFractions(CalculationModel model) {

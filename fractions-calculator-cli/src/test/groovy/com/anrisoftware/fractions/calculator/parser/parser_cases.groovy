@@ -28,6 +28,25 @@ String value = "62.8908766605"
 [
     [
         args: [
+            "-help"
+        ],
+        test: { CalculationModel parser ->
+            assert parser.getHelp() == true
+        }
+    ],
+    [
+        args: [
+            "-locale",
+            "en-US"
+        ],
+        test: { CalculationModel parser ->
+            assert parser.getHelp() == false
+            assert parser.getLocale().language == "en"
+            assert parser.getLocale().country == "US"
+        }
+    ],
+    [
+        args: [
             value
         ],
         test: { CalculationModel parser ->

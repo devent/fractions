@@ -92,6 +92,11 @@
 			<groupId>org.antlr</groupId>
 			<artifactId>ST4</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.resources</groupId>
+			<artifactId>resources-texts</artifactId>
+			<version>1.15</version>
+		</dependency>
 	</dependencies>
 
 </project>

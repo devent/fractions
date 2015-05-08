@@ -1,0 +1,184 @@
+Description
+-----------
+
+The command line application to calculates the continued fraction from a
+specified value. To start the application there are scripts installed in
+the `bin/` directory. For Linux it is the `bin/linux/run.sh` script, for
+Windows it is the `bin/windows/run.bat` script. The script can be run
+from anywhere, i.e.:
+
+``` {lang="bash"}
+$ bin/linux/fractionscli.sh
+```
+
+Debug
+-----
+
+A version for debug purpose is in the same directory as the start script
+and is run in the same matter, i.e.:
+
+``` {lang="bash"}
+$ bin/linux/fractionscli-debug.sh
+```
+
+Synopsis
+--------
+
+``` {lang="bash"}
+fractionscli.sh [OPTIONS...] -fraction-a|-a VALUE
+fractionscli.sh [OPTIONS...] -denominators|-d DENOS
+fractionscli.sh [OPTIONS...] -fraction-a|-a DENOS -fraction-b|-b DENOS
+fractionscli.sh [OPTIONS...] -help|-?
+```
+
+Description
+-----------
+
+The program have three modes, to calculate a continued fraction from a
+given value, to calculate the value of a given continued fraction and to
+compare two continued fractions with each other.
+
+Usage
+-----
+
+To calculate a continued fraction from a given value, the VALUE must be
+entered after the optional OPTIONS. The value must be entered in the
+current locale format, i.e. for en\_US with a dot as the decimal
+separator and for de\_DE with a comma as the decimal separator. The
+calculate a continued fraction is then printed on the console in the
+abbreviated notation [a0;a1,… an−1,an]. The options `-service`, `-max`,
+`-value-format`, `-d0` and `-z` can be specified as OPTIONS.
+
+``` {lang="bash"}
+fractionscli.sh 62.8908766605
+[63;-9,-6,-10,-34,2,16,-4,6,3]
+```
+
+``` {lang="bash"}
+fractionscli.sh -max 4 62.8908766605
+[63;-9,-6,-10]
+```
+
+``` {lang="bash"}
+fractionscli.sh -service Mod3Fraction 62.8908766605
+[63;-9,-6,-11,2,-2,2,-2,2,-2,2]
+```
+
+In addition, the k=0 partial denominator can be set with the `-d0`
+argument. If the k=0 partial denominator is set, the continued fraction
+is calculated with that denominator.
+
+``` {lang="bash"}
+fractionscli.sh -d0 0 62.8908766605
+[0;0,62,-9,-6,-10,-34,2,16,-4]
+```
+
+In addition, the numerator z can be set with the `-z` argument. If the
+numerator is set, the continued fraction is calculated with that
+numerator for each fraction.
+
+``` {lang="bash"}
+fractionscli.sh -z 2.0 62.8908766605
+[0;0,62,-9,-6,-10,-34,2,16,-4]
+```
+
+The second usage is to calculate the value of the given continued
+fraction. The continued fraction is entered in the abbreviated notation
+(see above) after the argument `-denominators` or `-d`. Care should be
+taken because in some terminals the square brackets `[` and `]` have
+special meaning and must be quoted or escaped. The options
+`-value-format` and `-z` can be specified as OPTIONS.
+
+``` {lang="bash"}
+fractionscli.sh -d "[63;-9,-6,-10,-34,2,16,-4,6,3]"
+62.89087666
+```
+
+``` {lang="bash"}
+fractionscli.sh -f "0.00" -d "[63;-9,-6,-10,-34,2,16,-4,6,3]"
+62.89
+```
+
+The third usage is to compare two continued fractions, using the
+algorithm as described in [Comparison of continued
+fractions](http://en.wikipedia.org/wiki/Continued_fraction#Comparison_of_continued_fractions).
+Care should be taken because in some terminals the square brackets `[`
+and `]` have special meaning and must be quoted or escaped. The option
+`-value-format` can be specified as OPTIONS.
+
+``` {lang="bash"}
+$ fractionscli.sh -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,20]"
+1
+```
+
+``` {lang="bash"}
+$ fractionscli.sh -a "[63;-9,-6,-10,-34,20]" -b "[63;-9,-6,-10,-34,2]"
+-1
+```
+
+``` {lang="bash"}
+$ fractionscli.sh -a "[63;-9,-6,-10,-34,2]" -b "[63;-9,-6,-10,-34,2]"
+0
+```
+
+Options
+-------
+
+`-service service`
+
+Sets the calculation algorithm specified by the service name. Defaults
+to the “IntegerFraction” algorithm.
+
+-   `"IntegerFraction"` standard algorithm, z=1.0; n0..ni ∈ ℕ;
+-   `"IntegerNoMinusOneFraction` no ~~1 values for partial denominators,
+    z=1.0; n0..ni ∈ ℕ;\
+-   `"Mod3Fraction` Global Scaling algorithm, z=2.0; nk%3;
+
+max COUNT`
+
+    Sets the maximum count of denominators for the value. Defaults to
+    ten denominators.
+
+value-format|-f FORMAT`
+
+    Sets the value format to parse the value and denominators and to
+    format the calculated value of the continued fraction. Defaults to
+    the `NumberFormat#getInstance()` formatter. See `DecimalFormat`.
+
+d0 VALUE`
+
+    Sets the value of the k=0 partial denominator.
+
+z VALUE`
+
+    Sets the value of the numerator of the continued fraction.
+
+denominators|-d DENOS`
+
+    If the denominators are specified then the value of the continued
+    fraction with the specified denominators is printed.
+
+fraction-a|-a DENOS -fraction-b|-b DENOS`
+
+    Sets the denominators for the first and second continued fraction to
+    be compared for inequality and prints the inequality:
+
+    *-1 if a<b
+    * 0 if a=b
+    * 1 if a>b
+
+`-help|-?`
+
+Prints this help. The help is also printed if the program is started
+with no argument.
+
+`-locale LOCALE`
+
+Sets the locale to print the help. Expects a locale tag in the IETF BCP
+47 format, for example `en-US` or `de-DE`.
+
+`VALUE`
+
+If the value is specified then the continued fraction is calculated from
+this value and the denominators are printed. Either denominators or
+value can be specified at the same time.

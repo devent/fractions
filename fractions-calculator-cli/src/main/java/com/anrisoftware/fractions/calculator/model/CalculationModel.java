@@ -19,6 +19,7 @@
 package com.anrisoftware.fractions.calculator.model;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import com.anrisoftware.fractions.core.ContinuedFraction;
 import com.anrisoftware.fractions.core.FractionService;
@@ -32,6 +33,15 @@ import com.anrisoftware.fractions.core.FractionService;
 public interface CalculationModel {
 
     /**
+     * Returns if print the help.
+     *
+     * @return {@code true} if to print the help.
+     *
+     * @since 2.7
+     */
+    boolean getHelp();
+
+    /**
      * Returns the value of the continued fraction.
      *
      * @return the {@link Double} value or {@code null}.
@@ -42,6 +52,8 @@ public interface CalculationModel {
      * Returns the denominator n0 of the continued fraction.
      *
      * @return the denominator n0 {@link Integer} value or {@code null}.
+     *
+     * @since 2.7
      */
     Integer getD0value();
 
@@ -49,6 +61,8 @@ public interface CalculationModel {
      * Returns the numerator of the continued fraction.
      *
      * @return the numerator z {@link Double} value or {@code null}.
+     *
+     * @since 2.7
      */
     Double getZvalue();
 
@@ -93,4 +107,14 @@ public interface CalculationModel {
      * @return the {@link NumberFormat}.
      */
     NumberFormat getValueFormat();
+
+    /**
+     * Returns the application locale.
+     *
+     * @return {@code Locale} the {@link Locale} locale or {@code null}.
+     *
+     * @since 2.7
+     */
+    Locale getLocale();
+
 }

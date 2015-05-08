@@ -21,6 +21,7 @@ package com.anrisoftware.fractions.calculator.parser;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -152,8 +153,7 @@ public class CalculationParser implements CalculationModel {
         }
     }
 
-    private ContinuedFraction parseFraction(String deno)
-            throws ArgsException {
+    private ContinuedFraction parseFraction(String deno) throws ArgsException {
         if (deno == null) {
             return null;
         }
@@ -165,6 +165,11 @@ public class CalculationParser implements CalculationModel {
         } catch (ParseException e) {
             throw log.errorParseDeno(e, deno);
         }
+    }
+
+    @Override
+    public boolean getHelp() {
+        return model.getHelp();
     }
 
     @Override
@@ -210,5 +215,10 @@ public class CalculationParser implements CalculationModel {
     @Override
     public FractionService getService() {
         return service;
+    }
+
+    @Override
+    public Locale getLocale() {
+        return model.getLocale();
     }
 }
