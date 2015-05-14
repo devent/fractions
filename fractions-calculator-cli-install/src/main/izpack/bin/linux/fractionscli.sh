@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
+# Copyright 2013-2015 Erwin Müller <erwin.mueller@deventm.org>
 #
 # This file is part of fractions-calculator-cli-install.
 #
@@ -42,19 +42,26 @@ function noJavaRuntime() {
 function checkJavaRuntime() {
     if [ -z "$javaCommand" ]; then
         noJavaRuntime
-        zenity --error --text="$noJavaRuntimeText"
+        type zenity >/dev/null 2>&1
+        if [ $? = 0 ]; then
+            zenity --error --text="$noJavaRuntimeText"
+        else
+            echo "$noJavaRuntimeText"
+        fi
         exit 1
     fi
 }
 
+currentDir=$(pwd)
 changeBinDirectory
 javaCommand=`type -P java`
 mainClass="${project.custom.app.mainclass}"
 lib="../../lib/*"
 IFS='.' read -a lang <<< "$LANG"
 log="-Dlogback.configurationFile=file:///$PWD/../../etc/logback.xml"
+logArgs="-Dproject.custom.log.prefix=$currentDir"
 args=""
 noJavaRuntimeText="No Java Runtime found."
 checkJavaRuntime
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
-"$javaCommand" "$log" -cp "$lib" "$mainClass" $args $*
+"$javaCommand" "$logArgs" "$log" -cp "$lib" "$mainClass" $args $*

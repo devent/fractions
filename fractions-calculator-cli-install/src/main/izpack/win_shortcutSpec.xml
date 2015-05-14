@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
+    Copyright 2013-2015 Erwin Müller <erwin.mueller@deventm.org>
 
     This file is part of fractions-calculator-cli-install.
 
@@ -23,44 +23,25 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
     <skipIfNotSupported />
-    <programGroup defaultName="${project.custom.name}"
+    <programGroup defaultName="${project.custom.app.name}"
         location="startMenu" />
     <shortcut
-       name="Start ${project.name}"
+       name="Start ${project.custom.app.name}"
      programGroup="yes"
      desktop="yes"
      applications="no"
      startMenu="yes"
      startup="no"
-     target="&quot;${INSTALL_PATH}&quot;/bin/windows/${project.custom.app.windowsbin}"
+     target="cmd.exe /K &quot;cd /d ${INSTALL_PATH}\bin\windows\&quot;"
      commandLine=""
      workingDirectory="$INSTALL_PATH"
-     description="Start ${project.custom.name}. ${project.custom.description}"
+     description="Start ${project.custom.app.name}. ${project.custom.app.description}"
      type="Application"
      encoding="UTF-8"
      terminal="false"
      KdeSubstUID="false"
      initialState="normal"
-     iconFile="&quot;${INSTALL_PATH}&quot;/${project.custom.icon.windows}">
-        <createForPack name="Windows" />
-    </shortcut>
-    <shortcut
-       name="Debug ${project.custom.name}"
-     programGroup="yes"
-     desktop="yes"
-     applications="no"
-     startMenu="yes"
-     startup="no"
-     target="&quot;${INSTALL_PATH}&quot;/bin/windows/${project.custom.app.windowsdebugbin}"
-     commandLine=""
-     workingDirectory="&quot;${INSTALL_PATH}&quot;"
-     description="Start debug mode of ${project.custom.name}. ${project.custom.description}"
-     type="Application"
-     encoding="UTF-8"
-     terminal="true"
-     KdeSubstUID="false"
-     initialState="normal"
-     iconFile="&quot;${INSTALL_PATH}&quot;/${project.custom.icon.windows}">
+     iconFile="&quot;${INSTALL_PATH}&quot;/${project.custom.app.icon.windows}">
         <createForPack name="Windows" />
     </shortcut>
     <shortcut
@@ -73,7 +54,7 @@
      target="&quot;${INSTALL_PATH}&quot;\doc\en\readme.txt"
      commandLine=""
      workingDirectory="$INSTALL_PATH\doc\en"
-     description="${project.custom.name} readme file"
+     description="${project.custom.app.name} readme file"
      type="Link"
      encoding="UTF-8">
     </shortcut>
@@ -87,7 +68,7 @@
      target="&quot;${INSTALL_PATH}&quot;\doc\de\readme.txt"
      commandLine=""
      workingDirectory="&quot;${INSTALL_PATH}&quot;\doc\de"
-     description="${project.custom.name} liesmich Datei"
+     description="${project.custom.app.name} liesmich Datei"
      type="Link"
      encoding="UTF-8">
     </shortcut>
