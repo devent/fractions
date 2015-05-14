@@ -17,7 +17,8 @@
 @REM fractions-calculator-cli-install. If not, see <http://www.gnu.org/licenses/>.
 @REM
 
-set lib="%CD%"\lib\*
+@echo off
+set lib="%CD%\lib\*"
 set log="-Dlogback.configurationFile=file:///%CD%/etc/logback-debug.xml"
 set args=
 set mainClass="${project.custom.app.mainclass}"

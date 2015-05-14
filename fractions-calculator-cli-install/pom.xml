@@ -21,7 +21,7 @@
 	<properties>
 		<project.custom.author.name>Erwin Müller</project.custom.author.name>
 		<project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
-		<project.custom.app.name>fractionscli</project.custom.app.name>
+		<project.custom.app.name>Fractions-CLI</project.custom.app.name>
 		<project.custom.app.description>Calculates the continued fraction from a specified value.</project.custom.app.description>
 		<project.custom.app.path>fractionscli</project.custom.app.path>
 		<project.custom.app.version>2.7</project.custom.app.version>
