@@ -22,13 +22,28 @@ Description
   Packages the fractions calculator command line interface for deployment
 and installation.
 
-  * fractions-calculator-cli-install-2.6-single-jar.jar
+  * fractions-calculator-cli-install-2.7-single-jar.jar
 
   the application Jar executable file with all dependencies bundled;
 
-  * fractions-calculator-cli-install-2.6.jar
+  * fractions-calculator-cli-install-2.7.jar
 
   the installation Jar executable file;
+
+* Maven Build
+
+  To build the application and installation Jar executable file:
+
+---
+mvn package -P compile-izpack
+---
+
+  To build the application and installation Windows executable file:
+
+---
+mvn package -P make-install-exe
+mvn package -P make-exe
+---
 
 SCM
 
@@ -43,11 +58,3 @@ SCM
   * {{{https://github.com/devent/fractions}Repository}}
 
   * git@github.com:devent/fractions.git
-
-* Maven Build
-
-  To build the application and installation Jar executable file:
-
----
-mvn package -P compile-izpack
----
