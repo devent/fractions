@@ -34,8 +34,8 @@
      startup="no"
      target="${INSTALL_PATH}/bin/linux/${project.custom.app.linuxbin}"
      commandLine=""
-     workingDirectory="$INSTALL_PATH/bin/linux"
-     description="Start ${project.custom.app.name}. ${project.custom.app.description}"
+     workingDirectory="$INSTALL_PATH"
+     description="Start ${project.custom.app.name}. ${project.custom.app.description}."
      type="Application"
      encoding="UTF-8"
      terminal="true"
@@ -55,7 +55,7 @@
      target="$INSTALL_PATH/doc/en/readme.txt"
      commandLine=""
      workingDirectory="$INSTALL_PATH/doc/en"
-     description="${project.custom.app.name} readme file"
+     description="${project.custom.app.name} readme file."
      type="link"
      mimetype="text/plain"
      encoding="UTF-8">
@@ -71,7 +71,7 @@
      target="$INSTALL_PATH/doc/de/readme.txt"
      commandLine=""
      workingDirectory="$INSTALL_PATH/doc/de"
-     description="${project.custom.app.name} liesmich Datei"
+     description="${project.custom.app.name} liesmich Datei."
      type="link"
      mimetype="text/plain"
      encoding="UTF-8">

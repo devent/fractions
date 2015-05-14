@@ -32,16 +32,16 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="cmd.exe /K &quot;cd /d ${INSTALL_PATH}\bin\windows\&quot;"
+     target="cmd.exe"
      commandLine=""
      workingDirectory="$INSTALL_PATH"
-     description="Start ${project.custom.app.name}. ${project.custom.app.description}"
+     description="Start ${project.custom.app.name}. ${project.custom.app.description}."
      type="Application"
      encoding="UTF-8"
      terminal="false"
      KdeSubstUID="false"
      initialState="normal"
-     iconFile="&quot;${INSTALL_PATH}&quot;/${project.custom.app.icon.windows}">
+     iconFile="${INSTALL_PATH}/${project.custom.app.icon.windows}">
         <createForPack name="Windows" />
     </shortcut>
     <shortcut
@@ -51,10 +51,10 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="&quot;${INSTALL_PATH}&quot;\doc\en\readme.txt"
+     target="${INSTALL_PATH}\doc\en\readme.txt"
      commandLine=""
      workingDirectory="$INSTALL_PATH\doc\en"
-     description="${project.custom.app.name} readme file"
+     description="${project.custom.app.name} readme file."
      type="Link"
      encoding="UTF-8">
     </shortcut>
@@ -65,10 +65,10 @@
      applications="no"
      startMenu="yes"
      startup="no"
-     target="&quot;${INSTALL_PATH}&quot;\doc\de\readme.txt"
+     target="${INSTALL_PATH}\doc\de\readme.txt"
      commandLine=""
-     workingDirectory="&quot;${INSTALL_PATH}&quot;\doc\de"
-     description="${project.custom.app.name} liesmich Datei"
+     workingDirectory="${INSTALL_PATH}\doc\de"
+     description="${project.custom.app.name} liesmich Datei."
      type="Link"
      encoding="UTF-8">
     </shortcut>
