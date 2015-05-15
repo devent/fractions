@@ -1,6 +1,6 @@
 <div class="alignright">
-<a href="http://translate.google.com/translate?hl=de&sl=en&tl=de&u=http%3A%2F%2Fwww.mueller-public.de%2F2014%2F03%2Fcontinued-fraction-calculator%2F&sandbox=1" title="Deutsch"><img src="http://www.mueller-public.de/wp-content/uploads/2014/02/Germany-16x16.png" /></a>
-<a href="http://translate.google.com/translate?hl=de&sl=en&tl=ru&u=http%3A%2F%2Fwww.mueller-public.de%2F2014%2F03%2Fcontinued-fraction-calculator%2F&sandbox=1" title="Русский"><img src="http://www.mueller-public.de/wp-content/uploads/2014/02/Russia-16x16.png" /></a>
+<a href="https://anrisoftware.com/l/3l" title="Deutsch"><img src="http://www.mueller-public.de/wp-content/uploads/2014/02/Germany-16x16.png" /></a>
+<a href="https://anrisoftware.com/l/3m" title="Русский"><img src="http://www.mueller-public.de/wp-content/uploads/2014/02/Russia-16x16.png" /></a>
 </div>
 <hr />
 
