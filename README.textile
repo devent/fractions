@@ -118,8 +118,8 @@ h2. Options
 Sets the calculation algorithm specified by the service name. Defaults to the "IntegerFraction" algorithm.
 
 * @"IntegerFraction"@ standard algorithm, z=1.0; n0..ni ∈ ℕ;
-* @"IntegerNoMinusOneFraction@ no -1 values for partial denominators, z=1.0; n0..ni ∈ ℕ;
-* @"Mod3Fraction@ Global Scaling algorithm, z=2.0; nk%3;
+* @"IntegerNoMinusOneFraction"@ no -1 values for partial denominators, z=1.0; n0..ni ∈ ℕ;
+* @"Mod3Fraction"@ Global Scaling algorithm, z=2.0; nk%3;
 
 @-max COUNT@
 
