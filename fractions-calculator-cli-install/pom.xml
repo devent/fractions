@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.fractions</groupId>
 	<artifactId>fractions-calculator-cli-install</artifactId>
-	<version>2.7-SNAPSHOT</version>
+	<version>2.7</version>
 	<name>Fractions :: Calculator Command Line Installation</name>
 	<description>Packages the fractions calculator command line interface for deployment and installation.</description>
 	<inceptionYear>2013</inceptionYear>
@@ -100,17 +100,17 @@
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-integer</artifactId>
-				<version>2.7-SNAPSHOT</version>
+				<version>2.7</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-core</artifactId>
-				<version>2.7-SNAPSHOT</version>
+				<version>2.7</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.fractions</groupId>
 				<artifactId>fractions-calculator-cli</artifactId>
-				<version>2.7-SNAPSHOT</version>
+				<version>2.7</version>
 			</dependency>
             <dependency>
                 <groupId>args4j</groupId>
