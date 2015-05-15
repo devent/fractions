@@ -4,7 +4,7 @@
 </div>
 <hr />
 
-h1. "Continued Fraction Calculator Version 2.7":http://www.mueller-public.de/2015/05/continued-frac…or-version-2-7/
+h1. "Continued Fraction Calculator Version 2.7":http://www.mueller-public.de/2015/05/continued-fraction-calculator-version-2-7/
 
 !>http://www.mueller-public.de/wp-content/uploads/2014/03/fractionscli_example.png!
 
@@ -14,8 +14,10 @@ To calculate the continued fraction from a specified value and to compare two di
 
 The calculator can either be installed using the setup program or the @Jar@ file can be started directly.
 
-* "Continued Fraction Calculator Command Line Application Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-2.2.jar
-* "Continued Fraction Calculator Command Line Application Setup Version 2.2":http://www.mueller-public.de/wp-content/uploads/2014/03/fractions-calculator-cli-install-2.2-standard.jar
+* "Continued Fraction Calculator CLI Installer Jar file, Version 2.7":https://anrisoftware.com/projects/attachments/download/379/fractions-calculator-cli-install-2.7-single-jar.jar
+* "Continued Fraction Calculator CLI Windows Installer file, Version 2.7":https://anrisoftware.com/projects/attachments/download/378/fractions-calculator-cli-install-2.7-single-jar.exe
+* "Continued Fraction Calculator CLI executable Jar file, Version 2.7":https://anrisoftware.com/projects/attachments/download/377/fractions-calculator-cli-install-2.7.jar
+* "Continued Fraction Calculator CLI Windows executable, Version 2.7":https://anrisoftware.com/projects/attachments/download/376/fractions-calculator-cli-install-2.7.exe
 * "Sources Github.com":https://github.com/devent/fractions
 
 h2. Description
